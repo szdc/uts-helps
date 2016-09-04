@@ -1,5 +1,8 @@
 # UTS:HELPS Responsive Front-End
 
+## Guides
+* [Coding style guide](CODINGSTYLE.md)
+
 ## Table of Contents
 1. [Features](#features)
 1. [Requirements](#requirements)
