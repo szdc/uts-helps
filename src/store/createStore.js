@@ -2,6 +2,8 @@ import { applyMiddleware, compose, createStore } from 'redux'
 import { routerMiddleware } from 'react-router-redux'
 import thunk from 'redux-thunk'
 import makeRootReducer from './reducers'
+import { loadState, saveState } from './localStorage'
+import throttle from 'lodash/throttle'
 
 export default (initialState = {}, history) => {
   // ======================================================
@@ -23,15 +25,28 @@ export default (initialState = {}, history) => {
   // ======================================================
   // Store Instantiation and HMR Setup
   // ======================================================
+
+  // Load persistant state
+  const persistedState = {
+    ...loadState()
+  }
   const store = createStore(
     makeRootReducer(),
-    initialState,
+    persistedState,
     compose(
       applyMiddleware(...middleware),
       ...enhancers
     )
   )
   store.asyncReducers = {}
+
+  // Throttle saving the state of the application.
+  store.subscribe(throttle(() => {
+    const state = store.getState()
+    saveState({
+      user: state.user
+    })
+  }, 1000))
 
   if (module.hot) {
     module.hot.accept('./reducers', () => {
