@@ -1,14 +1,15 @@
 /**
- * Attempts to log the user into the HELPS system.
+ * Attempts to log the user into the system.
  *
  * @param id
  * @param password
- * @param rememberMe
  * @param callback
  * @returns {function(*, *, *)}
  */
-export function login(id, password, rememberMe, callback) {
-  return (dispatch, getState, UtsHelps) => {
-    callback({})
+export function login(id, password, callback) {
+  return (dispatch, getState, api) => {
+    setTimeout(() => {
+      callback(null)
+    }, 1000)
   }
 }
