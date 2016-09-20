@@ -1,0 +1,112 @@
+.drawer {
+  background-color: #fff;
+  box-shadow: 1px 1px 1px 1px rgba(0, 0, 0, 0.15);
+  display: flex;
+  flex-flow: column;
+  height: 100%;
+  left: -250px;
+  position: fixed;
+  transition: left 0.3s ease-in-out;
+  width: 250px;
+  z-index: 1100;
+}
+.user {
+  background-color: #eee;
+  color: #333;
+  display: flex;
+  flex: 0 0 auto;
+  flex-flow: column;
+  height: 175px;
+  position: relative;
+}
+.sectionLogo {
+  flex: 1 0 auto;
+  position: relative;
+}
+.userInfo {
+  flex: 0 0 auto;
+  padding: 0 15px 10px;
+}
+.companyLogo {
+  height: auto;
+  max-width: 70%;
+  position: absolute;
+  top: 0;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  margin: auto;
+}
+.userInfoItem {
+  display: block;
+  padding: 3px 0;
+}
+.username {
+  composes: userInfoItem;
+  font-size: 18px;
+}
+.company {
+  composes: userInfoItem;
+  font-size: 12px;
+}
+.menu {
+  overflow-y: auto;
+}
+.menu ul {
+  padding: 10px 0;
+}
+.menu li {
+  cursor: pointer;
+  font-size: 14px;
+  position: relative;
+  user-select: none;
+}
+.menu li:active {
+  background-color: #eee;
+}
+.menu li i {
+  font-size: 24px;
+  vertical-align: middle;
+  width: 24px;
+}
+.link::before {
+  content: '';
+  display: inline-block;
+  height: 100%;
+  vertical-align: middle;
+}
+.menu .text {
+  padding-left: 30px;
+}
+.link {
+  display: block;
+  padding: 12px 15px;
+}
+.shadow {
+  background-color: rgba(0, 0, 0, 0.5);
+  opacity: 0;
+  height: 100%;
+  pointer-events: none;
+  position: fixed;
+  transition: opacity 0.3s ease-in-out;
+  width: 100%;
+  z-index: 1000;
+}
+.open .drawer {
+  left: 0;
+  transition: left 0.3s ease-in-out;
+}
+.open .shadow {
+  opacity: 1;
+  pointer-events: all;
+  transition: opacity 0.3s ease-in-out;
+}
+.version {
+  position: absolute;
+  bottom: 10px;
+  margin: 0 auto;
+  width: 100%;
+  text-align: center;
+  font-size: 10px;
+  color: #ccc;
+}

@@ -1,0 +1,59 @@
+@import '../../styles/variables/colors.scss';
+@import '../../styles/variables/fonts.scss';
+
+$height: 45px;
+
+.container {
+  background-color: #fff;
+  border-bottom: 2px solid var(--border-color);
+  color: var(--secondary-color);
+  font-weight: var(--font-weight-bold);
+  height: $height;
+  line-height: $height;
+  text-align: center;
+  width: 100%;
+}
+.title {
+  font-size: 14px;
+  height: $height;
+  letter-spacing: 1px;
+  text-transform: uppercase;
+}
+.pullLeft {
+  cursor: pointer;
+  display: inline-block;
+  float: left;
+  height: $height;
+  left: 10px;
+  position: absolute;
+  top: -2px;
+}
+.pullLeft::before,
+.pullRight::after {
+  content: '';
+  display: inline-block;
+  height: 100%;
+  vertical-align: middle;
+}
+.pullRight {
+  display: inline-block;
+  float: right;
+  height: $height;
+  right: 10px;
+  position: absolute;
+  top: -2px;
+}
+.counter {
+  display: inline-block;
+  vertical-align: middle;
+}
+.icon {
+  font-size: 28px;
+  vertical-align: middle;
+}
+.pullLeft .icon {
+  margin-right: 10px;
+}
+.pullRight .icon {
+  margin-left: 15px;
+}
