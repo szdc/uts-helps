@@ -3,8 +3,12 @@ import ReactDOM from 'react-dom'
 import createBrowserHistory from 'history/lib/createBrowserHistory'
 import { useRouterHistory } from 'react-router'
 import { syncHistoryWithStore } from 'react-router-redux'
+import injectTapEventPlugin from 'react-tap-event-plugin'
+
 import createStore from './store/createStore'
 import AppContainer from './containers/AppContainer'
+
+injectTapEventPlugin()
 
 // ========================================================
 // Browser History Setup
