@@ -1,0 +1,22 @@
+:root {
+  --button-height: 20px;
+
+  --padding-vertical-default: 10px;
+  --padding-horizontal-default: 15px;
+  --padding-default: var(--padding-vertical-default) var(--padding-horizontal-default);
+  --padding-box: var(--padding-horizontal-default) var(--padding-horizontal-default);
+
+
+  .fill-height {
+    height: 100%;
+  }
+  .scrollable {
+    overflow-y: auto;
+  }
+  .padding-default {
+    padding: var(--padding-vertical-default) var(--padding-horizontal-default);
+  }
+  .main-container {
+    padding-bottom: 20px;
+  }
+}
