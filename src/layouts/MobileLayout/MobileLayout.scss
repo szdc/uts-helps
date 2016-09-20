@@ -1,0 +1,33 @@
+@import '../../styles/variables/spacing.scss';
+
+$header-height: 45px;
+$nav-height: 45px;
+$category-width: 75px;
+$content-height: 100%;
+
+.container {
+  height: 100%;
+  margin: 0 auto;
+  overflow: hidden;
+  padding-bottom: 15px;
+  position: relative;
+  width: 100%;
+}
+.content {
+  overflow-y: auto;
+  overflow-x: hidden;
+  position: relative;
+}
+.contentContainer {
+  height: $content-height;
+  overflow: hidden;
+  padding-bottom: var(--button-height);
+}
+.content {
+  height: 100%;
+}
+.fixedLeft {
+  float: left;
+  height: 100%;
+  width: $category-width;
+}
