@@ -5,6 +5,7 @@ import NoAuthLayout from 'layouts/NoAuthLayout'
 // Routes
 import LoginRoute from './Login'
 import LogoutRoute from './Logout'
+import RegisterRoute from './Register'
 import NotFoundRoute from './NotFound'
 
 export const createRoutes = (store, api) => ({
@@ -16,7 +17,8 @@ export const createRoutes = (store, api) => ({
     {
       component: NoAuthLayout,
       childRoutes: [
-        LoginRoute(store)
+        LoginRoute(store),
+        RegisterRoute(store)
       ]
     },
     {

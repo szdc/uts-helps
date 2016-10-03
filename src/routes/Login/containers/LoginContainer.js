@@ -1,5 +1,6 @@
 import React from 'react'
 import { connect } from 'react-redux'
+import { push } from 'react-router-redux'
 
 import LoginForm from '../components/Login'
 import { login } from 'store/user/actions'
@@ -13,7 +14,17 @@ class LoginContainer extends React.Component {
    */
   constructor(props) {
     super(props)
-    this.LoginForm = LoginForm(login, '/deals')
+    this.LoginForm = LoginForm(login, '/bookings')
+    this._onUserNotFound = ::this._onUserNotFound
+  }
+
+  /**
+   * Redirects to the login page if the user is not found.
+   *
+   * @private
+   */
+  _onUserNotFound() {
+    this.props.push('/register')
   }
 
   /**
@@ -25,16 +36,21 @@ class LoginContainer extends React.Component {
     return (
       <this.LoginForm
         {...this.props}
+        onUserNotFound={this._onUserNotFound}
       />
     )
   }
 }
 LoginContainer.propTypes = {
-  location: React.PropTypes.object.isRequired
+  push: React.PropTypes.func
 }
 
 const mapStateToProps = state => ({
   email: state.user.id
 })
 
-export default connect(mapStateToProps)(LoginContainer)
+const mapDispatchToProps = {
+  push
+}
+
+export default connect(mapStateToProps, mapDispatchToProps)(LoginContainer)

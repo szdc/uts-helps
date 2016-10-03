@@ -1,8 +1,9 @@
 export default {
-  errorId: 'You must enter your student ID.',
+  errorIdMissing: 'You must enter your student ID.',
+  errorIdInvalid: 'Invalid student ID - must be numeric.',
   errorPassword: 'You must enter a password.',
-  hintEmail: '12345678',
-  labelEmail: 'Student ID',
+  hintId: '12345678',
+  labelId: 'Student ID',
   labelPassword: 'Password',
   labelSubmit: 'Login'
 }

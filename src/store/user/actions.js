@@ -37,8 +37,8 @@ export function userLogoutSuccess() {
 export function login(id, password, callback) {
   return (dispatch, getState, UtsHelps) => {
     UtsHelps.getStudent(id, (err, res) => {
-      if (err) {
-        callback(err)
+      if (err || !res.Result) {
+        callback(err || {})
       } else {
         dispatch(userLoginSuccess(res.Result))
         callback(null, res)
