@@ -27,7 +27,7 @@ export default class MobileLayout extends React.Component {
       header: this.defaultHeader,
       navigation: this.defaultNavigation,
       navigationDrawerOpen: false,
-      title: 'Local Deals'
+      title: 'UTS:HELPS Booking System'
     }
     this.onNavigationDrawerChange = ::this.onNavigationDrawerChange
     this.openNavigationDrawer = ::this.openNavigationDrawer
@@ -58,7 +58,7 @@ export default class MobileLayout extends React.Component {
    * @param title
    * @param suffix
    */
-  setTitle(title, suffix = ' - Local Deals') {
+  setTitle(title, suffix = ' - UTS:HELPS Booking System') {
     this.setState({
       title: `${title}${suffix}`
     })

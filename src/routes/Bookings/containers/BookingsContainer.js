@@ -21,14 +21,16 @@ export default class BookingsContainer extends React.Component {
   componentDidMount() {
     const { fetchBookings, layout } = this.props
     fetchBookings()
-    layout.setHeader({
-      contextualOptions: [
-        <IconSearch
-          onClick={this._toggleSearch}
-        />
-      ],
-      title: strings.title
-    })
+    layout
+      .setHeader({
+        contextualOptions: [
+          <IconSearch
+            onClick={this._toggleSearch}
+          />
+        ],
+        title: strings.title
+      })
+      .setTitle(strings.page_title)
   }
 
   /**
