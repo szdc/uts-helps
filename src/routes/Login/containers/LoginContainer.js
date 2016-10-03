@@ -1,9 +1,8 @@
 import React from 'react'
 import { connect } from 'react-redux'
 
-import { login } from '../modules/login'
-
 import LoginForm from '../components/Login'
+import { login } from '../modules/login'
 
 class LoginContainer extends React.Component {
 

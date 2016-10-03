@@ -7,6 +7,8 @@ import injectTapEventPlugin from 'react-tap-event-plugin'
 
 import createStore from './store/createStore'
 import AppContainer from './containers/AppContainer'
+import UtsHelps from 'utils/uts-helps-api'
+console.log(UtsHelps)
 
 injectTapEventPlugin()
 
@@ -25,7 +27,7 @@ const browserHistory = useRouterHistory(createBrowserHistory)({
 // so we need to provide a custom `selectLocationState` to inform
 // react-router-redux of its location.
 const initialState = window.___INITIAL_STATE__
-const store = createStore(initialState, browserHistory)
+const store = createStore(initialState, browserHistory, UtsHelps)
 const history = syncHistoryWithStore(browserHistory, store, {
   selectLocationState: (state) => state.router
 })
@@ -45,7 +47,7 @@ if (__DEBUG__) {
 const MOUNT_NODE = document.getElementById('root')
 
 let render = () => {
-  const routes = require('./routes/index').default(store)
+  const routes = require('./routes/index').default(store, UtsHelps)
 
   ReactDOM.render(
     <AppContainer

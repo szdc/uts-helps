@@ -1,8 +1,8 @@
 export default {
-  errorEmail: 'Invalid email address.',
+  errorId: 'You must enter your student ID.',
   errorPassword: 'You must enter a password.',
-  hintEmail: 'user@example.com',
-  labelEmail: 'Email',
+  hintEmail: '12345678',
+  labelEmail: 'Student ID',
   labelPassword: 'Password',
   labelSubmit: 'Login'
 }

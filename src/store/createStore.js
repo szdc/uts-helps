@@ -5,11 +5,11 @@ import makeRootReducer from './reducers'
 import { loadState, saveState } from './localStorage'
 import throttle from 'lodash/throttle'
 
-export default (initialState = {}, history) => {
+export default (initialState = {}, history, api) => {
   // ======================================================
   // Middleware Configuration
   // ======================================================
-  const middleware = [thunk, routerMiddleware(history)]
+  const middleware = [thunk.withExtraArgument(api), routerMiddleware(history)]
 
   // ======================================================
   // Store Enhancers

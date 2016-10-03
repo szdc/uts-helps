@@ -24,7 +24,7 @@ export default (submitAction, redirectTo) => {
       this.rxEmail = /^[^@]+?@[^@]+\.[^@]+$/gi
       this.state = {
         form: {
-          email: '',
+          id: '',
           password: ''
         },
         formErrors: {}
@@ -55,11 +55,11 @@ export default (submitAction, redirectTo) => {
      */
     _validate() {
       const { props } = this
-      const { email, password } = this.state.form
+      const { id, password } = this.state.form
       let formErrors = {}
 
-      if (!email.length || email.search(this.rxEmail) === -1) {
-        formErrors.email = props.errorEmail
+      if (!id.length) {
+        formErrors.id = props.errorId
       }
 
       if (!password.length) {
@@ -80,8 +80,8 @@ export default (submitAction, redirectTo) => {
 
       this.setState({formErrors}, () => {
         if (!Object.keys(formErrors).length) {
-          const { email, password } = this.state.form
-          this.props.onSubmit(email, password)
+          const { id, password } = this.state.form
+          this.props.onSubmit(id, password)
         }
       })
     }
@@ -104,11 +104,11 @@ export default (submitAction, redirectTo) => {
           >
             <TextField
               className={classes.input}
-              errorText={formErrors.email}
+              errorText={formErrors.id}
               floatingLabelText={props.labelEmail}
               hintText={props.hintEmail}
-              name='email'
-              value={form.email}
+              name='id'
+              value={form.id}
             />
             <TextField
               className={classes.input}
@@ -133,7 +133,7 @@ export default (submitAction, redirectTo) => {
     }
   }
   Login.propTypes = {
-    errorEmail: React.PropTypes.string,
+    errorId: React.PropTypes.string,
     errorPassword: React.PropTypes.string,
     hintEmail: React.PropTypes.string,
     labelEmail: React.PropTypes.string,
@@ -142,7 +142,7 @@ export default (submitAction, redirectTo) => {
     onSubmit: React.PropTypes.func
   }
   Login.defaultProps = {
-    errorEmail: strings.errorEmail,
+    errorId: strings.errorId,
     errorPassword: strings.errorPassword,
     hintEmail: strings.hintEmail,
     labelEmail: strings.labelEmail,

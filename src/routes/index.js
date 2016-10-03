@@ -7,7 +7,7 @@ import LoginRoute from './Login'
 import LogoutRoute from './Logout'
 import NotFoundRoute from './NotFound'
 
-export const createRoutes = (store) => ({
+export const createRoutes = (store, api) => ({
   path: '/',
   indexRoute: {
     onEnter: (nextState, replace) => replace('/login')

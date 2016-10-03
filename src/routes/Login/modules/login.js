@@ -7,9 +7,14 @@
  * @returns {function(*, *, *)}
  */
 export function login(id, password, callback) {
-  return (dispatch, getState, api) => {
-    setTimeout(() => {
+  return (dispatch, getState, UtsHelps) => {
+    UtsHelps.getStudent(id, (err, res) => {
+      if (err) {
+        console.log(err)
+      } else {
+        console.log(res)
+      }
       callback(null)
-    }, 1000)
+    })
   }
 }
