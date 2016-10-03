@@ -8,6 +8,9 @@ import LogoutRoute from './Logout'
 import RegisterRoute from './Register'
 import NotFoundRoute from './NotFound'
 
+// Bookings
+import BookingsRoute from './Bookings'
+
 // Authentication
 import { requireAuth, requireNoAuth, requireRegistering } from 'utils/auth'
 
@@ -35,6 +38,7 @@ export const createRoutes = (store, api) => ({
       component: MobileLayout,
       onEnter: requireAuth(store),
       childRoutes: [
+        BookingsRoute(store),
         LogoutRoute(store),
         NotFoundRoute(store)
       ]
