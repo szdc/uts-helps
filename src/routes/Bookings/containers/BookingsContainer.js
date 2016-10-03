@@ -1,9 +1,11 @@
 import React from 'react'
+import RaisedButton from 'material-ui/RaisedButton'
 import TextField from 'material-ui/TextField'
 import { connect } from 'react-redux'
 import { push } from 'react-router-redux'
 
 import Bookings from '../components/Bookings'
+import CenterLayout from 'layouts/CenterLayout'
 import Loading from 'components/Loading'
 import { fetchBookings } from 'store/bookings/actions'
 import { IconClose, IconSearch } from 'components/Icons'
@@ -76,6 +78,18 @@ export default class BookingsContainer extends React.Component {
     if (bookings.loading || !bookings.bookings) {
       return (
         <Loading />
+      )
+    }
+
+    if (!bookings.bookings.length) {
+      return (
+        <CenterLayout>
+          <p>{strings.message_no_bookings}</p>
+          <br />
+          <RaisedButton
+            label={strings.label_find_workshop}
+          />
+        </CenterLayout>
       )
     }
 
