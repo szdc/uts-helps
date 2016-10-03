@@ -8,6 +8,9 @@ import LogoutRoute from './Logout'
 import RegisterRoute from './Register'
 import NotFoundRoute from './NotFound'
 
+// Authentication
+import { requireAuth, requireNoAuth, requireRegistering } from 'utils/auth'
+
 export const createRoutes = (store, api) => ({
   path: '/',
   indexRoute: {
@@ -16,13 +19,21 @@ export const createRoutes = (store, api) => ({
   childRoutes: [
     {
       component: NoAuthLayout,
+      onEnter: requireNoAuth(store),
       childRoutes: [
-        LoginRoute(store),
+        LoginRoute(store)
+      ]
+    },
+    {
+      component: NoAuthLayout,
+      onEnter: requireRegistering(store),
+      childRoutes: [
         RegisterRoute(store)
       ]
     },
     {
       component: MobileLayout,
+      onEnter: requireAuth(store),
       childRoutes: [
         LogoutRoute(store),
         NotFoundRoute(store)

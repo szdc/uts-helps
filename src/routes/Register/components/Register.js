@@ -27,7 +27,7 @@ export default (submitAction, redirectTo) => {
       this.rxId = /^\d+$/gi
       this.state = {
         form: {
-          id: '',
+          id: props.id,
           firstLanguage: 'English',
           countryOrigin: 'Australia'
         },
@@ -161,7 +161,7 @@ export default (submitAction, redirectTo) => {
             <br />
             <div className={classes.formActions}>
               <RaisedButton
-                label={!props.submitting && props.labelSubmit}
+                label={!props.submitting && strings.labelSubmit}
                 icon={props.submitting && <Spinner size='small' />}
                 type='submit'
               />
@@ -172,6 +172,7 @@ export default (submitAction, redirectTo) => {
     }
   }
   Register.propTypes = {
+    id: React.PropTypes.string,
     onSubmit: React.PropTypes.func
   }
 

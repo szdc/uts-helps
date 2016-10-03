@@ -30,4 +30,8 @@ class RegisterContainer extends React.Component {
   }
 }
 
-export default connect()(RegisterContainer)
+const mapStateToProps = state => ({
+  id: state.user.id
+})
+
+export default connect(mapStateToProps)(RegisterContainer)

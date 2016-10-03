@@ -2,6 +2,7 @@ import { push } from 'react-router-redux'
 
 export const USER_LOGOUT = 'USER_LOGOUT'
 export const USER_LOGIN_SUCCESS = 'USER_LOGIN_SUCCESS'
+export const USER_NOT_FOUND = 'USER_NOT_FOUND'
 
 /**
  * Creates an action to register a successful login.
@@ -12,6 +13,18 @@ export function userLoginSuccess(user) {
   return {
     type: USER_LOGIN_SUCCESS,
     payload: user
+  }
+}
+
+/**
+ * Creates an action to register a user not being found.
+ *
+ * @returns {{type: string}}
+ */
+export function userNotFound(userId) {
+  return {
+    type: USER_NOT_FOUND,
+    payload: userId
   }
 }
 
@@ -38,6 +51,7 @@ export function login(id, password, callback) {
   return (dispatch, getState, UtsHelps) => {
     UtsHelps.getStudent(id, (err, res) => {
       if (err || !res.Result) {
+        dispatch(userNotFound(id))
         callback(err || {})
       } else {
         dispatch(userLoginSuccess(res.Result))
