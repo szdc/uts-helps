@@ -35,6 +35,10 @@ export function receiveUserProfile(err, profile) {
  */
 export function fetchUserProfile(userId) {
   return (dispatch, getState, UtsHelps) => {
+    if (!userId) {
+      userId = getState().user.id.trim()
+    }
+
     dispatch(requestUserProfile())
     UtsHelps.getStudent(userId, (err, res) => {
       if (err) {

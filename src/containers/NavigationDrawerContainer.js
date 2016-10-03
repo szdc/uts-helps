@@ -18,7 +18,7 @@ class NavigationDrawerContainer extends React.Component {
 
   /**
    * Renders the Navigation Drawer.
-   * 
+   *
    * @returns {*}
    */
   render() {

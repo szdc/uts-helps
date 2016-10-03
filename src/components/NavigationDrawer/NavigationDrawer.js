@@ -3,10 +3,7 @@ import Drawer from 'material-ui/Drawer'
 import { Link } from 'react-router'
 
 import {
-  IconAddUser,
-  IconLeaderboard,
-  IconLogout,
-  IconSettings
+  IconLogout
 } from 'components/Icons'
 
 import strings from './NavigationDrawer.strings'
@@ -32,7 +29,7 @@ export default class NavigationDrawer extends React.Component {
         <div className={classes.user}>
           <div className={classes.sectionLogo} />
           <div className={classes.userInfo}>
-            <span className={classes.username}>{profile.name}</span>
+            <span className={classes.username}>{profile.preferred_name || profile.studentID}</span>
           </div>
         </div>
         <div className={classes.menu}>
