@@ -19,7 +19,7 @@ export default function userReducer(state = initialState, action) {
     case USER_LOGIN_SUCCESS:
       return {
         ...state,
-        ...action.payload,
+        id: action.payload.studentID,
         isLoggedIn: true
       }
     default:

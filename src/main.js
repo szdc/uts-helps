@@ -8,7 +8,6 @@ import injectTapEventPlugin from 'react-tap-event-plugin'
 import createStore from './store/createStore'
 import AppContainer from './containers/AppContainer'
 import UtsHelps from 'utils/uts-helps-api'
-console.log(UtsHelps)
 
 injectTapEventPlugin()
 
