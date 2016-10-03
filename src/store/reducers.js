@@ -1,5 +1,7 @@
 import { combineReducers } from 'redux'
 import { routerReducer as router } from 'react-router-redux'
+
+import bookingsReducer from './bookings/reducers'
 import profileReducer from './profile/reducers'
 import userReducer from './user/reducers'
 
@@ -8,6 +10,7 @@ export const makeRootReducer = (asyncReducers) => {
     // Add sync reducers here
     router,
     ...asyncReducers,
+    bookings: bookingsReducer,
     profile: profileReducer,
     user: userReducer
   })

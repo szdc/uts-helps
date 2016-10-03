@@ -4,6 +4,8 @@ import { connect } from 'react-redux'
 import { push } from 'react-router-redux'
 
 import Bookings from '../components/Bookings'
+import Loading from 'components/Loading'
+import { fetchBookings } from 'store/bookings/actions'
 import { IconClose, IconSearch } from 'components/Icons'
 
 import classes from './BookingsContainer.scss'
@@ -15,7 +17,8 @@ export default class BookingsContainer extends React.Component {
    * Fetches the user's profile.
    */
   componentDidMount() {
-    const { layout } = this.props
+    const { fetchBookings, layout } = this.props
+    fetchBookings()
     layout.setHeader({
       contextualOptions: [
         <IconSearch
@@ -68,6 +71,14 @@ export default class BookingsContainer extends React.Component {
    * @returns {*}
    */
   render() {
+    const { bookings } = this.props
+
+    if (bookings.loading || !bookings.bookings) {
+      return (
+        <Loading />
+      )
+    }
+
     return (
       <div>
         <Bookings />
@@ -76,12 +87,19 @@ export default class BookingsContainer extends React.Component {
   }
 }
 BookingsContainer.propTypes = {
+  bookings: React.PropTypes.object.isRequired,
+  fetchBookings: React.PropTypes.func.isRequired,
   layout: React.PropTypes.object.isRequired,
   push: React.PropTypes.func.isRequired
 }
 
+const mapStateToProps = state => ({
+  bookings: state.bookings
+})
+
 const mapDispatchToProps = {
+  fetchBookings,
   push
 }
 
-export default connect(null, mapDispatchToProps)(BookingsContainer)
+export default connect(mapStateToProps, mapDispatchToProps)(BookingsContainer)
