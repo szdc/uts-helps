@@ -2,7 +2,7 @@ import React from 'react'
 import { connect } from 'react-redux'
 
 import RegisterForm from '../components/Register'
-import { register } from 'store/user/actions'
+import register from '../modules/register'
 
 class RegisterContainer extends React.Component {
 

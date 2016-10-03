@@ -72,3 +72,22 @@ export function logout() {
     dispatch(push('/login'))
   }
 }
+
+/**
+ * Registers a student.
+ *
+ * @param userDetails
+ * @param callback
+ * @returns {function(*, *, *)}
+ */
+export function register(userDetails, callback) {
+  return (dispatch, getState, UtsHelps) => {
+    UtsHelps.registerStudent(userDetails, (err, res) => {
+      if (err) {
+        callback(err)
+      } else {
+        callback(null, res.Result)
+      }
+    })
+  }
+}

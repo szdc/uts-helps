@@ -28,12 +28,17 @@ export default (submitAction, redirectTo) => {
       this.state = {
         form: {
           id: props.id,
-          firstLanguage: 'English',
-          countryOrigin: 'Australia'
+          countryOrigin: props.countryOrigin,
+          degree: props.degree,
+          firstLanguage: props.firstLanguage,
+          status: props.status
         },
         formErrors: {}
       }
+      this._onDateChange = ::this._onDateChange
       this._onFieldChange = ::this._onFieldChange
+      this._onSelectDegreeChange = ::this._onSelectDegreeChange
+      this._onSelectStatusChange = ::this._onSelectStatusChange
       this._onSubmit = ::this._onSubmit
     }
 
@@ -53,25 +58,63 @@ export default (submitAction, redirectTo) => {
     }
 
     /**
+     * Generates a field change event.
+     *
+     * @param name
+     * @param value
+     * @private
+     */
+    _generateFieldChangeEvent(name, value) {
+      this._onFieldChange({
+        target: {
+          name,
+          value
+        }
+      })
+    }
+
+    /**
+     * Handles a change on the date field.
+     *
+     * @param e
+     * @param date
+     * @private
+     */
+    _onDateChange(e, date) {
+      this._generateFieldChangeEvent('dateOfBirth', date)
+    }
+
+    /**
+     * Handles a change to the select status field.
+     *
+     * @param e
+     * @param key
+     * @param payload
+     * @private
+     */
+    _onSelectStatusChange(e, key, payload) {
+      this._generateFieldChangeEvent('status', payload)
+    }
+
+    /**
+     * Handles a change to the select degree field.
+     *
+     * @param e
+     * @param key
+     * @param payload
+     * @private
+     */
+    _onSelectDegreeChange(e, key, payload) {
+      this._generateFieldChangeEvent('degree', payload)
+    }
+
+    /**
      * Validates the form.
      *
      * @private
      */
     _validate() {
-      const { props } = this
-      const { id, password } = this.state.form
       let formErrors = {}
-
-      if (!id.length) {
-        formErrors.id = props.errorIdMissing
-      }
-      if (id.search(this.rxId) === -1) {
-        formErrors.id = props.errorIdInvalid
-      }
-
-      if (!password.length) {
-        formErrors.password = props.errorPassword
-      }
 
       return formErrors
     }
@@ -87,8 +130,7 @@ export default (submitAction, redirectTo) => {
 
       this.setState({formErrors}, () => {
         if (!Object.keys(formErrors).length) {
-          const { id, password } = this.state.form
-          this.props.onSubmit(id, password)
+          this.props.onSubmit(this.state.form)
         }
       })
     }
@@ -124,12 +166,15 @@ export default (submitAction, redirectTo) => {
             <DatePicker
               floatingLabelText={strings.labelDob}
               hintText='Date Picker'
+              onChange={this._onDateChange}
               textFieldStyle={inputStyle}
               style={inputStyle}
             />
             <SelectField
               floatingLabelText={strings.labelDegree}
-              value='UG'
+              name='degree'
+              onChange={this._onSelectDegreeChange}
+              value={form.degree}
               style={inputStyle}
             >
               <MenuItem value='UG' primaryText='Undergraduate' />
@@ -137,7 +182,9 @@ export default (submitAction, redirectTo) => {
             </SelectField>
             <SelectField
               floatingLabelText={strings.labelStatus}
-              value='Local'
+              name='status'
+              onChange={this._onSelectStatusChange}
+              value={form.status}
               style={inputStyle}
             >
               <MenuItem value='Local' primaryText='Local' />
@@ -172,8 +219,18 @@ export default (submitAction, redirectTo) => {
     }
   }
   Register.propTypes = {
+    countryOrigin: React.PropTypes.string,
+    degree: React.PropTypes.string,
+    firstLanguage: React.PropTypes.string,
     id: React.PropTypes.string,
-    onSubmit: React.PropTypes.func
+    onSubmit: React.PropTypes.func,
+    status: React.PropTypes.string
+  }
+  Register.defaultProps = {
+    countryOrigin: 'Australia',
+    degree: 'UG',
+    firstLanguage: 'English',
+    status: 'Local'
   }
 
   return connectForm(Register, submitAction)
