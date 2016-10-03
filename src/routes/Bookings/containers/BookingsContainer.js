@@ -1,6 +1,5 @@
 import React from 'react'
 import RaisedButton from 'material-ui/RaisedButton'
-import TextField from 'material-ui/TextField'
 import { connect } from 'react-redux'
 import { push } from 'react-router-redux'
 
@@ -8,12 +7,21 @@ import Bookings from '../components/Bookings'
 import CenterLayout from 'layouts/CenterLayout'
 import Loading from 'components/Loading'
 import { fetchBookings } from 'store/bookings/actions'
-import { IconClose, IconSearch } from 'components/Icons'
+import { IconAdd } from 'components/Icons'
 
-import classes from './BookingsContainer.scss'
 import strings from './BookingsContainer.strings.js'
 
 export default class BookingsContainer extends React.Component {
+
+  /**
+   * Sets up the component.
+   *
+   * @param props
+   */
+  constructor(props) {
+    super(props)
+    this._findWorkshops = ::this._findWorkshops
+  }
 
   /**
    * Fetches the user's profile.
@@ -24,8 +32,8 @@ export default class BookingsContainer extends React.Component {
     layout
       .setHeader({
         contextualOptions: [
-          <IconSearch
-            onClick={this._toggleSearch}
+          <IconAdd
+            onClick={this._findWorkshops}
           />
         ],
         title: strings.title
@@ -34,39 +42,12 @@ export default class BookingsContainer extends React.Component {
   }
 
   /**
-   * Toggles the search bar.
+   * Navigates to the find workshops page.
    *
    * @private
    */
-  _toggleSearch() {
-    this.setState({
-      searching: !this.state.searching
-    }, () => {
-      let search =
-        <IconSearch
-          onClick={this._toggleSearch}
-        />
-
-      if (this.state.searching) {
-        search =
-          <div>
-            <div className={classes.search}>
-              <TextField
-                name='search'
-                onChange={this._onFilterChange}
-                ref={c => c !== null && c.focus()}
-              />
-              <IconClose
-                onClick={this._toggleSearch}
-              />
-            </div>
-          </div>
-      }
-
-      this.props.layout.updateHeader({
-        contextualOptions: [search]
-      })
-    })
+  _findWorkshops() {
+    this.props.push('/workshops')
   }
 
   /**
@@ -97,7 +78,9 @@ export default class BookingsContainer extends React.Component {
 
     return (
       <div>
-        <Bookings />
+        <Bookings
+          bookings={bookings.bookings}
+        />
       </div>
     )
   }
