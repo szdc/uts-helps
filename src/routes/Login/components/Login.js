@@ -119,8 +119,8 @@ export default (submitAction, redirectTo) => {
             <TextField
               className={classes.input}
               errorText={formErrors.id}
-              floatingLabelText={props.labelEmail}
-              hintText={props.hintEmail}
+              floatingLabelText={props.labelId}
+              hintText={props.hintId}
               name='id'
               value={form.id}
             />
