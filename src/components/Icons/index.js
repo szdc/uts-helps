@@ -116,3 +116,6 @@ export const IconSearch = props =>
 export const IconSettings = props =>
   createIcon(props, 'settings')
 
+export const IconWorkshop = props =>
+  createIcon(props, 'people')
+

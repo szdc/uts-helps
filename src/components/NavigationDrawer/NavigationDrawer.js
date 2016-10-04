@@ -4,7 +4,9 @@ import Drawer from 'material-ui/Drawer'
 import { Link } from 'react-router'
 
 import {
-  IconLogout
+  IconDate,
+  IconLogout,
+  IconWorkshop
 } from 'components/Icons'
 
 import strings from './NavigationDrawer.strings'
@@ -54,7 +56,7 @@ export default class NavigationDrawer extends React.Component {
           <ul>
             <li>
               <Link to='/bookings' className={classes.link} onClick={this.close}>
-                <IconLogout />
+                <IconDate />
                 <span onClick={this.close} className={classes.text}>
                   {strings.label_bookings}
                 </span>
@@ -62,7 +64,7 @@ export default class NavigationDrawer extends React.Component {
             </li>
             <li>
               <Link to='/workshop-sets' className={classes.link} onClick={this.close}>
-                <IconLogout />
+                <IconWorkshop />
                 <span onClick={this.close} className={classes.text}>
                   {strings.label_workshops}
                 </span>
