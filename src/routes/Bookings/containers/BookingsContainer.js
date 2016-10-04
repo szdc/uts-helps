@@ -47,7 +47,7 @@ export default class BookingsContainer extends React.Component {
    * @private
    */
   _findWorkshops() {
-    this.props.push('/workshops')
+    this.props.push('/workshop-sets')
   }
 
   /**
