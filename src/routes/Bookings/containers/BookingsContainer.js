@@ -1,10 +1,10 @@
 import React from 'react'
-import RaisedButton from 'material-ui/RaisedButton'
+import moment from 'moment'
 import { connect } from 'react-redux'
+import { createSelector } from 'reselect'
 import { push } from 'react-router-redux'
 
 import Bookings from '../components/Bookings'
-import CenterLayout from 'layouts/CenterLayout'
 import Loading from 'components/Loading'
 import { fetchBookings } from 'store/bookings/actions'
 import { IconAdd } from 'components/Icons'
@@ -56,7 +56,11 @@ class BookingsContainer extends React.Component {
    * @returns {XML}
    */
   render() {
-    const { bookings } = this.props
+    const {
+      bookings,
+      futureBookings,
+      pastBookings
+    } = this.props
 
     if (bookings.loading || !bookings.bookings) {
       return (
@@ -64,22 +68,12 @@ class BookingsContainer extends React.Component {
       )
     }
 
-    if (!bookings.bookings.length) {
-      return (
-        <CenterLayout>
-          <p>{strings.message_no_bookings}</p>
-          <br />
-          <RaisedButton
-            label={strings.label_find_workshop}
-          />
-        </CenterLayout>
-      )
-    }
-
     return (
       <div>
         <Bookings
           bookings={bookings.bookings}
+          future={futureBookings}
+          past={pastBookings}
         />
       </div>
     )
@@ -89,12 +83,48 @@ BookingsContainer.propTypes = {
   bookings: React.PropTypes.object.isRequired,
   fetchBookings: React.PropTypes.func.isRequired,
   layout: React.PropTypes.object.isRequired,
-  push: React.PropTypes.func.isRequired
+  pastBookings: React.PropTypes.array,
+  push: React.PropTypes.func.isRequired,
+  futureBookings: React.PropTypes.array
 }
 
 const mapStateToProps = state => ({
-  bookings: state.bookings
+  bookings: state.bookings,
+  pastBookings: pastBookingsSelector(state),
+  futureBookings: futureBookingsSelector(state)
 })
+
+/**
+ * Selects bookings which are in the future.
+ */
+const futureBookingsSelector = createSelector(
+  state => state.bookings,
+  bookings => {
+    if (bookings.loading || !bookings.bookings) {
+      return []
+    }
+    const now = moment()
+    return bookings.bookings.filter(booking =>
+      moment(booking.ending).isAfter(now)
+    )
+  }
+)
+
+/**
+ * Selects bookings which were in the past.
+ */
+const pastBookingsSelector = createSelector(
+  state => state.bookings,
+  bookings => {
+    if (bookings.loading || !bookings.bookings) {
+      return []
+    }
+    const now = moment()
+    return bookings.bookings.filter(booking =>
+      moment(booking.ending).isBefore(now)
+    )
+  }
+)
 
 const mapDispatchToProps = {
   fetchBookings,
