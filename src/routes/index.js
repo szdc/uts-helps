@@ -11,6 +11,10 @@ import NotFoundRoute from './NotFound'
 // Bookings
 import BookingsRoute from './Bookings'
 
+// Workshops
+import WorkshopSetsRoute from './WorkshopSets'
+import WorkshopsRoute from './Workshops'
+
 // Authentication
 import { requireAuth, requireNoAuth, requireRegistering } from 'utils/auth'
 
@@ -40,6 +44,8 @@ export const createRoutes = (store, api) => ({
       childRoutes: [
         BookingsRoute(store),
         LogoutRoute(store),
+        WorkshopsRoute(store),
+        WorkshopSetsRoute(store),
         NotFoundRoute(store)
       ]
     }

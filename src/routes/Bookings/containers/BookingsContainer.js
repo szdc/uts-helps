@@ -51,9 +51,9 @@ export default class BookingsContainer extends React.Component {
   }
 
   /**
-   * Renders the Navigation Drawer.
+   * Renders the booking list.
    *
-   * @returns {*}
+   * @returns {XML}
    */
   render() {
     const { bookings } = this.props

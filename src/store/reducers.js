@@ -4,6 +4,7 @@ import { routerReducer as router } from 'react-router-redux'
 import bookingsReducer from './bookings/reducers'
 import profileReducer from './profile/reducers'
 import userReducer from './user/reducers'
+import workshopSetsReducer from './workshopSets/reducers'
 
 export const makeRootReducer = (asyncReducers) => {
   return combineReducers({
@@ -12,7 +13,8 @@ export const makeRootReducer = (asyncReducers) => {
     ...asyncReducers,
     bookings: bookingsReducer,
     profile: profileReducer,
-    user: userReducer
+    user: userReducer,
+    workshopSets: workshopSetsReducer
   })
 }
 

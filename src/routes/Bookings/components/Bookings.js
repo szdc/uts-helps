@@ -1,7 +1,9 @@
 import React from 'react'
 import Divider from 'material-ui/Divider'
 import Subheader from 'material-ui/Subheader'
-import { List, ListItem } from 'material-ui/List'
+import { List } from 'material-ui/List'
+
+import BookingListItem from './BookingListItem'
 
 import classes from './Bookings.scss'
 import strings from './Bookings.strings'
@@ -33,27 +35,4 @@ export default class Bookings extends React.Component {
 }
 Bookings.propTypes = {
   bookings: React.PropTypes.array.isRequired
-}
-
-class BookingListItem extends React.Component {
-
-  /**
-   * Renders the booking item.
-   *
-   * @returns {XML}
-   */
-  render() {
-    const { booking } = this.props
-
-    return (
-      <ListItem
-        primaryText={booking.topic}
-        secondaryText={booking.description}
-        secondaryTextLines={2}
-      />
-    )
-  }
-}
-BookingListItem.propTypes = {
-  booking: React.PropTypes.object.isRequired
 }
