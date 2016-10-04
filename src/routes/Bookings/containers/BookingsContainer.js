@@ -72,6 +72,7 @@ class BookingsContainer extends React.Component {
       <Bookings
         bookings={bookings.bookings}
         future={futureBookings}
+        onFindWorkshopClick={this._findWorkshops}
         past={pastBookings}
       />
     )
