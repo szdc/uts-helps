@@ -1,6 +1,5 @@
 export default {
-  label_import: 'Import contacts',
-  label_leaderboard: 'Leaderboard',
+  label_bookings: 'My bookings',
   label_logout: 'Logout',
-  label_settings: 'Settings'
+  label_workshops: 'Find workshops'
 }

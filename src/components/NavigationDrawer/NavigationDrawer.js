@@ -1,4 +1,5 @@
 import React from 'react'
+import Divider from 'material-ui/Divider'
 import Drawer from 'material-ui/Drawer'
 import { Link } from 'react-router'
 
@@ -10,6 +11,23 @@ import strings from './NavigationDrawer.strings'
 import classes from './NavigationDrawer.scss'
 
 export default class NavigationDrawer extends React.Component {
+
+  /**
+   * Sets up the component.
+   *
+   * @param props
+   */
+  constructor(props) {
+    super(props)
+    this.close = ::this.close
+  }
+
+  /**
+   * Closes the navigation drawer.
+   */
+  close() {
+    this.props.onChange(false)
+  }
 
   /**
    * Renders the drawer.
@@ -34,6 +52,25 @@ export default class NavigationDrawer extends React.Component {
         </div>
         <div className={classes.menu}>
           <ul>
+            <li>
+              <Link to='/bookings' className={classes.link} onClick={this.close}>
+                <IconLogout />
+                <span onClick={this.close} className={classes.text}>
+                  {strings.label_bookings}
+                </span>
+              </Link>
+            </li>
+            <li>
+              <Link to='/workshop-sets' className={classes.link} onClick={this.close}>
+                <IconLogout />
+                <span onClick={this.close} className={classes.text}>
+                  {strings.label_workshops}
+                </span>
+              </Link>
+            </li>
+            <li>
+              <Divider />
+            </li>
             <li>
               <Link to='/logout' className={classes.link} onClick={this.close}>
                 <IconLogout />
