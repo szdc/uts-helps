@@ -84,5 +84,3 @@ Header.defaultProps = {
   onDrawerClick: () => {},
   title: ''
 }
-
-export default Header

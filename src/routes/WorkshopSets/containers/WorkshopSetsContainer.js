@@ -8,7 +8,7 @@ import { fetchWorkshopSets } from 'store/workshopSets/actions'
 
 import strings from './WorkshopSetsContainer.strings'
 
-export default class WorkshopSetsContainer extends React.Component {
+class WorkshopSetsContainer extends React.Component {
 
   /**
    * Sets up the component.

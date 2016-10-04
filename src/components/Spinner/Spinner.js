@@ -31,5 +31,3 @@ Spinner.defaultProps = {
   size: 'default',
   type: 'constant'
 }
-
-export default Spinner

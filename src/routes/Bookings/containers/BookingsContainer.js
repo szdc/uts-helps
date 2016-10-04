@@ -11,7 +11,7 @@ import { IconAdd } from 'components/Icons'
 
 import strings from './BookingsContainer.strings.js'
 
-export default class BookingsContainer extends React.Component {
+class BookingsContainer extends React.Component {
 
   /**
    * Sets up the component.
