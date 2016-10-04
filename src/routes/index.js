@@ -13,6 +13,7 @@ import BookingsRoute from './Bookings'
 
 // Workshops
 import WorkshopSetsRoute from './WorkshopSets'
+import WorkshopSetRoute from './WorkshopSets/routes/View'
 import WorkshopsRoute from './Workshops'
 
 // Authentication
@@ -46,6 +47,7 @@ export const createRoutes = (store, api) => ({
         LogoutRoute(store),
         WorkshopsRoute(store),
         WorkshopSetsRoute(store),
+        WorkshopSetRoute(store),
         NotFoundRoute(store)
       ]
     }
