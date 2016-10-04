@@ -69,13 +69,11 @@ class BookingsContainer extends React.Component {
     }
 
     return (
-      <div>
-        <Bookings
-          bookings={bookings.bookings}
-          future={futureBookings}
-          past={pastBookings}
-        />
-      </div>
+      <Bookings
+        bookings={bookings.bookings}
+        future={futureBookings}
+        past={pastBookings}
+      />
     )
   }
 }

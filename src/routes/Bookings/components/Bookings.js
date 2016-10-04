@@ -51,10 +51,12 @@ export default class Bookings extends React.Component {
           <Tab label={strings.label_past} value={1} />
         </Tabs>
         <SwipeableViews
+          containerStyle={{height: '100%'}}
+          style={{height: 'calc(100% - 48px)'}}
           index={this.state.slideIndex}
           onChangeIndex={this._handleChange}
         >
-          <div>
+          <div style={{height: '100%'}}>
             {!future.length &&
               <CenterLayout>
                 <p>{strings.message_no_future_bookings}</p>
@@ -71,7 +73,7 @@ export default class Bookings extends React.Component {
               />
             ))}
           </div>
-          <div>
+          <div style={{height: '100%'}}>
             {!past.length &&
               <CenterLayout>
                 <p>{strings.message_no_past_bookings}</p>
