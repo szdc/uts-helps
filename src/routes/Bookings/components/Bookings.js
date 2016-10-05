@@ -50,6 +50,7 @@ export default class Bookings extends React.Component {
         </Tabs>
         <SwipeableViews
           containerStyle={{height: '100%'}}
+          slideStyle={{height: '100%'}}
           style={{height: 'calc(100% - 48px)'}}
           index={this.state.slideIndex}
           onChangeIndex={this._handleChange}
