@@ -3,6 +3,7 @@ import moment from 'moment'
 import { ListItem } from 'material-ui/List'
 
 import classes from './WorkshopListItem.scss'
+import strings from './WorkshopListItem.strings'
 
 export default class WorkshopListItem extends React.Component {
 
@@ -33,7 +34,7 @@ export default class WorkshopListItem extends React.Component {
    * @private
    */
   _getDateString(startDate) {
-    return moment(startDate).format('dddd, Do MMMM YYYY')
+    return moment(startDate).format(strings.format_date)
   }
 
   /**
@@ -45,7 +46,10 @@ export default class WorkshopListItem extends React.Component {
    * @private
    */
   _getTimeString(startDate, endDate) {
-    return moment(startDate).format('h:mma') + ' - ' + moment(endDate).format('h:mma')
+    const timeFormat = strings.format_time
+    const start = moment(startDate).format(timeFormat)
+    const end = moment(endDate).format(timeFormat)
+    return strings.format_time_string.replace('{0}', start).replace('{1}', end)
   }
 
   /**
@@ -61,19 +65,19 @@ export default class WorkshopListItem extends React.Component {
         nestedItems={[
           <div className={classes.moreInfo}>
             <div className={classes.infoLine}>
-              <span className={classes.heading}>Places Available:</span>
+              <span className={classes.heading}>{strings.label_available}</span>
               <span className={classes.content}>{workshop.maximum - workshop.BookingCount}</span>
             </div>
             <div className={classes.infoLine}>
-              <span className={classes.heading}>Room:</span>
+              <span className={classes.heading}>{strings.label_campus}</span>
               <span className={classes.content}>{workshop.campus}</span>
             </div>
             <div className={classes.infoLine}>
-              <span className={classes.heading}>Target Group:</span>
+              <span className={classes.heading}>{strings.label_target_group}</span>
               <span className={classes.content}>{workshop.targetingGroup}</span>
             </div>
             <div className={classes.infoLine}>
-              <span className={classes.heading}>What it Covers:</span>
+              <span className={classes.heading}>{strings.label_topic}</span>
               <span className={classes.content}>{workshop.topic}</span>
             </div>
           </div>
