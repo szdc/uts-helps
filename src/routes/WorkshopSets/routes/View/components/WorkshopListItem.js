@@ -63,26 +63,31 @@ export default class WorkshopListItem extends React.Component {
     return (
       <ListItem
         nestedItems={[
-          <div className={classes.moreInfo}>
-            <div className={classes.infoLine}>
-              <span className={classes.heading}>{strings.label_available}</span>
-              <span className={classes.content}>{workshop.maximum - workshop.BookingCount}</span>
+          <ListItem
+            className={classes.moreInfo}
+            innerDivStyle={{margin: '0', padding: '0 15px'}}
+            nestedListStyle={{margin: '0', padding: '0'}}
+            key={Math.random()}>
+            <div>
+              <div className={classes.infoLine}>
+                <span className={classes.heading}>{strings.label_available}</span>
+                <span className={classes.content}>{workshop.maximum - workshop.BookingCount}</span>
+              </div>
+              <div className={classes.infoLine}>
+                <span className={classes.heading}>{strings.label_campus}</span>
+                <span className={classes.content}>{workshop.campus}</span>
+              </div>
+              <div className={classes.infoLine}>
+                <span className={classes.heading}>{strings.label_target_group}</span>
+                <span className={classes.content}>{workshop.targetingGroup}</span>
+              </div>
+              <div className={classes.infoLine}>
+                <span className={classes.heading}>{strings.label_topic}</span>
+                <span className={classes.content}>{workshop.topic}</span>
+              </div>
             </div>
-            <div className={classes.infoLine}>
-              <span className={classes.heading}>{strings.label_campus}</span>
-              <span className={classes.content}>{workshop.campus}</span>
-            </div>
-            <div className={classes.infoLine}>
-              <span className={classes.heading}>{strings.label_target_group}</span>
-              <span className={classes.content}>{workshop.targetingGroup}</span>
-            </div>
-            <div className={classes.infoLine}>
-              <span className={classes.heading}>{strings.label_topic}</span>
-              <span className={classes.content}>{workshop.topic}</span>
-            </div>
-          </div>
+          </ListItem>
         ]}
-        initiallyOpen
         primaryText={workshop.topic}
         primaryTogglesNestedList
         secondaryText={
