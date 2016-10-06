@@ -15,6 +15,7 @@ export default class WorkshopListItem extends React.Component {
    */
   constructor(props) {
     super(props)
+    this._onBookClick = ::this._onBookClick
     this._onClick = ::this._onClick
   }
 
@@ -26,6 +27,16 @@ export default class WorkshopListItem extends React.Component {
   _onClick() {
     const { onClick, workshop } = this.props
     onClick(workshop)
+  }
+
+  /**
+   * Handles a click on the book session button.
+   *
+   * @private
+   */
+  _onBookClick() {
+    const { onBookClick, workshop } = this.props
+    onBookClick(workshop)
   }
 
   /**
@@ -77,6 +88,7 @@ export default class WorkshopListItem extends React.Component {
               <div className={classes.actions}>
                 <RaisedButton
                   label={strings.label_book_workshop}
+                  onClick={this._onBookClick}
                   primary
                 />
               </div>
@@ -116,6 +128,11 @@ export default class WorkshopListItem extends React.Component {
   }
 }
 WorkshopListItem.propTypes = {
+  onBookClick: React.PropTypes.func,
   onClick: React.PropTypes.func,
   workshop: React.PropTypes.object.isRequired
+}
+WorkshopListItem.defaultProps = {
+  onBookClick: () => {},
+  onClick: () => {}
 }
