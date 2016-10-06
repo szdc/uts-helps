@@ -126,7 +126,7 @@
     "sass-loader": "^4.0.0",
     "style-loader": "^0.13.0",
     "url-loader": "^0.5.6",
-    "uts-helps-api-js": "git+ssh://git@github.com/szdc/uts-helps-api-js.git#transpiled",
+    "uts-helps-api-js": "git+ssh://git@github.com/szdc/uts-helps-api-js.git#build",
     "webpack": "^1.12.14",
     "yargs": "^4.0.0"
   },
