@@ -2,7 +2,7 @@ import React from 'react'
 import Subheader from 'material-ui/Subheader'
 import { List } from 'material-ui/List'
 
-import WorkshopListItem from './WorkshopListItem'
+import WorkshopListItem from '../containers/WorkshopListItemContainer'
 
 import classes from './Workshops.scss'
 import strings from './Workshops.strings'

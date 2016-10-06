@@ -80,7 +80,7 @@ export default class WorkshopListItem extends React.Component {
             innerDivStyle={{
               backgroundColor: '#f4f4f4',
               margin: '0',
-              padding: '10px 15px'
+              padding: '10px 21px'
             }}
             style={{margin: '-10px 0'}}
             key={Math.random()}>

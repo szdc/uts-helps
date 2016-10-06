@@ -29,10 +29,11 @@ class WorkshopsContainer extends React.Component {
       id: params.id
     })
     layout
-    .setHeader({
-      title: strings.title
-    })
-    .setTitle(strings.page_title)
+      .setHeader({
+        displayMenuAsBackButton: true,
+        title: strings.title
+      })
+      .setTitle(strings.page_title)
   }
 
   /**
