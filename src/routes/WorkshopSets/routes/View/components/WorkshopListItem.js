@@ -1,5 +1,6 @@
 import React from 'react'
 import moment from 'moment'
+import RaisedButton from 'material-ui/RaisedButton'
 import { ListItem } from 'material-ui/List'
 
 import classes from './WorkshopListItem.scss'
@@ -65,25 +66,37 @@ export default class WorkshopListItem extends React.Component {
         nestedItems={[
           <ListItem
             className={classes.moreInfo}
-            innerDivStyle={{margin: '0', padding: '0 15px'}}
-            nestedListStyle={{margin: '0', padding: '0'}}
+            innerDivStyle={{
+              backgroundColor: '#f4f4f4',
+              margin: '0',
+              padding: '10px 15px'
+            }}
+            style={{margin: '-10px 0'}}
             key={Math.random()}>
-            <div>
-              <div className={classes.infoLine}>
-                <span className={classes.heading}>{strings.label_available}</span>
-                <span className={classes.content}>{workshop.maximum - workshop.BookingCount}</span>
+            <div className={classes.moreInfoContainer}>
+              <div className={classes.actions}>
+                <RaisedButton
+                  label={strings.label_book_workshop}
+                  primary
+                />
               </div>
-              <div className={classes.infoLine}>
-                <span className={classes.heading}>{strings.label_campus}</span>
-                <span className={classes.content}>{workshop.campus}</span>
-              </div>
-              <div className={classes.infoLine}>
-                <span className={classes.heading}>{strings.label_target_group}</span>
-                <span className={classes.content}>{workshop.targetingGroup}</span>
-              </div>
-              <div className={classes.infoLine}>
-                <span className={classes.heading}>{strings.label_topic}</span>
-                <span className={classes.content}>{workshop.topic}</span>
+              <div className={classes.moreInfoContent}>
+                <div className={classes.infoLine}>
+                  <span className={classes.heading}>{strings.label_available}</span>
+                  <span className={classes.content}>{workshop.maximum - workshop.BookingCount}</span>
+                </div>
+                <div className={classes.infoLine}>
+                  <span className={classes.heading}>{strings.label_campus}</span>
+                  <span className={classes.content}>{workshop.campus}</span>
+                </div>
+                <div className={classes.infoLine}>
+                  <span className={classes.heading}>{strings.label_target_group}</span>
+                  <span className={classes.content}>{workshop.targetingGroup}</span>
+                </div>
+                <div className={classes.infoLine}>
+                  <span className={classes.heading}>{strings.label_topic}</span>
+                  <span className={classes.content}>{workshop.topic}</span>
+                </div>
               </div>
             </div>
           </ListItem>
