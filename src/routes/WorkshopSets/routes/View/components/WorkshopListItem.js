@@ -1,7 +1,8 @@
 import React from 'react'
-import moment from 'moment'
 import RaisedButton from 'material-ui/RaisedButton'
 import { ListItem } from 'material-ui/List'
+
+import { getDateString, getTimeString } from 'utils/helpers'
 
 import classes from './WorkshopListItem.scss'
 import strings from './WorkshopListItem.strings'
@@ -37,31 +38,6 @@ export default class WorkshopListItem extends React.Component {
   _onBookClick() {
     const { onBookClick, workshop } = this.props
     onBookClick(workshop)
-  }
-
-  /**
-   * Constructs a date string for display.
-   *
-   * @param startDate
-   * @private
-   */
-  _getDateString(startDate) {
-    return moment(startDate).format(strings.format_date)
-  }
-
-  /**
-   * Constructs a time string for display.
-   *
-   * @param startDate
-   * @param endDate
-   * @returns {string}
-   * @private
-   */
-  _getTimeString(startDate, endDate) {
-    const timeFormat = strings.format_time
-    const start = moment(startDate).format(timeFormat)
-    const end = moment(endDate).format(timeFormat)
-    return strings.format_time_string.replace('{0}', start).replace('{1}', end)
   }
 
   /**
@@ -117,9 +93,9 @@ export default class WorkshopListItem extends React.Component {
         primaryTogglesNestedList
         secondaryText={
           <p className={classes.secondaryText}>
-            {this._getDateString(workshop.StartDate)}
+            {getDateString(workshop.StartDate)}
             <br />
-            {this._getTimeString(workshop.StartDate, workshop.EndDate)}
+            {getTimeString(workshop.StartDate, workshop.EndDate)}
           </p>
         }
         secondaryTextLines={2}

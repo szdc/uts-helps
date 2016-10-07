@@ -1,4 +1,6 @@
 export default {
+  label_cancel: 'Cancel',
+  label_close: 'Close',
   title_confirm: 'Confirm booking',
   title_success: 'Booking Confirmation',
   text_booking: 'Confirming booking...',

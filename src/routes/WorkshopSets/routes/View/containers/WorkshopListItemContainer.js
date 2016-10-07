@@ -4,6 +4,8 @@ import Dialog from 'material-ui/Dialog'
 import FlatButton from 'material-ui/FlatButton'
 import { connect } from 'react-redux'
 
+import { getDateString, getTimeString } from 'utils/helpers'
+
 import WorkshopListItem from '../components/WorkshopListItem'
 
 import classes from './BookingDialog.scss'
@@ -19,21 +21,19 @@ class WorkshopListItemContainer extends React.Component {
   constructor(props) {
     super(props)
     this.state = {
-      booking: false,
-      confirming: false,
-      dialog: {},
-      success: false
+      dialog: {}
     }
     this._onBookingDialogCancel = ::this._onBookingDialogCancel
     this._onBookingDialogConfirm = ::this._onBookingDialogConfirm
     this._onBookingSuccess = ::this._onBookingSuccess
     this._onBookWorkshopClick = ::this._onBookWorkshopClick
 
+    const { workshop } = props
     this.bookingDialogConfirm = {
       props: {
         actions: [
           <FlatButton
-            label='Cancel'
+            label={strings.label_cancel}
             onTouchTap={this._onBookingDialogCancel}
           />,
           <FlatButton
@@ -42,10 +42,6 @@ class WorkshopListItemContainer extends React.Component {
             primary
           />
         ],
-        bodyStyle: {
-          lineHeight: '1.4',
-          paddingBottom: '0'
-        },
         title: strings.title_confirm,
         titleStyle: {
           paddingBottom: '12px'
@@ -73,10 +69,27 @@ class WorkshopListItemContainer extends React.Component {
     }
     this.bookingDialogSuccess = {
       props: {
+        actions: [
+          <FlatButton
+            label={strings.label_close}
+            onTouchTap={this._onBookingDialogCancel}
+          />
+        ],
         title: strings.title_success
       },
       content: (
-        <span>...</span>
+        <div className={classes.bookingContent}>
+          <span className={classes.title}>{workshop.topic}</span>
+          <div>
+            <label>Date:</label>
+            <span>{getDateString(workshop.StartDate)}</span>
+          </div>
+          <div>
+            <label>Time:</label>
+            <span>{getTimeString(workshop.StartDate, workshop.EndDate)}</span>
+          </div>
+          <hr />
+        </div>
       )
     }
   }
@@ -87,9 +100,9 @@ class WorkshopListItemContainer extends React.Component {
    * @param workshop
    * @private
    */
-  _onBookWorkshopClick(workshop) {
+  _onBookWorkshopClick() {
     this.setState({
-      dialog: this.bookingDialogConfirm
+      dialog: this.bookingDialogSuccess
     })
   }
 
@@ -139,6 +152,11 @@ class WorkshopListItemContainer extends React.Component {
     return (
       <div>
         <Dialog
+          bodyStyle={{
+            lineHeight: '1.4',
+            paddingBottom: '0'
+          }}
+          className={classes.dialog}
           onRequestClose={this._onBookingDialogCancel}
           open={Object.keys(dialog).length > 0}
           {...dialog.props}
@@ -149,10 +167,12 @@ class WorkshopListItemContainer extends React.Component {
           onBookClick={this._onBookWorkshopClick}
           {...this.props}
         />
-
       </div>
     )
   }
+}
+WorkshopListItemContainer.propTypes = {
+  workshop: React.PropTypes.object.isRequired
 }
 
 export default connect()(WorkshopListItemContainer)
