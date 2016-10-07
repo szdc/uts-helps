@@ -81,10 +81,6 @@ export default class WorkshopListItem extends React.Component {
                   <span className={classes.heading}>{strings.label_target_group}</span>
                   <span className={classes.content}>{workshop.targetingGroup}</span>
                 </div>
-                <div className={classes.infoLine}>
-                  <span className={classes.heading}>{strings.label_topic}</span>
-                  <span className={classes.content}>{workshop.topic}</span>
-                </div>
               </div>
             </div>
           </ListItem>
