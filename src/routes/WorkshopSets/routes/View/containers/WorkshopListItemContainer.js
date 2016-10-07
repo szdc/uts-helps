@@ -7,6 +7,7 @@ import { connect } from 'react-redux'
 import WorkshopListItem from '../components/WorkshopListItem'
 
 import classes from './BookingDialog.scss'
+import strings from './BookingDialog.strings'
 
 class WorkshopListItemContainer extends React.Component {
 
@@ -45,14 +46,12 @@ class WorkshopListItemContainer extends React.Component {
           lineHeight: '1.4',
           paddingBottom: '0'
         },
-        title: 'Confirm booking',
+        title: strings.title_confirm,
         titleStyle: {
           paddingBottom: '12px'
         }
       },
-      content: (
-        <span>Are you sure you want to book this session?</span>
-      )
+      content: <span>{strings.text_confirm}</span>
     }
     this.bookingDialogBooking = {
       props: {
@@ -67,14 +66,14 @@ class WorkshopListItemContainer extends React.Component {
             style={{margin: '5px'}}
           />
           <span className={classes.progressText}>
-            Confirming booking...
+            {strings.text_booking}
           </span>
         </div>
       )
     }
     this.bookingDialogSuccess = {
       props: {
-        title: 'Booking Confirmation'
+        title: strings.title_success
       },
       content: (
         <span>...</span>
