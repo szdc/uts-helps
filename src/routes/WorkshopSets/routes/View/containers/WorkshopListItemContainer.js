@@ -2,6 +2,7 @@ import React from 'react'
 import CircularProgress from 'material-ui/CircularProgress'
 import Dialog from 'material-ui/Dialog'
 import FlatButton from 'material-ui/FlatButton'
+import Reminders from 'containers/RemindersContainer'
 import { connect } from 'react-redux'
 
 import { getDateString, getTimeString } from 'utils/helpers'
@@ -80,15 +81,23 @@ class WorkshopListItemContainer extends React.Component {
       content: (
         <div className={classes.bookingContent}>
           <span className={classes.title}>{workshop.topic}</span>
-          <div>
-            <label>Date:</label>
-            <span>{getDateString(workshop.StartDate)}</span>
-          </div>
-          <div>
-            <label>Time:</label>
-            <span>{getTimeString(workshop.StartDate, workshop.EndDate)}</span>
-          </div>
+          <table>
+            <tbody>
+              <tr>
+                <td><label>Date:</label></td>
+                <td><span>{getDateString(workshop.StartDate)}</span></td>
+              </tr>
+              <tr>
+                <td><label>Time:</label></td>
+                <td><span>{getTimeString(workshop.StartDate, workshop.EndDate)}</span></td>
+              </tr>
+            </tbody>
+          </table>
           <hr />
+          <div>
+            <label>Reminders:</label>
+            <Reminders />
+          </div>
         </div>
       )
     }
