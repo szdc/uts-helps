@@ -1,7 +1,7 @@
 import React from 'react'
-import RaisedButton from 'material-ui/RaisedButton'
 
 import Attendance from '../containers/AttendanceContainer'
+import CancelBooking from '../containers/CancelBookingContainer'
 import GenericListItem from 'components/GenericListItem'
 import { IconCheck } from 'components/Icons'
 
@@ -42,11 +42,9 @@ export default class BookingListItem extends React.Component {
       <GenericListItem
         actions={
           <div>
-            {booking.isUpcoming &&
-              <RaisedButton
-                label={strings.label_cancel}
-                onClick={this._onCancelClick}
-                primary
+            {!booking.isUpcoming &&
+              <CancelBooking
+                booking={booking}
               />
             }
             {booking.attended === null &&

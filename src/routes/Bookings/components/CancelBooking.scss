@@ -1,0 +1,14 @@
+.progressContainer::before {
+  content: '';
+  display: inline-block;
+  height: 100%;
+  vertical-align: middle;
+}
+.progressIndicator {
+  vertical-align: middle;
+}
+.progressText {
+  display: inline-block;
+  margin-left: 12px;
+  vertical-align: middle;
+}

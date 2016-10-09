@@ -1,4 +1,4 @@
 export default {
-  label_cancel_booking: 'Cancel',
+  label_cancel: 'Cancel',
   text_attended: 'You attended'
 }

@@ -3,12 +3,11 @@ import CircularProgress from 'material-ui/CircularProgress'
 import Dialog from 'material-ui/Dialog'
 import FlatButton from 'material-ui/FlatButton'
 import RaisedButton from 'material-ui/RaisedButton'
-import TextField from 'material-ui/TextField'
 
-import classes from './Attendance.scss'
-import strings from './Attendance.strings'
+import classes from './CancelBooking.scss'
+import strings from './CancelBooking.strings'
 
-export default class Attendance extends React.Component {
+export default class CancelBooking extends React.Component {
 
   /**
    * Records attendance.
@@ -21,19 +20,15 @@ export default class Attendance extends React.Component {
     this.state = {
       confirming: false,
       dialog: {},
-      form: {
-        code: ''
-      },
       submitting: false
     }
     this._closeDialog = ::this._closeDialog
-    this._onFieldChanged = ::this._onFieldChanged
-    this._onRecordAttendanceClick = ::this._onRecordAttendanceClick
+    this._onCancelClick = ::this._onCancelClick
     this._onSubmit = ::this._onSubmit
 
-    this.dialogVerify = {
+    this.dialogConfirm = {
       props: {
-        title: strings.title_verify,
+        title: strings.title_confirm,
         titleStyle: {
           paddingBottom: '12px'
         }
@@ -61,7 +56,7 @@ export default class Attendance extends React.Component {
   }
 
   /**
-   * Verifies attendance.
+   * Cancels the booking.
    *
    * @private
    */
@@ -71,33 +66,18 @@ export default class Attendance extends React.Component {
       confirming: false,
       submitting: true
     })
-    this.props.onSubmit(this.state.form.code)
+    this.props.onSubmit()
   }
 
   /**
-   * Handles a click on record attendance.
+   * Handles a click on the cancel button.
    *
    * @private
    */
-  _onRecordAttendanceClick() {
+  _onCancelClick() {
     this.setState({
-      dialog: this.dialogVerify,
+      dialog: this.dialogConfirm,
       confirming: true
-    })
-  }
-
-  /**
-   * Stores a change to a form field.
-   *
-   * @param e
-   * @private
-   */
-  _onFieldChanged(e) {
-    this.setState({
-      form: {
-        ...this.state.form,
-        [e.target.name]: e.target.value.toUpperCase()
-      }
     })
   }
 
@@ -110,15 +90,14 @@ export default class Attendance extends React.Component {
     const {
       confirming,
       dialog,
-      form,
       submitting
     } = this.state
 
     return (
       <div>
         <RaisedButton
-          label={strings.label_record_attendance}
-          onClick={this._onRecordAttendanceClick}
+          label={strings.label_cancel}
+          onClick={this._onCancelClick}
           primary
           style={{float: 'right', marginBottom: '10px'}}
         />
@@ -127,12 +106,11 @@ export default class Attendance extends React.Component {
             confirming ?
               [
                 <FlatButton
-                  label={strings.label_cancel}
+                  label={strings.label_close}
                   onTouchTap={this._closeDialog}
                 />,
                 <FlatButton
-                  disabled={form.code.length === 0}
-                  label={strings.label_attend}
+                  label={strings.label_confirm}
                   onTouchTap={this._onSubmit}
                   primary
                 />
@@ -145,15 +123,7 @@ export default class Attendance extends React.Component {
         >
           {confirming &&
             <div>
-              <span>{strings.text_verify}</span>
-              <TextField
-                floatingLabelFixed
-                floatingLabelText='Code word'
-                hintText='ABC123'
-                name='code'
-                onChange={this._onFieldChanged}
-                value={form.code}
-              />
+              <span>{strings.text_confirm}</span>
             </div>
           }
           {submitting &&
@@ -173,6 +143,6 @@ export default class Attendance extends React.Component {
     )
   }
 }
-Attendance.propTypes = {
+CancelBooking.propTypes = {
   onSubmit: React.PropTypes.func.isRequired
 }
