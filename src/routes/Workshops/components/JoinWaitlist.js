@@ -106,7 +106,7 @@ export default class JoinWaitlist extends React.Component {
             confirming ?
               [
                 <FlatButton
-                  label={strings.label_close}
+                  label={strings.label_cancel}
                   onTouchTap={this._closeDialog}
                 />,
                 <FlatButton

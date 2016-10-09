@@ -19,6 +19,8 @@ export default class GenericListItem extends React.Component {
       cutoffReached,
       description,
       endDate,
+      isWaitlistable,
+      isWaitisted,
       remaining,
       startDate,
       targetGroup,
@@ -51,10 +53,12 @@ export default class GenericListItem extends React.Component {
                     <span className={classes.content}>{waitlistSize}</span>
                   </div> : null
                 }
-                <div className={classes.infoLine}>
-                  <span className={classes.heading}>{strings.label_available}</span>
-                  <span className={classes.content}>{remaining}</span>
-                </div>
+                {!isWaitisted && !isWaitlistable &&
+                  <div className={classes.infoLine}>
+                    <span className={classes.heading}>{strings.label_available}</span>
+                    <span className={classes.content}>{remaining}</span>
+                  </div>
+                }
                 {campus ?
                   <div className={classes.infoLine}>
                     <span className={classes.heading}>{strings.label_campus}</span>
@@ -104,6 +108,8 @@ GenericListItem.propTypes = {
   campus: React.PropTypes.string,
   cutoffReached: React.PropTypes.bool,
   description: React.PropTypes.string,
+  isWaitlistable: React.PropTypes.bool,
+  isWaitisted: React.PropTypes.bool,
   endDate: React.PropTypes.string,
   remaining: React.PropTypes.number,
   startDate: React.PropTypes.string,
