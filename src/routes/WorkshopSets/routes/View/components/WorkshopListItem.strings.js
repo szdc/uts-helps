@@ -5,5 +5,6 @@ export default {
   label_campus: 'Room:',
   label_description: 'Description:',
   label_target_group: 'Target Group:',
-  label_topic: 'Topic:'
+  label_topic: 'Topic:',
+  text_has_booking: 'You\'re attending'
 }

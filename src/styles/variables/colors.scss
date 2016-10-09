@@ -9,9 +9,6 @@ $color-primary: rgb(0, 188, 212);
 .border {
   border-color: #ddd;
 }
-.badge {
-  background-color: $color-primary;
-}
 
 :root {
   --primary-color: $color-primary;
@@ -24,61 +21,11 @@ $color-primary: rgb(0, 188, 212);
   --selected-item-bg-color: #666;
   --selected-item-text-color: #fff;
 
-  // Buttons
-  --button-bg-color: #000;
-  --button-text-color: #fff;
-
-  // Input elements
-  --textarea-padding: 6px 4px;
-  --textarea-label-margin: 0 0 4px 0;
-
   // Errors
   --error-color: red;
-
-  // Category colors
-  --category-all: #000;
-  --category-owner: #2196f3;
-  --category-buyer: #FFD600;
-  --category-hot: #F44336;
-  --category-warm: #FB8C00;
-  --category-listing: #4CAF50;
-  --category-bought: #EC407A;
-  --category-sold: #9901B3;
-  --category-private: #607D8B;
-  --category-none: #777;
-  --category-custom: #000;
+  --success-color: #4CAF50;
 }
 
-.category-all {
-  background-color: var(--category-all);
-}
-.category-owner {
-  background-color: var(--category-owner);
-}
-.category-buyer {
-  background-color: var(--category-buyer);
-}
-.category-hot {
-  background-color: var(--category-hot);
-}
-.category-warm {
-  background-color: var(--category-warm);
-}
-.category-listing {
-  background-color: var(--category-listing);
-}
-.category-bought {
-  background-color: var(--category-bought);
-}
-.category-sold {
-  background-color: var(--category-sold);
-}
-.category-private {
-  background-color: var(--category-private);
-}
-.category-none {
-  background-color: var(--category-none);
-}
-.category-custom {
-  background-color: var(--category-custom);
+.success {
+  color: var(--success-color);
 }

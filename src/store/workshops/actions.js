@@ -61,3 +61,23 @@ export function searchWorkshops(params) {
     })
   }
 }
+
+/**
+ * Updates a workshop.
+ *
+ * @param workshopId
+ * @param fields
+ * @returns {function(*, *, *)}
+ */
+export function updateWorkshop(workshopId, fields) {
+  return (dispatch, getState, UtsHelps) => {
+    const workshops = getState().workshops.workshops
+    const updatedWorkshops = workshops.map(workshop => {
+      if (workshop.WorkshopId === workshopId) {
+        workshop = {...workshop, ...fields, workshopID: workshop.workshopID}
+      }
+      return workshop
+    })
+    dispatch(receiveWorkshopsSuccess(updatedWorkshops))
+  }
+}

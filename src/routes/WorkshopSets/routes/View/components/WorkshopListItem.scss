@@ -24,3 +24,19 @@
 .moreInfoContent {
   overflow: hidden;
 }
+.hasBooking {
+  color: var(--success-color);
+  float: right;
+  position: relative;
+  right: 5px;
+  top: -4px;
+}
+.hasBooking i {
+  font-size: 18px;
+  margin-right: 5px;
+  position: relative;
+  top: 4px;
+}
+.primaryText {
+  padding-right: 40px;
+}

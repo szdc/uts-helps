@@ -3,6 +3,7 @@ import RaisedButton from 'material-ui/RaisedButton'
 import { ListItem } from 'material-ui/List'
 
 import { getDateString, getTimeString } from 'utils/helpers'
+import { IconCheck } from 'components/Icons'
 
 import classes from './WorkshopListItem.scss'
 import strings from './WorkshopListItem.strings'
@@ -100,14 +101,26 @@ export default class WorkshopListItem extends React.Component {
             </div>
           </ListItem>
         ]}
-        innerDivStyle={{lineHeight: '1.2', paddingRight: '50px'}}
-        primaryText={workshop.topic}
+        innerDivStyle={{lineHeight: '1.2'}}
+        primaryText={
+          <div className={classes.primaryText}>
+            {workshop.topic}
+          </div>
+        }
         primaryTogglesNestedList
         secondaryText={
           <p className={classes.secondaryText}>
             {getDateString(workshop.StartDate)}
             <br />
-            {getTimeString(workshop.StartDate, workshop.EndDate)}
+            <div>
+              {getTimeString(workshop.StartDate, workshop.EndDate)}
+              {workshop.bookingId !== null &&
+                <div className={classes.hasBooking}>
+                  <IconCheck />
+                  {strings.text_has_booking}
+                </div>
+              }
+            </div>
           </p>
         }
         secondaryTextLines={2}
