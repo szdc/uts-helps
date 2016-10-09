@@ -95,6 +95,9 @@ export const IconEmail = props =>
 export const IconErrorOutline = props =>
   createIcon(props, 'error_outline')
 
+export const IconFilter = props =>
+  createIcon(props, 'filter_list')
+
 export const IconLogout = props =>
   createIcon(props, 'exit_to_app')
 

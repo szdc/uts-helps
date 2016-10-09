@@ -1,10 +1,14 @@
 import React from 'react'
+import Dialog from 'material-ui/Dialog'
+import FlatButton from 'material-ui/FlatButton'
 import { connect } from 'react-redux'
 import { createSelector } from 'reselect'
 import { push } from 'react-router-redux'
 
-import Workshops from '../components/Workshops'
+import { IconFilter } from 'components/Icons'
+import FilterDialog from './FilterDialogContainer'
 import Loading from 'components/Loading'
+import Workshops from '../components/Workshops'
 import { searchWorkshops } from 'store/workshops/actions'
 
 import strings from './WorkshopsContainer.strings'
@@ -18,6 +22,12 @@ class WorkshopsContainer extends React.Component {
    */
   constructor(props) {
     super(props)
+
+    this.state = {
+      showFilterDialog: false
+    }
+    this._closeFilter = ::this._closeFilter
+    this._onFilterClick = ::this._onFilterClick
     this._onWorkshopClick = ::this._onWorkshopClick
   }
 
@@ -25,12 +35,17 @@ class WorkshopsContainer extends React.Component {
    * Fetches the user's profile.
    */
   componentDidMount() {
-    const { searchWorkshops, layout, params } = this.props
+    const { layout, params, searchWorkshops } = this.props
     searchWorkshops({
       workshopSetId: params.id
     })
     layout
       .setHeader({
+        contextualOptions: [
+          <IconFilter
+            onTouchTap={this._onFilterClick}
+          />
+        ],
         displayMenuAsBackButton: true,
         title: strings.title
       })
@@ -48,6 +63,28 @@ class WorkshopsContainer extends React.Component {
   }
 
   /**
+   * Shows the filter dialog.
+   *
+   * @private
+   */
+  _onFilterClick() {
+    this.setState({
+      showFilterDialog: true
+    })
+  }
+
+  /**
+   * Hides the filter dialog.
+   *
+   * @private
+   */
+  _closeFilter() {
+    this.setState({
+      showFilterDialog: false
+    })
+  }
+
+  /**
    * Renders the workshop list.
    *
    * @returns {XML}
@@ -62,19 +99,45 @@ class WorkshopsContainer extends React.Component {
     }
 
     return (
-      <Workshops
-        onWorkshopClick={this._onWorkshopClick}
-        workshops={workshops.workshops}
-      />
+      <div>
+        <Workshops
+          onWorkshopClick={this._onWorkshopClick}
+          workshops={workshops.workshops}
+        />
+        <Dialog
+          actions={
+            [
+              <FlatButton
+                label={strings.label_cancel}
+                onTouchTap={this._closeFilter}
+              />,
+              <FlatButton
+                label={strings.label_confirm}
+                onTouchTap={this._onSubmit}
+                primary
+              />
+            ]
+          }
+          bodyStyle={{
+            lineHeight: '1.4',
+            paddingBottom: '0'
+          }}
+          onRequestClose={this._closeFilter}
+          open={this.state.showFilterDialog}
+          title={strings.title_filter}
+        >
+          <FilterDialog />
+        </Dialog>
+      </div>
     )
   }
 }
 WorkshopsContainer.propTypes = {
-  workshops: React.PropTypes.object.isRequired,
-  searchWorkshops: React.PropTypes.func.isRequired,
   layout: React.PropTypes.object.isRequired,
   params: React.PropTypes.object.isRequired,
-  push: React.PropTypes.func.isRequired
+  push: React.PropTypes.func.isRequired,
+  searchWorkshops: React.PropTypes.func.isRequired,
+  workshops: React.PropTypes.object.isRequired
 }
 
 const mapStateToProps = state => ({
