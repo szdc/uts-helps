@@ -163,6 +163,7 @@ class WorkshopListItemContainer extends React.Component {
     return (
       <div>
         <Dialog
+          autoDetectWindowHeight={false}
           bodyStyle={{
             lineHeight: '1.4',
             paddingBottom: '0'

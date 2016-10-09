@@ -129,7 +129,11 @@ export default class Reminders extends React.Component {
         </Table>
 
         {reminders.length > 0 &&
-          <Table className={classes.reminders} selectable={false}>
+          <Table
+            className={classes.reminders}
+            selectable={false}
+            bodyStyle={{maxHeight: '120px'}}
+          >
             <TableBody displayRowCheckbox={false}>
               {reminders.map(reminder => (
                 <TableRowReminder
