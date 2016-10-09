@@ -3,12 +3,9 @@ import {
   RECEIVE_BOOKINGS_ERROR,
   RECEIVE_BOOKINGS_SUCCESS
 } from './actions'
-import {
-  RECEIVE_ADD_BOOKING_SUCCESS
-} from './actions/create'
-import {
-  RECEIVE_CANCEL_BOOKING_SUCCESS
-} from './actions/cancel'
+import { RECEIVE_ADD_BOOKING_SUCCESS } from './actions/create'
+import { RECEIVE_ATTEND_BOOKING_SUCCESS } from './actions/attend'
+import { RECEIVE_CANCEL_BOOKING_SUCCESS } from './actions/cancel'
 
 const initialState = {
   bookings: null,
@@ -52,6 +49,16 @@ export default function bookingsReducer(state = initialState, action) {
         bookings: state.bookings ? state.bookings.filter(booking =>
           booking.workshopID !== action.payload
         ) : []
+      }
+    case RECEIVE_ATTEND_BOOKING_SUCCESS:
+      return {
+        ...state,
+        bookings: state.bookings ? state.bookings.map(booking => {
+          if (booking.workshopID === action.payload) {
+            booking.attended = 1
+          }
+          return booking
+        }) : []
       }
     default:
       return state

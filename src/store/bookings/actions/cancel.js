@@ -57,7 +57,7 @@ export function cancelBooking(workshopId, callback) {
         callback(err)
       } else {
         dispatch(receiveCancelBookingSuccess(workshopId))
-        callback(null, res.Result)
+        callback(null, workshopId)
       }
     })
   }
