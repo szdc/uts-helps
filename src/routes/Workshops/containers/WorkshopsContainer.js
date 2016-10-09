@@ -83,8 +83,11 @@ const mapStateToProps = state => ({
 
 /**
  * Adds the following keys to workshops:
- * - remaining {number} - the number of spaces remaining
  * - cutoffReached {bool} - whether or not the cutoff has been reached
+ * - isBookable {bool} - if the workshop can be booked
+ * - isBooked {bool} - if the workshop has been booked
+ * - isWaitlistable {bool} - if the workshop can be waitlisted
+ * - remaining {number} - the number of spaces remaining
  * - waitlistSize {number} - the number of people on the waitlist
  */
 const workshopSelector = createSelector(
@@ -94,8 +97,12 @@ const workshopSelector = createSelector(
       return []
     }
     workshops.workshops = workshops.workshops.map(workshop => {
-      workshop.remaining = Math.max(workshop.maximum - workshop.BookingCount, 0)
       workshop.cutoffReached = workshop.cutoff ? workshop.BookingCount >= workshop.cutoff : false
+      workshop.isBooked = workshop.bookingId !== null
+      workshop.isWaitlistable = workshop.bookingId === null && (workshop.remaining === 0 || workshop.cutoffReached)
+        && !workshop.isWaitlisted
+      workshop.isBookable = workshop.bookingId === null && !workshop.isWaitlistable && !workshop.isWaitlisted
+      workshop.remaining = Math.max(workshop.maximum - workshop.BookingCount, 0)
       workshop.waitlistSize = workshop.cutoff ? workshop.BookingCount - workshop.cutoff : 0
       return workshop
     })

@@ -6,6 +6,9 @@ import {
 import {
   RECEIVE_CANCEL_BOOKING_SUCCESS
 } from '../bookings/actions/cancel'
+import {
+  RECEIVE_WAITLIST_BOOKING_SUCCESS
+} from '../bookings/actions/waitlist'
 
 const initialState = {
   workshops: null,
@@ -43,6 +46,19 @@ export default function workshopsReducer(state = initialState, action) {
             return {
               ...workshop,
               bookingId: null
+            }
+          }
+          return workshop
+        }) : []
+      }
+    case RECEIVE_WAITLIST_BOOKING_SUCCESS:
+      return {
+        ...state,
+        workshops: state.workshops ? state.workshops.map(workshop => {
+          if (workshop.WorkshopId === action.payload) {
+            return {
+              ...workshop,
+              isWaitlisted: true
             }
           }
           return workshop

@@ -26,8 +26,6 @@ export default class GenericListItem extends React.Component {
       waitlistSize
     } = this.props
 
-    console.log(cutoffReached && waitlistSize >= 0)
-
     return (
       <ListItem
         innerDivStyle={{lineHeight: '1.2'}}
@@ -49,7 +47,7 @@ export default class GenericListItem extends React.Component {
               <div className={classes.moreInfoContent}>
                 {(cutoffReached && waitlistSize >= 0) ?
                   <div className={classes.infoLine}>
-                    <span className={classes.heading}>{strings.label_available}</span>
+                    <span className={classes.heading}>{strings.label_waitlist}</span>
                     <span className={classes.content}>{waitlistSize}</span>
                   </div> : null
                 }

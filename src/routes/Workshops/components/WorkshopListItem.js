@@ -53,17 +53,6 @@ export default class WorkshopListItem extends React.Component {
   }
 
   /**
-   * Calculates the remaining capacity for the workshop.
-   *
-   * @returns {number}
-   * @private
-   */
-  _getRemainingCapacity() {
-    const { workshop } = this.props
-    return Math.max(workshop.maximum - workshop.BookingCount, 0)
-  }
-
-  /**
    * Renders the workshop set item.
    *
    * @returns {XML}
@@ -75,21 +64,21 @@ export default class WorkshopListItem extends React.Component {
       <GenericListItem
         actions={
           <div>
-            {workshop.bookingId === null && workshop.remaining !== 0 && !workshop.cutoffReached &&
+            {workshop.isBookable &&
               <RaisedButton
                 label={strings.label_book_workshop}
                 onClick={this._onBookClick}
                 primary
               />
             }
-            {workshop.bookingId !== null &&
+            {workshop.isBooked &&
               <RaisedButton
                 label={strings.label_cancel_workshop}
                 onClick={this._onCancelClick}
                 primary
               />
             }
-            {workshop.bookingId === null && (workshop.remaining === 0 || workshop.cutoffReached) &&
+            {workshop.isWaitlistable &&
               <JoinWaitlist
                 workshop={workshop}
               />
@@ -104,10 +93,16 @@ export default class WorkshopListItem extends React.Component {
                 {strings.text_has_booking}
               </div>
               :
-              (workshop.remaining === 0 || workshop.cutoffReached) &&
+              workshop.isWaitlistable &&
                 <div className={classes.capacityReached}>
                   {strings.text_capacity_reached}
                 </div>
+            }
+            {workshop.isWaitlisted &&
+              <div className={classes.hasBooking}>
+                <IconCheck />
+                {strings.text_is_waitlisted}
+              </div>
             }
           </div>
         }
