@@ -54,7 +54,7 @@ export default class BookingListItem extends React.Component {
               {strings.text_attended}
             </div>
         }
-        campus={booking.campusID}
+        campus={booking.campus}
         description={booking.description}
         endDate={booking.ending}
         startDate={booking.starting}
