@@ -1,8 +1,7 @@
 import React from 'react'
 import RaisedButton from 'material-ui/RaisedButton'
-import { ListItem } from 'material-ui/List'
 
-import { getDateString, getTimeString } from 'utils/helpers'
+import GenericListItem from 'components/GenericListItem'
 import { IconCheck } from 'components/Icons'
 
 import classes from './WorkshopListItem.scss'
@@ -61,69 +60,29 @@ export default class WorkshopListItem extends React.Component {
     const { workshop } = this.props
 
     return (
-      <ListItem
-        nestedItems={[
-          <ListItem
-            className={classes.moreInfo}
-            innerDivStyle={{
-              backgroundColor: '#f4f4f4',
-              margin: '0',
-              padding: '10px 21px'
-            }}
-            style={{margin: '-10px 0'}}
-            key={Math.random()}>
-            <div className={classes.moreInfoContainer}>
-              <div className={classes.actions}>
-                <RaisedButton
-                  label={workshop.bookingId ? strings.label_cancel_workshop : strings.label_book_workshop}
-                  onClick={workshop.bookingId ? this._onCancelClick : this._onBookClick}
-                  primary
-                />
-              </div>
-              <div className={classes.moreInfoContent}>
-                <div className={classes.infoLine}>
-                  <span className={classes.heading}>{strings.label_available}</span>
-                  <span className={classes.content}>{workshop.maximum - workshop.BookingCount}</span>
-                </div>
-                <div className={classes.infoLine}>
-                  <span className={classes.heading}>{strings.label_campus}</span>
-                  <span className={classes.content}>{workshop.campus}</span>
-                </div>
-                <div className={classes.infoLine}>
-                  <span className={classes.heading}>{strings.label_target_group}</span>
-                  <span className={classes.content}>{workshop.targetingGroup}</span>
-                </div>
-                <div className={classes.infoLine}>
-                  <span className={classes.heading}>{strings.label_description}</span>
-                  <span className={classes.content}>{workshop.description}</span>
-                </div>
-              </div>
-            </div>
-          </ListItem>
-        ]}
-        innerDivStyle={{lineHeight: '1.2'}}
-        primaryText={
-          <div className={classes.primaryText}>
-            {workshop.topic}
-          </div>
+      <GenericListItem
+        actions={
+          <RaisedButton
+            label={workshop.bookingId ? strings.label_cancel_workshop : strings.label_book_workshop}
+            onClick={workshop.bookingId ? this._onCancelClick : this._onBookClick}
+            primary
+          />
         }
-        primaryTogglesNestedList
-        secondaryText={
-          <p className={classes.secondaryText}>
-            {getDateString(workshop.StartDate)}
-            <br />
-            <div>
-              {getTimeString(workshop.StartDate, workshop.EndDate)}
-              {workshop.bookingId !== null &&
-                <div className={classes.hasBooking}>
-                  <IconCheck />
-                  {strings.text_has_booking}
-                </div>
-              }
+        additionalText={
+          workshop.bookingId !== null &&
+            <div className={classes.hasBooking}>
+              <IconCheck />
+              {strings.text_has_booking}
             </div>
-          </p>
         }
-        secondaryTextLines={2}
+        campus={workshop.campus}
+        capacity={workshop.maximum}
+        description={workshop.description}
+        endDate={workshop.EndDate}
+        remainingCapacity={workshop.maximum - workshop.BookingCount}
+        startDate={workshop.StartDate}
+        targetGroup={workshop.targetingGroup}
+        topic={workshop.topic}
       />
     )
   }
