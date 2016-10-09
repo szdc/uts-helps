@@ -44,22 +44,30 @@ export default class GenericListItem extends React.Component {
                 {actions}
               </div>
               <div className={classes.moreInfoContent}>
-                <div className={classes.infoLine}>
-                  <span className={classes.heading}>{strings.label_available}</span>
-                  <span className={classes.content}>{`${remainingCapacity} / ${capacity}`}</span>
-                </div>
-                <div className={classes.infoLine}>
-                  <span className={classes.heading}>{strings.label_campus}</span>
-                  <span className={classes.content}>{campus}</span>
-                </div>
-                <div className={classes.infoLine}>
-                  <span className={classes.heading}>{strings.label_target_group}</span>
-                  <span className={classes.content}>{targetGroup}</span>
-                </div>
-                <div className={classes.infoLine}>
-                  <span className={classes.heading}>{strings.label_description}</span>
-                  <span className={classes.content}>{description}</span>
-                </div>
+                {capacity && remainingCapacity &&
+                  <div className={classes.infoLine}>
+                    <span className={classes.heading}>{strings.label_available}</span>
+                    <span className={classes.content}>{`${remainingCapacity} / ${capacity}`}</span>
+                  </div>
+                }
+                {campus &&
+                  <div className={classes.infoLine}>
+                    <span className={classes.heading}>{strings.label_campus}</span>
+                    <span className={classes.content}>{campus}</span>
+                  </div>
+                }
+                {targetGroup &&
+                  <div className={classes.infoLine}>
+                    <span className={classes.heading}>{strings.label_target_group}</span>
+                    <span className={classes.content}>{targetGroup}</span>
+                  </div>
+                }
+                {description &&
+                  <div className={classes.infoLine}>
+                    <span className={classes.heading}>{strings.label_description}</span>
+                    <span className={classes.content}>{description}</span>
+                  </div>
+                }
               </div>
             </div>
           </ListItem>

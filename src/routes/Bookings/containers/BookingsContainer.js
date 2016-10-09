@@ -105,7 +105,10 @@ const futureBookingsSelector = createSelector(
     const now = moment()
     return bookings.bookings.filter(booking =>
       moment(booking.ending).isAfter(now)
-    )
+    ).map(booking => {
+      booking.isUpcoming = true
+      return booking
+    })
   }
 )
 
@@ -121,7 +124,10 @@ const pastBookingsSelector = createSelector(
     const now = moment()
     return bookings.bookings.filter(booking =>
       moment(booking.ending).isBefore(now)
-    )
+    ).map(booking => {
+      booking.isUpcoming = false
+      return booking
+    })
   }
 )
 
