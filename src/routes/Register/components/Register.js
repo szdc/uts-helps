@@ -19,7 +19,7 @@ export default (submitAction, redirectTo) => {
     /**
      * Sets up the component.
      *
-     * * @param props
+     * @param props
      */
     constructor(props) {
       super(props)

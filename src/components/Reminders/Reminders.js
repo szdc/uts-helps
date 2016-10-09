@@ -14,6 +14,7 @@ import TableRowReminder from './TableRowReminder'
 import { IconAdd } from 'components/Icons'
 
 import classes from './Reminders.scss'
+import strings from './Reminders.strings'
 
 export default class Reminders extends React.Component {
 
@@ -98,6 +99,7 @@ export default class Reminders extends React.Component {
                   name='figure'
                   onChange={this._onTextFieldChange}
                   ref='figure'
+                  pattern='[0-9]*'
                   style={{width: 'auto', marginRight: '15px'}}
                   type='number'
                   value={form.figure}
@@ -127,6 +129,10 @@ export default class Reminders extends React.Component {
             </TableRow>
           </TableBody>
         </Table>
+
+        <div className={classes.reminderSubtext}>
+          <span>{strings.reminder_subtext}</span>
+        </div>
 
         {reminders.length > 0 &&
           <Table
