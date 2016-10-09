@@ -2,6 +2,7 @@ import React from 'react'
 import RaisedButton from 'material-ui/RaisedButton'
 
 import GenericListItem from 'components/GenericListItem'
+import JoinWaitlist from '../containers/JoinWaitlistContainer'
 import { IconCheck } from 'components/Icons'
 
 import classes from './WorkshopListItem.scss'
@@ -89,10 +90,8 @@ export default class WorkshopListItem extends React.Component {
               />
             }
             {workshop.bookingId === null && (workshop.remaining === 0 || workshop.cutoffReached) &&
-              <RaisedButton
-                label={strings.label_join_waitlist}
-                onClick={this._onCancelClick}
-                primary
+              <JoinWaitlist
+                workshop={workshop}
               />
             }
           </div>
@@ -113,13 +112,14 @@ export default class WorkshopListItem extends React.Component {
           </div>
         }
         campus={workshop.campus}
-        capacity={workshop.maximum}
+        cutoffReached={workshop.cutoffReached}
         description={workshop.description}
         endDate={workshop.EndDate}
-        remainingCapacity={this._getRemainingCapacity()}
+        remaining={workshop.remaining}
         startDate={workshop.StartDate}
         targetGroup={workshop.targetingGroup}
         topic={workshop.topic}
+        waitlistSize={workshop.waitlistSize}
       />
     )
   }

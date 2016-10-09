@@ -4,10 +4,10 @@ import Dialog from 'material-ui/Dialog'
 import FlatButton from 'material-ui/FlatButton'
 import RaisedButton from 'material-ui/RaisedButton'
 
-import classes from './CancelBooking.scss'
-import strings from './CancelBooking.strings'
+import classes from './JoinWaitlist.scss'
+import strings from './JoinWaitlist.strings'
 
-export default class CancelBooking extends React.Component {
+export default class JoinWaitlist extends React.Component {
 
   /**
    * Sets up the component.
@@ -23,7 +23,7 @@ export default class CancelBooking extends React.Component {
       submitting: false
     }
     this._closeDialog = ::this._closeDialog
-    this._onCancelClick = ::this._onCancelClick
+    this._onJoinWaitlistClick = ::this._onJoinWaitlistClick
     this._onSubmit = ::this._onSubmit
 
     this.dialogConfirm = {
@@ -56,7 +56,7 @@ export default class CancelBooking extends React.Component {
   }
 
   /**
-   * Cancels the booking.
+   * Adds the user to the waitlist.
    *
    * @private
    */
@@ -70,11 +70,11 @@ export default class CancelBooking extends React.Component {
   }
 
   /**
-   * Handles a click on the cancel button.
+   * Handles a click on the join waitlist button.
    *
    * @private
    */
-  _onCancelClick() {
+  _onJoinWaitlistClick() {
     this.setState({
       dialog: this.dialogConfirm,
       confirming: true
@@ -96,8 +96,8 @@ export default class CancelBooking extends React.Component {
     return (
       <div>
         <RaisedButton
-          label={strings.label_cancel}
-          onClick={this._onCancelClick}
+          label={strings.label_join_waitlist}
+          onClick={this._onJoinWaitlistClick}
           primary
           style={{float: 'right', marginBottom: '10px'}}
         />
@@ -116,7 +116,10 @@ export default class CancelBooking extends React.Component {
                 />
               ] : null
           }
-          bodyStyle={{lineHeight: '1.4'}}
+          bodyStyle={{
+            lineHeight: '1.4',
+            paddingBottom: '0'
+          }}
           onRequestClose={this._closeDialog}
           open={Object.keys(dialog).length > 0}
           {...dialog.props}
@@ -143,6 +146,6 @@ export default class CancelBooking extends React.Component {
     )
   }
 }
-CancelBooking.propTypes = {
+JoinWaitlist.propTypes = {
   onSubmit: React.PropTypes.func.isRequired
 }

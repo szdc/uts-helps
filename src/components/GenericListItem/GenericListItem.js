@@ -16,14 +16,17 @@ export default class GenericListItem extends React.Component {
       actions,
       additionalText,
       campus,
-      capacity,
+      cutoffReached,
       description,
       endDate,
-      remainingCapacity,
+      remaining,
       startDate,
       targetGroup,
-      topic
+      topic,
+      waitlistSize
     } = this.props
+
+    console.log(cutoffReached && waitlistSize >= 0)
 
     return (
       <ListItem
@@ -44,12 +47,16 @@ export default class GenericListItem extends React.Component {
                 {actions}
               </div>
               <div className={classes.moreInfoContent}>
-                {capacity && remainingCapacity >= 0 ?
+                {(cutoffReached && waitlistSize >= 0) ?
                   <div className={classes.infoLine}>
                     <span className={classes.heading}>{strings.label_available}</span>
-                    <span className={classes.content}>{`${remainingCapacity} / ${capacity}`}</span>
+                    <span className={classes.content}>{waitlistSize}</span>
                   </div> : null
                 }
+                <div className={classes.infoLine}>
+                  <span className={classes.heading}>{strings.label_available}</span>
+                  <span className={classes.content}>{remaining}</span>
+                </div>
                 {campus ?
                   <div className={classes.infoLine}>
                     <span className={classes.heading}>{strings.label_campus}</span>
@@ -97,11 +104,12 @@ GenericListItem.propTypes = {
   actions: React.PropTypes.node,
   additionalText: React.PropTypes.node,
   campus: React.PropTypes.string,
-  capacity: React.PropTypes.number,
+  cutoffReached: React.PropTypes.bool,
   description: React.PropTypes.string,
   endDate: React.PropTypes.string,
-  remainingCapacity: React.PropTypes.number,
+  remaining: React.PropTypes.number,
   startDate: React.PropTypes.string,
   targetGroup: React.PropTypes.string,
-  topic: React.PropTypes.string
+  topic: React.PropTypes.string,
+  waitlistSize: React.PropTypes.number
 }

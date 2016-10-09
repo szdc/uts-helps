@@ -9,6 +9,6 @@ export default {
   title_success: 'Booking Confirmation',
   text_booking: 'Confirming booking...',
   text_cancelling: 'Cancelling booking...',
-  text_confirm: 'Are you sure you want to book this session?',
+  text_confirm: 'Are you sure you want to book this workshop?',
   text_confirm_cancel: 'Are you sure you want to cancel this booking?'
 }
