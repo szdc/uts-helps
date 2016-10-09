@@ -7,7 +7,8 @@ import { connect } from 'react-redux'
 import { push } from 'react-router-redux'
 
 import WorkshopListItem from '../components/WorkshopListItem'
-import { createBooking } from 'store/bookings/actions/add-booking'
+import { createBooking } from 'store/bookings/actions/create'
+import { cancelBooking } from 'store/bookings/actions/cancel'
 import { getDateString, getTimeString } from 'utils/helpers'
 
 import classes from './BookingDialog.scss'
@@ -29,6 +30,8 @@ class WorkshopListItemContainer extends React.Component {
     this._onBookingDialogConfirm = ::this._onBookingDialogConfirm
     this._onBookingSuccess = ::this._onBookingSuccess
     this._onBookWorkshopClick = ::this._onBookWorkshopClick
+    this._onCancelBookingClick = ::this._onCancelBookingClick
+    this._onCancelDialogConfirm = ::this._onCancelDialogConfirm
     this._onViewMyBookingsClick = ::this._onViewMyBookingsClick
 
     const { workshop } = props
@@ -40,7 +43,7 @@ class WorkshopListItemContainer extends React.Component {
             onTouchTap={this._onBookingDialogCancel}
           />,
           <FlatButton
-            label='Book'
+            label={strings.label_book}
             onTouchTap={this._onBookingDialogConfirm}
             primary
           />
@@ -52,7 +55,7 @@ class WorkshopListItemContainer extends React.Component {
       },
       content: <span>{strings.text_confirm}</span>
     }
-    this.bookingDialogBooking = {
+    this.bookingDialogProcessing = {
       props: {
         modal: true,
         bodyStyle: {padding: '12px'}
@@ -110,12 +113,49 @@ class WorkshopListItemContainer extends React.Component {
         </div>
       )
     }
+    this.cancelDialogConfirm = {
+      props: {
+        actions: [
+          <FlatButton
+            label={strings.label_cancel}
+            onTouchTap={this._onBookingDialogCancel}
+          />,
+          <FlatButton
+            label={strings.label_confirm_cancel}
+            onTouchTap={this._onCancelDialogConfirm}
+            primary
+          />
+        ],
+        title: strings.title_confirm_cancel,
+        titleStyle: {
+          paddingBottom: '12px'
+        }
+      },
+      content: <span>{strings.text_confirm_cancel}</span>
+    }
+    this.cancelDialogProcessing = {
+      props: {
+        modal: true,
+        bodyStyle: {padding: '12px'}
+      },
+      content: (
+        <div className={classes.progressContainer}>
+          <CircularProgress
+            className={classes.progressIndicator}
+            size={'20px'}
+            style={{margin: '5px'}}
+          />
+          <span className={classes.progressText}>
+            {strings.text_cancelling}
+          </span>
+        </div>
+      )
+    }
   }
 
   /**
-   * Attempts to book the workshop.
+   * Shows the book workshop confirmation dialog.
    *
-   * @param workshop
    * @private
    */
   _onBookWorkshopClick() {
@@ -143,7 +183,7 @@ class WorkshopListItemContainer extends React.Component {
   _onBookingDialogConfirm() {
     const { workshop, createBooking } = this.props
     this.setState({
-      dialog: this.bookingDialogBooking
+      dialog: this.bookingDialogProcessing
     })
     createBooking(workshop.WorkshopId, (err, res) => {
       if (err) {
@@ -174,6 +214,37 @@ class WorkshopListItemContainer extends React.Component {
   }
 
   /**
+   * Shows the cancel booking confirmation dialog.
+   *
+   * @private
+   */
+  _onCancelBookingClick() {
+    this.setState({
+      dialog: this.cancelDialogConfirm
+    })
+  }
+
+  /**
+   * Handles a cancel dialog confirmation.
+   *
+   * @private
+   */
+  _onCancelDialogConfirm() {
+    const { workshop, cancelBooking } = this.props
+    this.setState({
+      dialog: this.cancelDialogProcessing
+    })
+    cancelBooking(workshop.WorkshopId, (err, res) => {
+      if (err) {
+        return console.log(err)
+      }
+      this.setState({
+        dialog: {}
+      })
+    })
+  }
+
+  /**
    * Renders the workshop list item.
    *
    * @returns {XML}
@@ -198,6 +269,7 @@ class WorkshopListItemContainer extends React.Component {
         </Dialog>
         <WorkshopListItem
           onBookClick={this._onBookWorkshopClick}
+          onCancelClick={this._onCancelBookingClick}
           {...this.props}
         />
       </div>
@@ -205,12 +277,14 @@ class WorkshopListItemContainer extends React.Component {
   }
 }
 WorkshopListItemContainer.propTypes = {
+  cancelBooking: React.PropTypes.func.isRequired,
   createBooking: React.PropTypes.func.isRequired,
   push: React.PropTypes.func.isRequired,
   workshop: React.PropTypes.object.isRequired
 }
 
 const mapDispatchToProps = {
+  cancelBooking,
   createBooking,
   push
 }

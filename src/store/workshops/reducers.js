@@ -3,6 +3,9 @@ import {
   RECEIVE_WORKSHOPS_ERROR,
   RECEIVE_WORKSHOPS_SUCCESS
 } from './actions'
+import {
+  RECEIVE_CANCEL_BOOKING_SUCCESS
+} from '../bookings/actions/cancel'
 
 const initialState = {
   workshops: null,
@@ -31,6 +34,19 @@ export default function workshopsReducer(state = initialState, action) {
         workshops: action.payload,
         error: initialState.error,
         loading: false
+      }
+    case RECEIVE_CANCEL_BOOKING_SUCCESS:
+      return {
+        ...state,
+        workshops: state.workshops ? state.workshops.map(workshop => {
+          if (workshop.WorkshopId === action.payload) {
+            return {
+              ...workshop,
+              bookingId: null
+            }
+          }
+          return workshop
+        }) : []
       }
     default:
       return state

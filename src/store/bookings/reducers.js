@@ -5,7 +5,10 @@ import {
 } from './actions'
 import {
   RECEIVE_ADD_BOOKING_SUCCESS
-} from './actions/add-booking'
+} from './actions/create'
+import {
+  RECEIVE_CANCEL_BOOKING_SUCCESS
+} from './actions/cancel'
 
 const initialState = {
   bookings: null,
@@ -42,6 +45,13 @@ export default function bookingsReducer(state = initialState, action) {
           ...(state.bookings || []),
           action.payload
         ]
+      }
+    case RECEIVE_CANCEL_BOOKING_SUCCESS:
+      return {
+        ...state,
+        bookings: state.bookings ? state.bookings.filter(booking =>
+          booking.workshopID !== action.payload
+        ) : []
       }
     default:
       return state
