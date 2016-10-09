@@ -44,7 +44,7 @@ export default class GenericListItem extends React.Component {
                 {actions}
               </div>
               <div className={classes.moreInfoContent}>
-                {capacity && remainingCapacity ?
+                {capacity && remainingCapacity >= 0 ?
                   <div className={classes.infoLine}>
                     <span className={classes.heading}>{strings.label_available}</span>
                     <span className={classes.content}>{`${remainingCapacity} / ${capacity}`}</span>

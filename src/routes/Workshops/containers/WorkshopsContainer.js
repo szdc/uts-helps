@@ -1,5 +1,6 @@
 import React from 'react'
 import { connect } from 'react-redux'
+import { createSelector } from 'reselect'
 import { push } from 'react-router-redux'
 
 import Workshops from '../components/Workshops'
@@ -77,8 +78,26 @@ WorkshopsContainer.propTypes = {
 }
 
 const mapStateToProps = state => ({
-  workshops: state.workshops
+  workshops: workshopSelector(state)
 })
+
+/**
+ * Adds remaining capacity and cutoff reached key to workshops.
+ */
+const workshopSelector = createSelector(
+  state => state.workshops,
+  workshops => {
+    if (workshops.loading || !workshops.workshops) {
+      return []
+    }
+    workshops.workshops = workshops.workshops.map(workshop => {
+      workshop.remaining = Math.max(workshop.maximum - workshop.BookingCount, 0)
+      workshop.cutoffReached = workshop.cutoff && workshop.BookingCount >= workshop.cutoff
+      return workshop
+    })
+    return workshops
+  }
+)
 
 const mapDispatchToProps = {
   searchWorkshops,

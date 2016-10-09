@@ -52,12 +52,24 @@ export default class WorkshopListItem extends React.Component {
   }
 
   /**
+   * Calculates the remaining capacity for the workshop.
+   *
+   * @returns {number}
+   * @private
+   */
+  _getRemainingCapacity() {
+    const { workshop } = this.props
+    return Math.max(workshop.maximum - workshop.BookingCount, 0)
+  }
+
+  /**
    * Renders the workshop set item.
    *
    * @returns {XML}
    */
   render() {
     const { workshop } = this.props
+    console.log(workshop)
 
     return (
       <GenericListItem
@@ -79,7 +91,7 @@ export default class WorkshopListItem extends React.Component {
         capacity={workshop.maximum}
         description={workshop.description}
         endDate={workshop.EndDate}
-        remainingCapacity={workshop.maximum - workshop.BookingCount}
+        remainingCapacity={this._getRemainingCapacity()}
         startDate={workshop.StartDate}
         targetGroup={workshop.targetingGroup}
         topic={workshop.topic}
