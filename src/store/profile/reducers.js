@@ -26,7 +26,10 @@ export default function profileReducer(state = initialState, action) {
         ...state,
         error: action.error || null,
         loading: false,
-        profile: action.payload
+        profile: {
+          ...action.payload,
+          studentID: action.payload.studentID.trim()
+        }
       }
     default:
       return state

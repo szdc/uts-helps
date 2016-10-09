@@ -122,6 +122,7 @@ export default (submitAction, redirectTo) => {
               floatingLabelText={props.labelId}
               hintText={props.hintId}
               name='id'
+              pattern='[0-9]*'
               value={form.id}
             />
             <TextField

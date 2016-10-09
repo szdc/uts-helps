@@ -4,10 +4,11 @@ import Dialog from 'material-ui/Dialog'
 import FlatButton from 'material-ui/FlatButton'
 import Reminders from 'containers/RemindersContainer'
 import { connect } from 'react-redux'
-
-import { getDateString, getTimeString } from 'utils/helpers'
+import { push } from 'react-router-redux'
 
 import WorkshopListItem from '../components/WorkshopListItem'
+import { createBooking } from 'store/bookings/actions/add-booking'
+import { getDateString, getTimeString } from 'utils/helpers'
 
 import classes from './BookingDialog.scss'
 import strings from './BookingDialog.strings'
@@ -28,6 +29,7 @@ class WorkshopListItemContainer extends React.Component {
     this._onBookingDialogConfirm = ::this._onBookingDialogConfirm
     this._onBookingSuccess = ::this._onBookingSuccess
     this._onBookWorkshopClick = ::this._onBookWorkshopClick
+    this._onViewMyBookingsClick = ::this._onViewMyBookingsClick
 
     const { workshop } = props
     this.bookingDialogConfirm = {
@@ -71,6 +73,11 @@ class WorkshopListItemContainer extends React.Component {
     this.bookingDialogSuccess = {
       props: {
         actions: [
+          <FlatButton
+            label={strings.label_my_bookings}
+            onTouchTap={this._onViewMyBookingsClick}
+            primary
+          />,
           <FlatButton
             label={strings.label_close}
             onTouchTap={this._onBookingDialogCancel}
@@ -134,10 +141,17 @@ class WorkshopListItemContainer extends React.Component {
    * @private
    */
   _onBookingDialogConfirm() {
+    const { workshop, createBooking } = this.props
     this.setState({
       dialog: this.bookingDialogBooking
-    }, () => {
-      setTimeout(this._onBookingSuccess, 2000)
+    })
+    createBooking(workshop.WorkshopId, (err, res) => {
+      if (err) {
+        return console.log(err)
+      }
+      this.setState({
+        dialog: this.bookingDialogSuccess
+      })
     })
   }
 
@@ -150,6 +164,13 @@ class WorkshopListItemContainer extends React.Component {
     this.setState({
       dialog: this.bookingDialogSuccess
     })
+  }
+
+  /**
+   * Navigates to the booking screen.
+   */
+  _onViewMyBookingsClick() {
+    this.props.push('/bookings')
   }
 
   /**
@@ -184,7 +205,14 @@ class WorkshopListItemContainer extends React.Component {
   }
 }
 WorkshopListItemContainer.propTypes = {
+  createBooking: React.PropTypes.func.isRequired,
+  push: React.PropTypes.func.isRequired,
   workshop: React.PropTypes.object.isRequired
 }
 
-export default connect()(WorkshopListItemContainer)
+const mapDispatchToProps = {
+  createBooking,
+  push
+}
+
+export default connect(null, mapDispatchToProps)(WorkshopListItemContainer)

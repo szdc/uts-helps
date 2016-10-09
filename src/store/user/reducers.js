@@ -22,7 +22,7 @@ export default function userReducer(state = initialState, action) {
     case USER_LOGIN_SUCCESS:
       return {
         ...state,
-        id: action.payload.studentID,
+        id: action.payload.studentID.trim(),
         isLoggedIn: true,
         isRegistering: false
       }

@@ -3,6 +3,9 @@ import {
   RECEIVE_BOOKINGS_ERROR,
   RECEIVE_BOOKINGS_SUCCESS
 } from './actions'
+import {
+  RECEIVE_ADD_BOOKING_SUCCESS
+} from './actions/add-booking'
 
 const initialState = {
   bookings: null,
@@ -31,6 +34,14 @@ export default function bookingsReducer(state = initialState, action) {
         bookings: action.payload,
         error: initialState.error,
         loading: false
+      }
+    case RECEIVE_ADD_BOOKING_SUCCESS:
+      return {
+        ...state,
+        bookings: [
+          ...(state.bookings || []),
+          action.payload
+        ]
       }
     default:
       return state

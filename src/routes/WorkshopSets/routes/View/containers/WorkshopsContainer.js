@@ -26,7 +26,7 @@ class WorkshopsContainer extends React.Component {
   componentDidMount() {
     const { searchWorkshops, layout, params } = this.props
     searchWorkshops({
-      id: params.id
+      workshopSetId: params.id
     })
     layout
       .setHeader({
