@@ -47,6 +47,9 @@ export function receiveWorkshopsSuccess(workshops) {
  */
 export function searchWorkshops(params) {
   return (dispatch, getState, UtsHelps) => {
+    const { user } = getState()
+    params.studentId = user.id
+
     dispatch(requestWorkshops())
     UtsHelps.searchWorkshops(params, (err, res) => {
       if (err) {
