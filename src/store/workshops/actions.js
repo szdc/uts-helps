@@ -56,6 +56,11 @@ export function searchWorkshops(params) {
       if (err) {
         dispatch(receiveWorkshopsError(err))
       } else {
+        res.Results.forEach(result => {
+          if (result.type === 'multiple') {
+            console.log(result)
+          }
+        })
         dispatch(receiveWorkshopsSuccess(res.Results))
       }
     })
