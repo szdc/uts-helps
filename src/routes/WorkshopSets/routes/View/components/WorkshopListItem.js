@@ -85,6 +85,7 @@ export default class WorkshopListItem extends React.Component {
             </div>
           </ListItem>
         ]}
+        innerDivStyle={{lineHeight: '1.2', paddingRight: '50px'}}
         primaryText={workshop.topic}
         primaryTogglesNestedList
         secondaryText={
