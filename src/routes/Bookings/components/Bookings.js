@@ -38,6 +38,9 @@ export default class Bookings extends React.Component {
    */
   render() {
     const { future, onFindWorkshopClick, past } = this.props
+    const tabStyle = {
+      backgroundColor: this.context.muiTheme.palette.primary3Color
+    }
 
     return (
       <div className={classes.container}>
@@ -45,8 +48,16 @@ export default class Bookings extends React.Component {
           onChange={this._handleChange}
           value={this.state.slideIndex}
         >
-          <Tab label={strings.label_future} value={0} />
-          <Tab label={strings.label_past} value={1} />
+          <Tab
+            label={strings.label_future}
+            style={tabStyle}
+            value={0}
+          />
+          <Tab
+            label={strings.label_past}
+            style={tabStyle}
+            value={1}
+          />
         </Tabs>
         <SwipeableViews
           containerStyle={{height: '100%'}}
@@ -69,6 +80,9 @@ export default class Bookings extends React.Component {
       </div>
     )
   }
+}
+Bookings.contextTypes = {
+  muiTheme: React.PropTypes.object.isRequired
 }
 Bookings.propTypes = {
   bookings: React.PropTypes.array.isRequired,

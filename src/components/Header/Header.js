@@ -41,9 +41,12 @@ export default class Header extends React.Component {
       displayMenuAsBackButton,
       title
     } = this.props
+    const headerStyle = {
+      backgroundColor: this.context.muiTheme.palette.primary1Color
+    }
 
     return (
-      <nav className={classes.container}>
+      <nav className={classes.container} style={headerStyle}>
         <div className={classes.pullLeft}>
           {
             displayMenuAsBackButton
@@ -66,7 +69,9 @@ export default class Header extends React.Component {
     )
   }
 }
-
+Header.contextTypes = {
+  muiTheme: React.PropTypes.object.isRequired
+}
 Header.propTypes = {
   contextualOptions: React.PropTypes.node,
   contextualOptionsHidden: React.PropTypes.bool,

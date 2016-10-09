@@ -1,4 +1,5 @@
 import React from 'react'
+import CircularProgress from 'material-ui/CircularProgress'
 import classes from './Spinner.scss'
 
 export default class Spinner extends React.Component {
@@ -11,9 +12,10 @@ export default class Spinner extends React.Component {
 
   render() {
     return (
-      <div className={classes.container}>
-        <div className={this._getClassName()} />
-      </div>
+      <CircularProgress
+        size={'40px'}
+        style={{margin: '5px'}}
+      />
     )
   }
 }

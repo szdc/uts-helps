@@ -1,12 +1,12 @@
 @import '../../styles/variables/colors.scss';
 @import '../../styles/variables/fonts.scss';
 
-$height: 45px;
+$height: 55px;
 
 .container {
   background-color: #fff;
   border-bottom: 2px solid var(--border-color);
-  color: var(--secondary-color);
+  color: #fff;
   font-weight: var(--font-weight-bold);
   height: $height;
   line-height: $height;
@@ -14,10 +14,9 @@ $height: 45px;
   width: 100%;
 }
 .title {
-  font-size: 14px;
+  font-size: 18px;
   height: $height;
-  letter-spacing: 1px;
-  text-transform: uppercase;
+  letter-spacing: 0;
 }
 .pullLeft {
   cursor: pointer;
