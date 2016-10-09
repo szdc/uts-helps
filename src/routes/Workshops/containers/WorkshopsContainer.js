@@ -94,7 +94,7 @@ const workshopSelector = createSelector(
   state => state.workshops,
   workshops => {
     if (workshops.loading || !workshops.workshops) {
-      return []
+      return workshops
     }
     workshops.workshops = workshops.workshops.map(workshop => {
       workshop.cutoffReached = workshop.cutoff ? workshop.BookingCount >= workshop.cutoff : false
