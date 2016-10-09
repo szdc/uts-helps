@@ -96,7 +96,9 @@ class WorkshopListItemContainer extends React.Component {
           <hr />
           <div>
             <label>Reminders:</label>
-            <Reminders />
+            <Reminders
+              workshop={workshop}
+            />
           </div>
         </div>
       )
@@ -111,7 +113,7 @@ class WorkshopListItemContainer extends React.Component {
    */
   _onBookWorkshopClick() {
     this.setState({
-      dialog: this.bookingDialogSuccess
+      dialog: this.bookingDialogConfirm
     })
   }
 
