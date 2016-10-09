@@ -50,6 +50,7 @@ export function fetchBookings() {
 
     dispatch(requestBookings())
     UtsHelps.searchWorkshopBookings({
+      active: true,
       studentId: user.id
     }, (err, res) => {
       if (err) {
