@@ -1,17 +1,18 @@
 .right {
   float: right;
-  margin-right: 40px;
-}
-.hasBooking {
-  color: var(--success-color);
-  float: right;
   position: relative;
   right: 5px;
   top: -4px;
 }
-.hasBooking i {
+.right i {
   font-size: 18px;
   margin-right: 5px;
   position: relative;
   top: 4px;
+}
+.hasBooking {
+  color: var(--success-color);
+}
+.capacityReached {
+  color: #FF6F00;
 }

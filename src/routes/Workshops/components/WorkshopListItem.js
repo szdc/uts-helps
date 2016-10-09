@@ -69,23 +69,48 @@ export default class WorkshopListItem extends React.Component {
    */
   render() {
     const { workshop } = this.props
-    console.log(workshop)
 
     return (
       <GenericListItem
         actions={
-          <RaisedButton
-            label={workshop.bookingId ? strings.label_cancel_workshop : strings.label_book_workshop}
-            onClick={workshop.bookingId ? this._onCancelClick : this._onBookClick}
-            primary
-          />
+          <div>
+            {workshop.bookingId === null && workshop.remaining !== 0 && !workshop.cutoffReached &&
+              <RaisedButton
+                label={strings.label_book_workshop}
+                onClick={this._onBookClick}
+                primary
+              />
+            }
+            {workshop.bookingId !== null &&
+              <RaisedButton
+                label={strings.label_cancel_workshop}
+                onClick={this._onCancelClick}
+                primary
+              />
+            }
+            {workshop.bookingId === null && (workshop.remaining === 0 || workshop.cutoffReached) &&
+              <RaisedButton
+                label={strings.label_join_waitlist}
+                onClick={this._onCancelClick}
+                primary
+              />
+            }
+          </div>
         }
         additionalText={
-          workshop.bookingId !== null &&
-            <div className={classes.hasBooking}>
-              <IconCheck />
-              {strings.text_has_booking}
-            </div>
+          <div className={classes.right}>
+            {workshop.bookingId !== null ?
+              <div className={classes.hasBooking}>
+                <IconCheck />
+                {strings.text_has_booking}
+              </div>
+              :
+              (workshop.remaining === 0 || workshop.cutoffReached) &&
+                <div className={classes.capacityReached}>
+                  {strings.text_capacity_reached}
+                </div>
+            }
+          </div>
         }
         campus={workshop.campus}
         capacity={workshop.maximum}
