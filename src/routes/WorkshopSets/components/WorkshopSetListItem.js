@@ -1,4 +1,5 @@
 import React from 'react'
+import Divider from 'material-ui/Divider'
 import { ListItem } from 'material-ui/List'
 
 export default class WorkshopSetListItem extends React.Component {
@@ -32,10 +33,13 @@ export default class WorkshopSetListItem extends React.Component {
     const { workshopSet } = this.props
 
     return (
-      <ListItem
-        onTouchTap={this._onClick}
-        primaryText={workshopSet.name}
-      />
+      <div>
+        <ListItem
+          onTouchTap={this._onClick}
+          primaryText={workshopSet.name}
+        />
+        <Divider />
+      </div>
     )
   }
 }

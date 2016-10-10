@@ -1,4 +1,5 @@
 import React from 'react'
+import Divider from 'material-ui/Divider'
 import { List } from 'material-ui/List'
 
 import WorkshopSetListItem from './WorkshopSetListItem'
@@ -18,6 +19,7 @@ export default class WorkshopSets extends React.Component {
     return (
       <div className={classes.container}>
         <List>
+          <Divider />
           {workshopSets.map(workshopSet => (
             <WorkshopSetListItem
               key={workshopSet.id}
