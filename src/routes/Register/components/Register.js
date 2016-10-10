@@ -2,6 +2,7 @@ import React from 'react'
 import DatePicker from 'material-ui/DatePicker'
 import FlatButton from 'material-ui/FlatButton'
 import MenuItem from 'material-ui/MenuItem'
+import Paper from 'material-ui/Paper'
 import RaisedButton from 'material-ui/RaisedButton'
 import SelectField from 'material-ui/SelectField'
 import TextField from 'material-ui/TextField'
@@ -151,86 +152,91 @@ export default (submitAction, redirectTo) => {
       }
 
       return (
-        <CenterLayout>
-          <form
-            className={classes.container}
-            onChange={this._onFieldChange}
-            onSubmit={this._onSubmit}
-          >
-            <TextField
-              disabled
-              errorText={formErrors.id}
-              floatingLabelText={strings.labelId}
-              name='id'
-              style={inputStyle}
-              value={form.id}
-            />
-            <DatePicker
-              floatingLabelText={strings.labelDob}
-              onChange={this._onDateChange}
-              textFieldStyle={inputStyle}
-              style={inputStyle}
-            />
-            <SelectField
-              floatingLabelText={strings.labelDegree}
-              name='degree'
-              onChange={this._onSelectDegreeChange}
-              value={form.degree}
-              style={inputStyle}
-            >
-              <MenuItem value='UG' primaryText='Undergraduate' />
-              <MenuItem value='PG' primaryText='Postgraduate' />
-            </SelectField>
-            <SelectField
-              floatingLabelText={strings.labelStatus}
-              name='status'
-              onChange={this._onSelectStatusChange}
-              value={form.status}
-              style={inputStyle}
-            >
-              <MenuItem value='Local' primaryText='Local' />
-              <MenuItem value='International' primaryText='International' />
-            </SelectField>
-            <TextField
-              className={classes.input}
-              errorText={formErrors.firstLanguage}
-              floatingLabelText={strings.labelFirstLanguage}
-              name='firstLanguage'
-              value={form.firstLanguage}
-            />
-            <TextField
-              className={classes.input}
-              errorText={formErrors.countryOrigin}
-              floatingLabelText={strings.labelCountryOrigin}
-              name='countryOrigin'
-              value={form.countryOrigin}
-            />
-            <TextField
-              className={classes.input}
-              errorText={formErrors.altContact}
-              floatingLabelText={strings.labelAltContact}
-              floatingLabelFixed
-              name='altContact'
-              value={form.altContact}
-            />
-            <br />
-            <br />
-            <div className={classes.formActions}>
-              <FlatButton
-                label={strings.labelLogin}
-                onTouchTap={props.onBackToLoginClick}
-                style={{marginRight: '10px'}}
-              />
-              <RaisedButton
-                label={!props.submitting && strings.labelSubmit}
-                icon={props.submitting && <Spinner color='#fff' size='small' />}
-                primary
-                style={{maxHeight: '36px'}}
-                type='submit'
-              />
-            </div>
-          </form>
-        </CenterLayout>
+        <div className={classes.container}>
+          <CenterLayout>
+            <Paper>
+              <form
+                className={classes.formContainer}
+                onChange={this._onFieldChange}
+                onSubmit={this._onSubmit}
+              >
+                <h1 className={classes.title}>Register your details</h1>
+                <TextField
+                  disabled
+                  errorText={formErrors.id}
+                  floatingLabelText={strings.labelId}
+                  name='id'
+                  style={inputStyle}
+                  value={form.id}
+                />
+                <DatePicker
+                  floatingLabelText={strings.labelDob}
+                  onChange={this._onDateChange}
+                  textFieldStyle={inputStyle}
+                  style={inputStyle}
+                />
+                <SelectField
+                  floatingLabelText={strings.labelDegree}
+                  name='degree'
+                  onChange={this._onSelectDegreeChange}
+                  value={form.degree}
+                  style={inputStyle}
+                >
+                  <MenuItem value='UG' primaryText='Undergraduate' />
+                  <MenuItem value='PG' primaryText='Postgraduate' />
+                </SelectField>
+                <SelectField
+                  floatingLabelText={strings.labelStatus}
+                  name='status'
+                  onChange={this._onSelectStatusChange}
+                  value={form.status}
+                  style={inputStyle}
+                >
+                  <MenuItem value='Local' primaryText='Local' />
+                  <MenuItem value='International' primaryText='International' />
+                </SelectField>
+                <TextField
+                  className={classes.input}
+                  errorText={formErrors.firstLanguage}
+                  floatingLabelText={strings.labelFirstLanguage}
+                  name='firstLanguage'
+                  value={form.firstLanguage}
+                />
+                <TextField
+                  className={classes.input}
+                  errorText={formErrors.countryOrigin}
+                  floatingLabelText={strings.labelCountryOrigin}
+                  name='countryOrigin'
+                  value={form.countryOrigin}
+                />
+                <TextField
+                  className={classes.input}
+                  errorText={formErrors.altContact}
+                  floatingLabelText={strings.labelAltContact}
+                  floatingLabelFixed
+                  name='altContact'
+                  value={form.altContact}
+                />
+                <br />
+                <br />
+                <div className={classes.formActions}>
+                  <FlatButton
+                    label={strings.labelLogin}
+                    style={{marginBottom: '10px'}}
+                    onTouchTap={props.onBackToLoginClick}
+                  />
+                  <RaisedButton
+                    label={!props.submitting && strings.labelSubmit}
+                    icon={props.submitting && <Spinner color='#fff' size='small' />}
+                    primary
+                    style={{maxHeight: '36px', marginLeft: '10px'}}
+                    type='submit'
+                  />
+                </div>
+              </form>
+            </Paper>
+          </CenterLayout>
+        </div>
       )
     }
   }

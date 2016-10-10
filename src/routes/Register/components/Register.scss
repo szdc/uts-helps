@@ -1,6 +1,11 @@
 .container {
+  height: 100%;
+  padding: 30px 20px;
+}
+.formContainer {
   margin: 0 auto;
   max-width: 375px;
+  padding: 45px 0;
   text-align: left;
   width: 80%;
 }
@@ -9,4 +14,8 @@
 }
 .formActions {
   text-align: right;
+}
+.title {
+  font-size: 18px;
+  text-align: center;
 }
