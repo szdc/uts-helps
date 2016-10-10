@@ -1,12 +1,25 @@
 .container {
+  height: 100%;
+}
+.formContainer {
   margin: 0 auto;
   max-width: 375px;
+  padding: 45px 0;
   text-align: left;
   width: 80%;
+}
+.logo {
+  display: block;
+  margin: 0 auto 25px;
+  max-width: 80%;
 }
 .input {
   width: 100% !important;
 }
 .formActions {
   text-align: right;
+}
+.title {
+  font-size: 18px;
+  text-align: center;
 }

@@ -1,4 +1,5 @@
 import React from 'react'
+import Paper from 'material-ui/Paper'
 import RaisedButton from 'material-ui/RaisedButton'
 import TextField from 'material-ui/TextField'
 
@@ -110,42 +111,50 @@ export default (submitAction, redirectTo) => {
       const { form, formErrors } = this.state
 
       return (
-        <CenterLayout>
-          <form
-            className={classes.container}
-            onChange={this._onFieldChange}
-            onSubmit={this._onSubmit}
-          >
-            <TextField
-              className={classes.input}
-              errorText={formErrors.id}
-              floatingLabelText={props.labelId}
-              hintText={props.hintId}
-              name='id'
-              pattern='[0-9]*'
-              value={form.id}
-            />
-            <TextField
-              className={classes.input}
-              errorText={formErrors.password}
-              floatingLabelText={props.labelPassword}
-              name='password'
-              type='password'
-              value={form.password}
-            />
-            <br />
-            <br />
-            <div className={classes.formActions}>
-              <RaisedButton
-                label={!props.submitting && props.labelSubmit}
-                icon={props.submitting && <Spinner color='#fff' size='small' />}
-                primary
-                style={{maxHeight: '36px'}}
-                type='submit'
-              />
-            </div>
-          </form>
-        </CenterLayout>
+        <div className={classes.container}>
+          <CenterLayout>
+            <Paper>
+              <form
+                className={classes.formContainer}
+                onChange={this._onFieldChange}
+                onSubmit={this._onSubmit}
+              >
+                <img
+                  className={classes.logo}
+                  src='images/logo2.png'
+                />
+                <TextField
+                  className={classes.input}
+                  errorText={formErrors.id}
+                  floatingLabelText={props.labelId}
+                  hintText={props.hintId}
+                  name='id'
+                  pattern='[0-9]*'
+                  value={form.id}
+                />
+                <TextField
+                  className={classes.input}
+                  errorText={formErrors.password}
+                  floatingLabelText={props.labelPassword}
+                  name='password'
+                  type='password'
+                  value={form.password}
+                />
+                <br />
+                <br />
+                <div className={classes.formActions}>
+                  <RaisedButton
+                    label={!props.submitting && props.labelSubmit}
+                    icon={props.submitting && <Spinner color='#fff' size='small' />}
+                    primary
+                    style={{maxHeight: '36px'}}
+                    type='submit'
+                  />
+                </div>
+              </form>
+            </Paper>
+          </CenterLayout>
+        </div>
       )
     }
   }
