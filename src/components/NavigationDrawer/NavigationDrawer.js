@@ -1,5 +1,4 @@
 import React from 'react'
-import Divider from 'material-ui/Divider'
 import Drawer from 'material-ui/Drawer'
 import { Link } from 'react-router'
 
@@ -55,31 +54,31 @@ export default class NavigationDrawer extends React.Component {
         <div className={classes.menu}>
           <ul>
             <li>
-              <Link to='/bookings' className={classes.link} onClick={this.close}>
+              <NavigationLink onClick={this.close} to='/bookings'>
                 <IconDate />
                 <span onClick={this.close} className={classes.text}>
                   {strings.label_bookings}
                 </span>
-              </Link>
+              </NavigationLink>
             </li>
             <li>
-              <Link to='/workshop-sets' className={classes.link} onClick={this.close}>
+              <NavigationLink onClick={this.close} to='/workshop-sets'>
                 <IconWorkshop />
                 <span onClick={this.close} className={classes.text}>
                   {strings.label_workshops}
                 </span>
-              </Link>
+              </NavigationLink>
             </li>
             <li>
-              <Divider />
+              <hr className={classes.divider} />
             </li>
             <li>
-              <Link to='/logout' className={classes.link} onClick={this.close}>
+              <NavigationLink onClick={this.close} to='/logout'>
                 <IconLogout />
                 <span onClick={this.close} className={classes.text}>
                   {strings.label_logout}
                 </span>
-              </Link>
+              </NavigationLink>
             </li>
           </ul>
         </div>
@@ -96,4 +95,36 @@ NavigationDrawer.propTypes = {
 }
 NavigationDrawer.defaultProps = {
   width: 250
+}
+
+class NavigationLink extends React.Component {
+
+  /**
+   * Renders the link.
+   */
+  render() {
+    const { children, onClick, to } = this.props
+    const linkStyle = {
+      color: this.context.muiTheme.palette.primary1Color
+    }
+
+    return (
+      <Link
+        className={classes.link}
+        onTouchTap={onClick}
+        style={linkStyle}
+        to={to}
+      >
+        {children}
+      </Link>
+    )
+  }
+}
+NavigationLink.contextTypes = {
+  muiTheme: React.PropTypes.object.isRequired
+}
+NavigationLink.propTypes = {
+  children: React.PropTypes.node,
+  onClick: React.PropTypes.func.isRequired,
+  to: React.PropTypes.string.isRequired
 }
