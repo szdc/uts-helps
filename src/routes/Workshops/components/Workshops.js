@@ -26,13 +26,22 @@ export default class Workshops extends React.Component {
     return (
       <p className={classes.filters}>
         {startDate &&
-          <span>Start date: {`On or after ${moment(startDate).format('DD/MM/YYYY')}`}</span>
+          <span>
+            <span className={classes.bold}>Start date:</span>
+            {`On or after ${moment(startDate).format('DD/MM/YYYY')}`}
+          </span>
         }
         {endDate &&
-          <span>End date: {`On or after ${moment(endDate).format('DD/MM/YYYY')}`}</span>
+          <span>
+            <span className={classes.bold}>End date:</span>
+            {`On or after ${moment(endDate).format('DD/MM/YYYY')}`}
+          </span>
         }
         {campus &&
-          <span>Location: {campus.campus}</span>
+          <span>
+            <span className={classes.bold}>Location:</span>
+            {campus.campus}
+          </span>
         }
       </p>
     )
@@ -55,7 +64,10 @@ export default class Workshops extends React.Component {
       <div className={classes.container}>
         <List style={{height: '100%'}}>
           <Subheader style={subheaderStyle}>
-            {strings.list_title.replace('{0}', workshopSet.name)}
+            <span className={classes.bold}>
+              {strings.list_title}
+            </span>
+            {workshopSet.name}
             {this._getFilterString()}
           </Subheader>
           <Divider style={{backgroundColor: '#eee'}} />

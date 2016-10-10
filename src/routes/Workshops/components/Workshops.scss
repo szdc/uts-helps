@@ -3,10 +3,19 @@
 }
 .filters {
   display: block;
+  margin-top: 6px;
+}
+.filters > span {
+  display: block;
+  margin-bottom: 4px;
 }
 .noResultsContainer {
   height: calc(100% - 51px);
 }
 .noResultsMessage {
   color: var(--primary-color);
+}
+.bold {
+  font-weight: bold;
+  margin-right: 5px;
 }
