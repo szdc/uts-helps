@@ -1,5 +1,3 @@
-import { updateWorkshop } from '../../workshops/actions'
-
 export const REQUEST_ADD_BOOKING = 'REQUEST_ADD_BOOKING'
 export const RECEIVE_ADD_BOOKING_ERROR = 'RECEIVE_ADD_BOOKING_ERROR'
 export const RECEIVE_ADD_BOOKING_SUCCESS = 'RECEIVE_ADD_BOOKING_SUCCESS'
@@ -59,7 +57,6 @@ export function createBooking(workshopId, callback) {
         callback(err)
       } else {
         dispatch(receiveAddBookingSuccess(res.Result))
-        dispatch(updateWorkshop(res.Result.workshopID, {bookingId: res.Result.id}))
         callback(null, res.Result)
       }
     })

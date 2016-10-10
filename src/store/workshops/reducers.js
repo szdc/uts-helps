@@ -3,12 +3,9 @@ import {
   RECEIVE_WORKSHOPS_ERROR,
   RECEIVE_WORKSHOPS_SUCCESS
 } from './actions'
-import {
-  RECEIVE_CANCEL_BOOKING_SUCCESS
-} from '../bookings/actions/cancel'
-import {
-  RECEIVE_WAITLIST_BOOKING_SUCCESS
-} from '../bookings/actions/waitlist'
+import { RECEIVE_ADD_BOOKING_SUCCESS } from '../bookings/actions/create'
+import { RECEIVE_CANCEL_BOOKING_SUCCESS } from '../bookings/actions/cancel'
+import { RECEIVE_WAITLIST_BOOKING_SUCCESS } from '../bookings/actions/waitlist'
 
 const initialState = {
   workshops: null,
@@ -38,6 +35,20 @@ export default function workshopsReducer(state = initialState, action) {
         error: initialState.error,
         loading: false
       }
+    case RECEIVE_ADD_BOOKING_SUCCESS:
+      return {
+        ...state,
+        workshops: state.workshops ? state.workshops.map(workshop => {
+          if (workshop.WorkshopId === action.payload.workshopID) {
+            return {
+              ...workshop,
+              BookingCount: workshop.BookingCount + 1,
+              bookingId: action.payload.id
+            }
+          }
+          return workshop
+        }) : []
+      }
     case RECEIVE_CANCEL_BOOKING_SUCCESS:
       return {
         ...state,
@@ -45,6 +56,7 @@ export default function workshopsReducer(state = initialState, action) {
           if (workshop.WorkshopId === action.payload) {
             return {
               ...workshop,
+              BookingCount: workshop.BookingCount - 1,
               bookingId: null
             }
           }
@@ -58,6 +70,7 @@ export default function workshopsReducer(state = initialState, action) {
           if (workshop.WorkshopId === action.payload) {
             return {
               ...workshop,
+              BookingCount: workshop.BookingCount + 1,
               isWaitlisted: true
             }
           }

@@ -111,7 +111,7 @@ export default class WorkshopListItem extends React.Component {
         description={workshop.description}
         endDate={workshop.EndDate}
         isWaitlistable={workshop.isWaitlistable}
-        isWaitisted={workshop.isWaitlisted}
+        isWaitlisted={workshop.isWaitlisted}
         remaining={workshop.remaining}
         startDate={workshop.StartDate}
         targetGroup={workshop.targetingGroup}
