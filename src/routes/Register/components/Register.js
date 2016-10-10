@@ -1,5 +1,6 @@
 import React from 'react'
 import DatePicker from 'material-ui/DatePicker'
+import FlatButton from 'material-ui/FlatButton'
 import MenuItem from 'material-ui/MenuItem'
 import RaisedButton from 'material-ui/RaisedButton'
 import SelectField from 'material-ui/SelectField'
@@ -207,6 +208,10 @@ export default (submitAction, redirectTo) => {
             <br />
             <br />
             <div className={classes.formActions}>
+              <FlatButton
+                label={strings.labelLogin}
+                onTouchTap={props.onBackToLoginClick}
+              />
               <RaisedButton
                 label={!props.submitting && strings.labelSubmit}
                 icon={props.submitting && <Spinner size='small' />}
@@ -224,6 +229,7 @@ export default (submitAction, redirectTo) => {
     degree: React.PropTypes.string,
     firstLanguage: React.PropTypes.string,
     id: React.PropTypes.string,
+    onBackToLoginClick: React.PropTypes.func,
     onSubmit: React.PropTypes.func,
     status: React.PropTypes.string
   }

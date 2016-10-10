@@ -1,10 +1,11 @@
 export default {
   labelId: 'Student ID',
-  labelDob: 'Date of Birth',
-  labelGender: 'Gender',
-  labelDegree: 'Degree',
-  labelStatus: 'Status',
-  labelFirstLanguage: 'First Language',
   labelCountryOrigin: 'Country of Origin',
+  labelDegree: 'Degree',
+  labelDob: 'Date of Birth',
+  labelFirstLanguage: 'First Language',
+  labelGender: 'Gender',
+  labelLogin: 'Back to login',
+  labelStatus: 'Status',
   labelSubmit: 'Register'
 }

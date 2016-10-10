@@ -1,5 +1,6 @@
 import React from 'react'
 import { connect } from 'react-redux'
+import { push } from 'react-router-redux'
 
 import RegisterForm from '../components/Register'
 import register from '../modules/register'
@@ -13,7 +14,18 @@ class RegisterContainer extends React.Component {
    */
   constructor(props) {
     super(props)
+
+    this._returnToLogin = ::this._returnToLogin
     this.RegisterForm = RegisterForm(register, '/bookings')
+  }
+
+  /**
+   * Returns the user to the login screen.
+   *
+   * @private
+   */
+  _returnToLogin() {
+    this.props.push('/login')
   }
 
   /**
@@ -24,14 +36,22 @@ class RegisterContainer extends React.Component {
   render() {
     return (
       <this.RegisterForm
+        onBackToLoginClick={this._returnToLogin}
         {...this.props}
       />
     )
   }
+}
+RegisterContainer.propTypes = {
+  push: React.PropTypes.func.isRequired
 }
 
 const mapStateToProps = state => ({
   id: state.user.id
 })
 
-export default connect(mapStateToProps)(RegisterContainer)
+const mapDispatchToProps = {
+  push
+}
+
+export default connect(mapStateToProps, mapDispatchToProps)(RegisterContainer)
