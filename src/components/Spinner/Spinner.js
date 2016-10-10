@@ -14,17 +14,23 @@ export default class Spinner extends React.Component {
       dialog: 0.75,
       small: 0.35
     }
+    const style = {
+      margin: '5px',
+      verticalAlign: 'middle'
+    }
 
     return (
       <CircularProgress
         className='spinner'
+        color={this.props.color}
         size={sizes[this.props.size]}
-        style={{margin: '5px', verticalAlign: 'middle'}}
+        style={style}
       />
     )
   }
 }
 Spinner.propTypes = {
+  color: React.PropTypes.string,
   size: React.PropTypes.oneOf([
     'default',
     'dialog',

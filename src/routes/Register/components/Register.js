@@ -214,7 +214,8 @@ export default (submitAction, redirectTo) => {
               />
               <RaisedButton
                 label={!props.submitting && strings.labelSubmit}
-                icon={props.submitting && <Spinner size='small' />}
+                icon={props.submitting && <Spinner color='#fff' size='small' />}
+                primary
                 style={{maxHeight: '36px'}}
                 type='submit'
               />
