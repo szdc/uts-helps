@@ -59,7 +59,7 @@ export default class Workshops extends React.Component {
             {this._getFilterString()}
           </Subheader>
           <Divider style={{backgroundColor: '#eee'}} />
-          {workshops.length === 0
+          {workshops.length
             ?
             workshops.map(workshop => (
               <WorkshopListItem
