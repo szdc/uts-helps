@@ -4,7 +4,7 @@ import { connect } from 'react-redux'
 import { createSelector } from 'reselect'
 import { push } from 'react-router-redux'
 
-import { IconFilter } from 'components/Icons'
+import { IconSearch } from 'components/Icons'
 import FilterDialog from './FilterDialogContainer'
 import Loading from 'components/Loading'
 import Workshops from '../components/Workshops'
@@ -47,7 +47,7 @@ class WorkshopsContainer extends React.Component {
     layout
       .setHeader({
         contextualOptions: [
-          <IconFilter
+          <IconSearch
             onTouchTap={this._onFilterClick}
           />
         ],
