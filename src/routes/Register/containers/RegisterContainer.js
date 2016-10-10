@@ -5,6 +5,8 @@ import { push } from 'react-router-redux'
 import RegisterForm from '../components/Register'
 import register from '../modules/register'
 
+import strings from './RegisterContainer.strings'
+
 class RegisterContainer extends React.Component {
 
   /**
@@ -17,6 +19,13 @@ class RegisterContainer extends React.Component {
 
     this._returnToLogin = ::this._returnToLogin
     this.RegisterForm = RegisterForm(register, '/bookings')
+  }
+
+  /**
+   * Updates the layout.
+   */
+  componentDidMount() {
+    this.props.layout.setTitle(strings.page_title)
   }
 
   /**
@@ -43,6 +52,7 @@ class RegisterContainer extends React.Component {
   }
 }
 RegisterContainer.propTypes = {
+  layout: React.PropTypes.object.isRequired,
   push: React.PropTypes.func.isRequired
 }
 

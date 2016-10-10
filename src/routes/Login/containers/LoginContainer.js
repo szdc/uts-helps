@@ -5,6 +5,8 @@ import { push } from 'react-router-redux'
 import LoginForm from '../components/Login'
 import { login } from 'store/user/actions'
 
+import strings from './LoginContainer.strings'
+
 class LoginContainer extends React.Component {
 
   /**
@@ -16,6 +18,13 @@ class LoginContainer extends React.Component {
     super(props)
     this.LoginForm = LoginForm(login, '/bookings')
     this._onUserNotFound = ::this._onUserNotFound
+  }
+
+  /**
+   * Updates the layout.
+   */
+  componentDidMount() {
+    this.props.layout.setTitle(strings.page_title)
   }
 
   /**
@@ -42,6 +51,7 @@ class LoginContainer extends React.Component {
   }
 }
 LoginContainer.propTypes = {
+  layout: React.PropTypes.object,
   push: React.PropTypes.func
 }
 
