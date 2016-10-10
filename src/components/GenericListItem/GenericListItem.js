@@ -55,7 +55,7 @@ export default class GenericListItem extends React.Component {
                       <span className={classes.content}>{waitlistSize}</span>
                     </div> : null
                   }
-                  {!isWaitlisted && !isWaitlistable && remaining !== null &&
+                  {!isWaitlisted && !isWaitlistable && typeof remaining !== 'undefined' &&
                     <div className={classes.infoLine}>
                       <span className={classes.heading}>{strings.label_available}</span>
                       <span className={classes.content}>{remaining}</span>
