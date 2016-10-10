@@ -52,7 +52,12 @@ export default class NavigationDrawer extends React.Component {
         onRequestChange={this.props.onChange}
       >
         <div className={classes.user} style={userStyle}>
-          <div className={classes.sectionLogo} />
+          <div className={classes.sectionLogo}>
+            <img
+              className={classes.logo}
+              src='images/logo.png'
+            />
+          </div>
           <div className={classes.userInfo}>
             <span className={classes.username}>{profile.preferred_name || profile.studentID}</span>
           </div>

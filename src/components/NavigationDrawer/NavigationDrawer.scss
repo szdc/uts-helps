@@ -22,6 +22,11 @@
   flex: 1 0 auto;
   position: relative;
 }
+.logo {
+  display: block;
+  margin: 25px auto 0;
+  max-width: 60%;
+}
 .userInfo {
   flex: 0 0 auto;
   padding: 0 15px 10px;
