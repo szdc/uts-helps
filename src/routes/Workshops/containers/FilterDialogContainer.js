@@ -1,9 +1,12 @@
 import React from 'react'
+import Dialog from 'material-ui/Dialog'
 import { connect } from 'react-redux'
 
 import FilterDialog from '../components/FilterDialog'
 import Loading from 'components/Loading'
 import { fetchCampuses } from 'store/campuses/actions'
+
+import strings from './FilterDialogContainer.strings'
 
 class FilterDialogContainer extends React.Component {
 
@@ -23,24 +26,42 @@ class FilterDialogContainer extends React.Component {
    * @returns {XML}
    */
   render() {
-    const { campuses } = this.props
-
-    if (campuses.loading || !campuses.campuses) {
-      return (
-        <Loading />
-      )
-    }
+    const {
+      actions,
+      campuses,
+      onCloseFilter,
+      open
+    } = this.props
 
     return (
-      <FilterDialog
-        campuses={campuses.campuses}
-      />
+      <Dialog
+        actions={actions}
+        bodyStyle={{
+          lineHeight: '1.4',
+          paddingBottom: '0'
+        }}
+        onRequestClose={onCloseFilter}
+        open={open}
+        title={strings.title}
+      >
+        {(campuses.loading || !campuses.campuses)
+          ?
+          <Loading />
+          :
+          <FilterDialog
+            campuses={campuses.campuses}
+          />
+        }
+      </Dialog>
     )
   }
 }
 FilterDialogContainer.propTypes = {
+  actions: React.PropTypes.array,
   campuses: React.PropTypes.object.isRequired,
-  fetchCampuses: React.PropTypes.func.isRequired
+  fetchCampuses: React.PropTypes.func.isRequired,
+  onCloseFilter: React.PropTypes.func.isRequired,
+  open: React.PropTypes.bool.isRequired
 }
 
 const mapStateToProps = state => ({

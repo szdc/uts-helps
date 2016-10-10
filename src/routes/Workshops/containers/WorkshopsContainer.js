@@ -1,5 +1,4 @@
 import React from 'react'
-import Dialog from 'material-ui/Dialog'
 import FlatButton from 'material-ui/FlatButton'
 import { connect } from 'react-redux'
 import { createSelector } from 'reselect'
@@ -104,30 +103,21 @@ class WorkshopsContainer extends React.Component {
           onWorkshopClick={this._onWorkshopClick}
           workshops={workshops.workshops}
         />
-        <Dialog
-          actions={
-            [
-              <FlatButton
-                label={strings.label_cancel}
-                onTouchTap={this._closeFilter}
-              />,
-              <FlatButton
-                label={strings.label_confirm}
-                onTouchTap={this._onSubmit}
-                primary
-              />
-            ]
-          }
-          bodyStyle={{
-            lineHeight: '1.4',
-            paddingBottom: '0'
-          }}
-          onRequestClose={this._closeFilter}
+        <FilterDialog
+          actions={[
+            <FlatButton
+              label={strings.label_cancel}
+              onTouchTap={this._closeFilter}
+            />,
+            <FlatButton
+              label={strings.label_confirm}
+              onTouchTap={this._onSubmit}
+              primary
+            />
+          ]}
+          onCloseFilter={this._closeFilter}
           open={this.state.showFilterDialog}
-          title={strings.title_filter}
-        >
-          <FilterDialog />
-        </Dialog>
+        />
       </div>
     )
   }
