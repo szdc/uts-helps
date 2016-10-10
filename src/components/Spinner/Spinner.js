@@ -11,9 +11,15 @@ export default class Spinner extends React.Component {
   }
 
   render() {
+    const sizes = {
+      default: 0.85,
+      small: 0.35
+    }
+
     return (
       <CircularProgress
-        size={'40px'}
+        className='spinner'
+        size={sizes[this.props.size]}
         style={{margin: '5px'}}
       />
     )
