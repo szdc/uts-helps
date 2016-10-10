@@ -210,6 +210,7 @@ export default (submitAction, redirectTo) => {
               <FlatButton
                 label={strings.labelLogin}
                 onTouchTap={props.onBackToLoginClick}
+                style={{marginRight: '10px'}}
               />
               <RaisedButton
                 label={!props.submitting && strings.labelSubmit}
