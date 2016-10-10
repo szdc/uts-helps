@@ -21,8 +21,7 @@ export default class FilterDialog extends React.Component {
         campusId: null,
         startDate: null,
         endDate: null,
-        topic: '',
-        tutor: ''
+        topic: ''
       }
     }
     this._onFieldChange = ::this._onFieldChange
@@ -78,11 +77,13 @@ export default class FilterDialog extends React.Component {
       <div>
         <DatePicker
           floatingLabelText={strings.hint_start_date}
+          floatingLabelFixed
           textFieldStyle={inputStyle}
           style={inputStyle}
         />
         <DatePicker
           floatingLabelText={strings.hint_end_date}
+          floatingLabelFixed
           textFieldStyle={inputStyle}
           style={inputStyle}
         />
@@ -109,15 +110,8 @@ export default class FilterDialog extends React.Component {
           hintText={strings.hint_topic}
           name='topic'
           onChange={this._onFieldChange}
+          style={{width: '100%'}}
           value={form.topic}
-        />
-        <TextField
-          floatingLabelText={strings.label_tutor}
-          floatingLabelFixed
-          hintText={strings.hint_tutor}
-          name='tutor'
-          onChange={this._onFieldChange}
-          value={form.tutor}
         />
       </div>
     )

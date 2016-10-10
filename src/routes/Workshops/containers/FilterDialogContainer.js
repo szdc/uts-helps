@@ -3,7 +3,6 @@ import Dialog from 'material-ui/Dialog'
 import { connect } from 'react-redux'
 
 import FilterDialog from '../components/FilterDialog'
-import Loading from 'components/Loading'
 import { fetchCampuses } from 'store/campuses/actions'
 
 import strings from './FilterDialogContainer.strings'
@@ -45,14 +44,9 @@ class FilterDialogContainer extends React.Component {
         repositionOnUpdate={false}
         title={strings.title}
       >
-        {(campuses.loading || !campuses.campuses)
-          ?
-          <Loading />
-          :
-          <FilterDialog
-            campuses={campuses.campuses}
-          />
-        }
+        <FilterDialog
+          campuses={campuses.campuses || []}
+        />
       </Dialog>
     )
   }
