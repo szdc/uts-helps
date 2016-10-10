@@ -37,6 +37,7 @@ export default class GenericListItem extends React.Component {
             innerDivStyle={{
               backgroundColor: '#f4f4f4',
               margin: '0',
+              overflow: 'hidden',
               padding: '10px 21px'
             }}
             style={{margin: '-10px 0'}}
