@@ -1,11 +1,9 @@
 import React from 'react'
-import Subheader from 'material-ui/Subheader'
 import { List } from 'material-ui/List'
 
 import WorkshopSetListItem from './WorkshopSetListItem'
 
 import classes from './WorkshopSets.scss'
-import strings from './WorkshopSets.strings'
 
 export default class WorkshopSets extends React.Component {
 
@@ -20,7 +18,6 @@ export default class WorkshopSets extends React.Component {
     return (
       <div className={classes.container}>
         <List>
-          <Subheader>{strings.list_title}</Subheader>
           {workshopSets.map(workshopSet => (
             <WorkshopSetListItem
               key={workshopSet.id}
