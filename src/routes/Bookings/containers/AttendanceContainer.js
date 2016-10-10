@@ -20,14 +20,21 @@ class AttendanceContainer extends React.Component {
    * Attempts to verify the user's attendance.
    *
    * @param code
+   * @param callback
    * @private
    */
-  _onVerifyAttendance(code) {
-    const { attendBooking, booking } = this.props
+  _onVerifyAttendance(code, callback) {
+    const { attendBooking, booking, validCodes } = this.props
+
+    if (validCodes.indexOf(code) === -1) {
+      return setTimeout(() => callback('Invalid code'), 1000)
+    }
+
     attendBooking(code, booking.workshopID, (err) => {
       if (err) {
-        return console.log(err)
+        return callback(err)
       }
+      callback()
     })
   }
 
@@ -47,7 +54,17 @@ class AttendanceContainer extends React.Component {
 }
 AttendanceContainer.propTypes = {
   attendBooking: React.PropTypes.func.isRequired,
-  booking: React.PropTypes.object.isRequired
+  booking: React.PropTypes.object.isRequired,
+  validCodes: React.PropTypes.arrayOf(React.PropTypes.string)
+}
+AttendanceContainer.defaultProps = {
+  validCodes: [
+    'SDP2016',
+    'CGH443',
+    'HJH211',
+    'J54R4G',
+    'SDP123'
+  ]
 }
 
 const mapDispatchToProps = {

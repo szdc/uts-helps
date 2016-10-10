@@ -1,18 +1,17 @@
 import React from 'react'
 import CircularProgress from 'material-ui/CircularProgress'
-import classes from './Spinner.scss'
 
 export default class Spinner extends React.Component {
 
-  _getClassName() {
-    const { size, type } = this.props
-    const classNames = [classes[size], classes[type]]
-    return classNames.join(' ')
-  }
-
+  /**
+   * Renders the spinner.
+   *
+   * @returns {XML}
+   */
   render() {
     const sizes = {
       default: 0.85,
+      dialog: 0.75,
       small: 0.35
     }
 
@@ -20,7 +19,7 @@ export default class Spinner extends React.Component {
       <CircularProgress
         className='spinner'
         size={sizes[this.props.size]}
-        style={{margin: '5px'}}
+        style={{margin: '5px', verticalAlign: 'middle'}}
       />
     )
   }
@@ -28,14 +27,10 @@ export default class Spinner extends React.Component {
 Spinner.propTypes = {
   size: React.PropTypes.oneOf([
     'default',
+    'dialog',
     'small'
-  ]),
-  type: React.PropTypes.oneOf([
-    'constant',
-    'infinite'
   ])
 }
 Spinner.defaultProps = {
-  size: 'default',
-  type: 'constant'
+  size: 'default'
 }

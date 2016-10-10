@@ -1,11 +1,11 @@
 import React from 'react'
-import CircularProgress from 'material-ui/CircularProgress'
 import Dialog from 'material-ui/Dialog'
 import FlatButton from 'material-ui/FlatButton'
 import Reminders from 'containers/RemindersContainer'
 import { connect } from 'react-redux'
 import { push } from 'react-router-redux'
 
+import Spinner from 'components/Spinner'
 import WorkshopListItem from '../components/WorkshopListItem'
 import { createBooking } from 'store/bookings/actions/create'
 import { cancelBooking } from 'store/bookings/actions/cancel'
@@ -62,11 +62,7 @@ class WorkshopListItemContainer extends React.Component {
       },
       content: (
         <div className={classes.progressContainer}>
-          <CircularProgress
-            className={classes.progressIndicator}
-            size={'20px'}
-            style={{margin: '5px'}}
-          />
+          <Spinner size='dialog' />
           <span className={classes.progressText}>
             {strings.text_booking}
           </span>
@@ -140,11 +136,7 @@ class WorkshopListItemContainer extends React.Component {
       },
       content: (
         <div className={classes.progressContainer}>
-          <CircularProgress
-            className={classes.progressIndicator}
-            size={'20px'}
-            style={{margin: '5px'}}
-          />
+          <Spinner size='dialog' />
           <span className={classes.progressText}>
             {strings.text_cancelling}
           </span>

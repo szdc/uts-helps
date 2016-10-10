@@ -1,8 +1,9 @@
 import React from 'react'
-import CircularProgress from 'material-ui/CircularProgress'
 import Dialog from 'material-ui/Dialog'
 import FlatButton from 'material-ui/FlatButton'
 import RaisedButton from 'material-ui/RaisedButton'
+
+import Spinner from 'components/Spinner'
 
 import classes from './JoinWaitlist.scss'
 import strings from './JoinWaitlist.strings'
@@ -131,11 +132,7 @@ export default class JoinWaitlist extends React.Component {
           }
           {submitting &&
             <div className={classes.progressContainer}>
-              <CircularProgress
-                className={classes.progressIndicator}
-                size={'20px'}
-                style={{margin: '5px'}}
-              />
+              <Spinner size='dialog' />
               <span className={classes.progressText}>
                 {strings.text_submitting}
               </span>

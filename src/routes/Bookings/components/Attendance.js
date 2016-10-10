@@ -1,9 +1,10 @@
 import React from 'react'
-import CircularProgress from 'material-ui/CircularProgress'
 import Dialog from 'material-ui/Dialog'
 import FlatButton from 'material-ui/FlatButton'
 import RaisedButton from 'material-ui/RaisedButton'
 import TextField from 'material-ui/TextField'
+
+import Spinner from 'components/Spinner'
 
 import classes from './Attendance.scss'
 import strings from './Attendance.strings'
@@ -24,6 +25,7 @@ export default class Attendance extends React.Component {
       form: {
         code: ''
       },
+      formErrors: {},
       submitting: false
     }
     this._closeDialog = ::this._closeDialog
@@ -67,11 +69,21 @@ export default class Attendance extends React.Component {
    */
   _onSubmit() {
     this.setState({
-      dialog: this.dialogSubmitting,
       confirming: false,
+      dialog: this.dialogSubmitting,
+      formErrors: {},
       submitting: true
     })
-    this.props.onSubmit(this.state.form.code)
+    this.props.onSubmit(this.state.form.code, (err) => {
+      if (err) {
+        this.setState({
+          dialog: this.dialogVerify,
+          formErrors: {
+            code: 'Invalid code word.'
+          }
+        })
+      }
+    })
   }
 
   /**
@@ -81,8 +93,8 @@ export default class Attendance extends React.Component {
    */
   _onRecordAttendanceClick() {
     this.setState({
-      dialog: this.dialogVerify,
-      confirming: true
+      dialog: this.dialogSubmitting,
+      submitting: true
     })
   }
 
@@ -111,6 +123,7 @@ export default class Attendance extends React.Component {
       confirming,
       dialog,
       form,
+      formErrors,
       submitting
     } = this.state
 
@@ -147,6 +160,7 @@ export default class Attendance extends React.Component {
             <div>
               <span>{strings.text_verify}</span>
               <TextField
+                errorText={formErrors.code}
                 floatingLabelFixed
                 floatingLabelText='Code word'
                 hintText='ABC123'
@@ -158,11 +172,7 @@ export default class Attendance extends React.Component {
           }
           {submitting &&
             <div className={classes.progressContainer}>
-              <CircularProgress
-                className={classes.progressIndicator}
-                size={'20px'}
-                style={{margin: '5px'}}
-              />
+              <Spinner size='dialog' />
               <span className={classes.progressText}>
                 {strings.text_submitting}
               </span>
