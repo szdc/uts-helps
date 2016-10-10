@@ -1,5 +1,6 @@
 export default {
   labelId: 'Student ID',
+  labelAltContact: 'Mobile Number',
   labelCountryOrigin: 'Country of Origin',
   labelDegree: 'Degree',
   labelDob: 'Date of Birth',

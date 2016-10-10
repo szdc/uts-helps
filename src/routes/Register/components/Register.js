@@ -28,6 +28,7 @@ export default (submitAction, redirectTo) => {
       this.rxId = /^\d+$/gi
       this.state = {
         form: {
+          altContact: props.altContact,
           id: props.id,
           countryOrigin: props.countryOrigin,
           degree: props.degree,
@@ -204,6 +205,14 @@ export default (submitAction, redirectTo) => {
               name='countryOrigin'
               value={form.countryOrigin}
             />
+            <TextField
+              className={classes.input}
+              errorText={formErrors.altContact}
+              floatingLabelText={strings.labelAltContact}
+              floatingLabelFixed
+              name='altContact'
+              value={form.altContact}
+            />
             <br />
             <br />
             <div className={classes.formActions}>
@@ -226,6 +235,7 @@ export default (submitAction, redirectTo) => {
     }
   }
   Register.propTypes = {
+    altContact: React.PropTypes.string,
     countryOrigin: React.PropTypes.string,
     dateFormat: React.PropTypes.func,
     degree: React.PropTypes.string,
@@ -236,6 +246,7 @@ export default (submitAction, redirectTo) => {
     status: React.PropTypes.string
   }
   Register.defaultProps = {
+    altContact: '',
     countryOrigin: 'Australia',
     dateFormat: new window.Intl.DateTimeFormat('en-AU', {
       day: 'numeric',
