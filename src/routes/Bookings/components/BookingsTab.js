@@ -28,6 +28,7 @@ export default class BookingsTab extends React.Component {
             <RaisedButton
               label={labelFindWorkshop}
               onClick={onFindWorkshopClick}
+              primary
             />
           </CenterLayout>
         }
