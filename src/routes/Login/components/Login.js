@@ -52,6 +52,10 @@ export default (submitAction, redirectTo) => {
      * @private
      */
     _onFieldChange(e) {
+      if (e.target.name === 'id' && e.target.value.search(this.rxId) === -1) {
+        return
+      }
+
       this.setState({
         form: {
           ...this.state.form,
@@ -125,7 +129,7 @@ export default (submitAction, redirectTo) => {
                 />
                 <TextField
                   className={classes.input}
-                  errorText={formErrors.id}
+                  errorText={props.errorIdInvalid}
                   floatingLabelText={props.labelId}
                   hintText={props.hintId}
                   name='id'
