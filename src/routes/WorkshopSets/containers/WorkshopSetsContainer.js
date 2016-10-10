@@ -24,8 +24,10 @@ class WorkshopSetsContainer extends React.Component {
    * Fetches the user's profile.
    */
   componentDidMount() {
-    const { fetchWorkshopSets, layout } = this.props
-    fetchWorkshopSets()
+    const { fetchWorkshopSets, layout, workshopSets } = this.props
+    if (!workshopSets.loading && !workshopSets.workshopSets) {
+      fetchWorkshopSets()
+    }
     layout
     .setHeader({
       title: strings.title
