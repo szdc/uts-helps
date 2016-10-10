@@ -77,10 +77,12 @@ export default class Attendance extends React.Component {
     this.props.onSubmit(this.state.form.code, (err) => {
       if (err) {
         this.setState({
+          confirming: true,
           dialog: this.dialogVerify,
           formErrors: {
             code: strings.error_code
-          }
+          },
+          submitting: false
         })
       }
     })
@@ -93,8 +95,8 @@ export default class Attendance extends React.Component {
    */
   _onRecordAttendanceClick() {
     this.setState({
-      dialog: this.dialogSubmitting,
-      submitting: true
+      dialog: this.dialogVerify,
+      confirming: true
     })
   }
 
@@ -151,7 +153,7 @@ export default class Attendance extends React.Component {
                 />
               ] : null
           }
-          bodyStyle={{lineHeight: '1.4'}}
+          bodyStyle={{lineHeight: '1.4', paddingBottom: '0'}}
           onRequestClose={this._closeDialog}
           open={Object.keys(dialog).length > 0}
           {...dialog.props}
