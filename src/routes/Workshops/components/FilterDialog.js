@@ -24,8 +24,10 @@ export default class FilterDialog extends React.Component {
         topic: ''
       }
     }
+    this._onEndDateChange = ::this._onEndDateChange
     this._onFieldChange = ::this._onFieldChange
     this._onSelectCampusChange = ::this._onSelectCampusChange
+    this._onStartDateChange = ::this._onStartDateChange
   }
 
   /**
@@ -40,6 +42,22 @@ export default class FilterDialog extends React.Component {
         ...this.state.form,
         [e.target.name]: e.target.value
       }
+    }, () => console.log(this.state))
+  }
+
+  /**
+   * Generates a field change event.
+   *
+   * @param name
+   * @param value
+   * @private
+   */
+  _generateFieldChangeEvent(name, value) {
+    this._onFieldChange({
+      target: {
+        name,
+        value
+      }
     })
   }
 
@@ -52,12 +70,29 @@ export default class FilterDialog extends React.Component {
    * @private
    */
   _onSelectCampusChange(e, key, payload) {
-    this.setState({
-      form: {
-        ...this.state.form,
-        campusId: payload
-      }
-    })
+    this._generateFieldChangeEvent('campusId', payload)
+  }
+
+  /**
+   * Handles a change on the start date field.
+   *
+   * @param e
+   * @param date
+   * @private
+   */
+  _onStartDateChange(e, date) {
+    this._generateFieldChangeEvent('startDate', date)
+  }
+
+  /**
+   * Handles a change on the end date field.
+   *
+   * @param e
+   * @param date
+   * @private
+   */
+  _onEndDateChange(e, date) {
+    this._generateFieldChangeEvent('endDate', date)
   }
 
   /**
@@ -66,8 +101,12 @@ export default class FilterDialog extends React.Component {
    * @returns {XML}
    */
   render() {
-    const { campuses } = this.props
+    const { campuses, dateFormat, maxDate, minDate } = this.props
     const { form } = this.state
+
+    // Normalise date times
+    maxDate.setHours(0, 0, 0, 0)
+    minDate.setHours(0, 0, 0, 0)
 
     const inputStyle = {
       width: '100%'
@@ -76,14 +115,20 @@ export default class FilterDialog extends React.Component {
     return (
       <div>
         <DatePicker
+          formatDate={dateFormat}
           floatingLabelText={strings.hint_start_date}
           floatingLabelFixed
+          minDate={minDate}
+          onChange={this._onStartDateChange}
           textFieldStyle={inputStyle}
           style={inputStyle}
         />
         <DatePicker
+          formatDate={dateFormat}
           floatingLabelText={strings.hint_end_date}
           floatingLabelFixed
+          minDate={minDate}
+          onChange={this._onEndDateChange}
           textFieldStyle={inputStyle}
           style={inputStyle}
         />
@@ -118,5 +163,17 @@ export default class FilterDialog extends React.Component {
   }
 }
 FilterDialog.propTypes = {
-  campuses: React.PropTypes.array.isRequired
+  campuses: React.PropTypes.array.isRequired,
+  dateFormat: React.PropTypes.func,
+  maxDate: React.PropTypes.object,
+  minDate: React.PropTypes.object
+}
+FilterDialog.defaultProps = {
+  dateFormat: new window.Intl.DateTimeFormat('en-AU', {
+    day: 'numeric',
+    month: 'long',
+    year: 'numeric'
+  }).format,
+  maxDate: new Date(),
+  minDate: new Date()
 }

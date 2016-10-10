@@ -227,6 +227,7 @@ export default (submitAction, redirectTo) => {
   }
   Register.propTypes = {
     countryOrigin: React.PropTypes.string,
+    dateFormat: React.PropTypes.func,
     degree: React.PropTypes.string,
     firstLanguage: React.PropTypes.string,
     id: React.PropTypes.string,
@@ -236,6 +237,11 @@ export default (submitAction, redirectTo) => {
   }
   Register.defaultProps = {
     countryOrigin: 'Australia',
+    dateFormat: new window.Intl.DateTimeFormat('en-AU', {
+      day: 'numeric',
+      month: 'long',
+      year: 'numeric'
+    }).format,
     degree: 'UG',
     firstLanguage: 'English',
     status: 'Local'
