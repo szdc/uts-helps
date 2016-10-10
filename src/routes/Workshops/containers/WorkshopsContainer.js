@@ -1,5 +1,5 @@
 import React from 'react'
-import FlatButton from 'material-ui/FlatButton'
+import moment from 'moment'
 import { connect } from 'react-redux'
 import { createSelector } from 'reselect'
 import { push } from 'react-router-redux'
@@ -24,10 +24,12 @@ class WorkshopsContainer extends React.Component {
     super(props)
 
     this.state = {
+      filter: {},
       showFilterDialog: false
     }
     this._closeFilter = ::this._closeFilter
     this._onFilterClick = ::this._onFilterClick
+    this._onFilterUpdated = ::this._onFilterUpdated
     this._onWorkshopClick = ::this._onWorkshopClick
   }
 
@@ -88,6 +90,32 @@ class WorkshopsContainer extends React.Component {
   }
 
   /**
+   * Refreshes workshops if the filter is updated.
+   *
+   * @param filter
+   * @private
+   */
+  _onFilterUpdated(filter) {
+    this.setState({
+      filter,
+      showFilterDialog: false
+    })
+    const searchParams = {}
+    if (filter.startDate) {
+      searchParams.startingDtBegin = moment(filter.startDate).format('YYYY-MM-DD')
+      searchParams.startingDtEnd = moment(filter.startDate).add(1, 'years').format('YYYY-MM-DD')
+    }
+    if (filter.endDate) {
+      searchParams.endingDtBegin = moment(filter.endDate).format('YYYY-MM-DD')
+      searchParams.endingDtEnd = moment(filter.endDate).add(1, 'years').format('YYYY-MM-DD')
+    }
+    if (filter.campusId) {
+      searchParams.campusId = filter.campusId
+    }
+    this.props.searchWorkshops(searchParams)
+  }
+
+  /**
    * Renders the workshop list.
    *
    * @returns {XML}
@@ -104,23 +132,15 @@ class WorkshopsContainer extends React.Component {
     return (
       <div>
         <Workshops
+          filter={this.state.filter}
           onWorkshopClick={this._onWorkshopClick}
           workshops={workshops.workshops}
           workshopSet={workshopSets.workshopSets.find(set => set.id === +params.id)}
         />
         <FilterDialog
-          actions={[
-            <FlatButton
-              label={strings.label_cancel}
-              onTouchTap={this._closeFilter}
-            />,
-            <FlatButton
-              label={strings.label_confirm}
-              onTouchTap={this._onSubmit}
-              primary
-            />
-          ]}
+          filter={this.state.filter}
           onCloseFilter={this._closeFilter}
+          onSubmit={this._onFilterUpdated}
           open={this.state.showFilterDialog}
         />
       </div>

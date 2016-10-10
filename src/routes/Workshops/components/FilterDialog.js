@@ -42,7 +42,7 @@ export default class FilterDialog extends React.Component {
         ...this.state.form,
         [e.target.name]: e.target.value
       }
-    }, () => console.log(this.state))
+    }, () => this.props.onFilterChange(this.state.form))
   }
 
   /**
@@ -70,7 +70,13 @@ export default class FilterDialog extends React.Component {
    * @private
    */
   _onSelectCampusChange(e, key, payload) {
-    this._generateFieldChangeEvent('campusId', payload)
+    this.setState({
+      form: {
+        ...this.state.form,
+        campusId: payload,
+        campus: this.props.campuses[key]
+      }
+    }, () => this.props.onFilterChange(this.state.form))
   }
 
   /**
@@ -166,7 +172,8 @@ FilterDialog.propTypes = {
   campuses: React.PropTypes.array.isRequired,
   dateFormat: React.PropTypes.func,
   maxDate: React.PropTypes.object,
-  minDate: React.PropTypes.object
+  minDate: React.PropTypes.object,
+  onFilterChange: React.PropTypes.func
 }
 FilterDialog.defaultProps = {
   dateFormat: new window.Intl.DateTimeFormat('en-AU', {
