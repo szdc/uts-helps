@@ -79,7 +79,7 @@ export default class Attendance extends React.Component {
         this.setState({
           dialog: this.dialogVerify,
           formErrors: {
-            code: 'Invalid code word.'
+            code: strings.error_code
           }
         })
       }
@@ -162,8 +162,8 @@ export default class Attendance extends React.Component {
               <TextField
                 errorText={formErrors.code}
                 floatingLabelFixed
-                floatingLabelText='Code word'
-                hintText='ABC123'
+                floatingLabelText={strings.label_code}
+                hintText={strings.hint_code}
                 name='code'
                 onChange={this._onFieldChanged}
                 value={form.code}
