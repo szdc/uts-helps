@@ -40,6 +40,9 @@ export default class NavigationDrawer extends React.Component {
    */
   render() {
     const { profile, width } = this.props
+    const userStyle = {
+      backgroundColor: this.context.muiTheme.palette.accent2Color
+    }
 
     return (
       <Drawer
@@ -48,7 +51,7 @@ export default class NavigationDrawer extends React.Component {
         open={this.props.open}
         onRequestChange={this.props.onChange}
       >
-        <div className={classes.user}>
+        <div className={classes.user} style={userStyle}>
           <div className={classes.sectionLogo} />
           <div className={classes.userInfo}>
             <span className={classes.username}>{profile.preferred_name || profile.studentID}</span>
@@ -113,6 +116,9 @@ export default class NavigationDrawer extends React.Component {
       </Drawer>
     )
   }
+}
+NavigationDrawer.contextTypes = {
+  muiTheme: React.PropTypes.object.isRequired
 }
 NavigationDrawer.propTypes = {
   open: React.PropTypes.bool.isRequired,

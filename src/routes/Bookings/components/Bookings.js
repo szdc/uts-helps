@@ -39,12 +39,14 @@ export default class Bookings extends React.Component {
   render() {
     const { future, onFindWorkshopClick, past } = this.props
     const tabStyle = {
-      backgroundColor: this.context.muiTheme.palette.primary3Color
+      backgroundColor: this.context.muiTheme.palette.accent2Color,
+      color: this.context.muiTheme.palette.primary1Color
     }
 
     return (
       <div className={classes.container}>
         <Tabs
+          inkBarStyle={{backgroundColor: this.context.muiTheme.palette.primary1Color}}
           onChange={this._handleChange}
           value={this.state.slideIndex}
         >
