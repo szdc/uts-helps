@@ -8,6 +8,7 @@ import { IconFilter } from 'components/Icons'
 import FilterDialog from './FilterDialogContainer'
 import Loading from 'components/Loading'
 import Workshops from '../components/Workshops'
+import { fetchWorkshopSets } from 'store/workshopSets/actions'
 import { searchWorkshops } from 'store/workshops/actions'
 
 import strings from './WorkshopsContainer.strings'
@@ -31,13 +32,16 @@ class WorkshopsContainer extends React.Component {
   }
 
   /**
-   * Fetches the user's profile.
+   * Fetches the workshops.
    */
   componentDidMount() {
-    const { layout, params, searchWorkshops } = this.props
+    const { fetchWorkshopSets, layout, params, searchWorkshops, workshopSets } = this.props
     searchWorkshops({
       workshopSetId: params.id
     })
+    if (workshopSets.loading || !workshopSets.workshopSets) {
+      fetchWorkshopSets()
+    }
     layout
       .setHeader({
         contextualOptions: [
@@ -89,21 +93,20 @@ class WorkshopsContainer extends React.Component {
    * @returns {XML}
    */
   render() {
-    const { workshops } = this.props
+    const { params, workshops, workshopSets } = this.props
 
-    if (workshops.loading || !workshops.workshops) {
+    if (workshops.loading || !workshops.workshops || workshopSets.loading || !workshopSets.workshopSets) {
       return (
         <Loading />
       )
     }
-
-    console.log(workshops.workshops)
 
     return (
       <div>
         <Workshops
           onWorkshopClick={this._onWorkshopClick}
           workshops={workshops.workshops}
+          workshopSet={workshopSets.workshopSets.find(set => set.id === +params.id)}
         />
         <FilterDialog
           actions={[
@@ -125,15 +128,18 @@ class WorkshopsContainer extends React.Component {
   }
 }
 WorkshopsContainer.propTypes = {
+  fetchWorkshopSets: React.PropTypes.func.isRequired,
   layout: React.PropTypes.object.isRequired,
   params: React.PropTypes.object.isRequired,
   push: React.PropTypes.func.isRequired,
   searchWorkshops: React.PropTypes.func.isRequired,
-  workshops: React.PropTypes.object.isRequired
+  workshops: React.PropTypes.object.isRequired,
+  workshopSets: React.PropTypes.object.isRequired
 }
 
 const mapStateToProps = state => ({
-  workshops: workshopSelector(state)
+  workshops: workshopSelector(state),
+  workshopSets: state.workshopSets
 })
 
 /**
@@ -174,6 +180,7 @@ const workshopSelector = createSelector(
 )
 
 const mapDispatchToProps = {
+  fetchWorkshopSets,
   searchWorkshops,
   push
 }

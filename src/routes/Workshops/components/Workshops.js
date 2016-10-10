@@ -15,12 +15,12 @@ export default class Workshops extends React.Component {
    * @returns {XML}
    */
   render() {
-    const { onWorkshopClick, workshops } = this.props
+    const { onWorkshopClick, workshops, workshopSet } = this.props
 
     return (
       <div className={classes.container}>
         <List>
-          <Subheader>{strings.list_title}</Subheader>
+          <Subheader>{strings.list_title.replace('{0}', workshopSet.name)}</Subheader>
           {workshops.map(workshop => (
             <WorkshopListItem
               key={workshop.WorkshopId}
@@ -35,8 +35,10 @@ export default class Workshops extends React.Component {
 }
 Workshops.propTypes = {
   onWorkshopClick: React.PropTypes.func,
-  workshops: React.PropTypes.array.isRequired
+  workshops: React.PropTypes.array.isRequired,
+  workshopSet: React.PropTypes.object
 }
 Workshops.defaultProps = {
-  onWorkshopClick: () => {}
+  onWorkshopClick: () => {},
+  workshopSet: {}
 }
