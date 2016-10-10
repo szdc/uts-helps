@@ -1,9 +1,10 @@
 import React from 'react'
-import CenterLayout from 'layouts/CenterLayout'
+import Divider from 'material-ui/Divider'
 import moment from 'moment'
 import Subheader from 'material-ui/Subheader'
 import { List } from 'material-ui/List'
 
+import CenterLayout from 'layouts/CenterLayout'
 import WorkshopListItem from '../containers/WorkshopListItemContainer'
 
 import classes from './Workshops.scss'
@@ -57,6 +58,7 @@ export default class Workshops extends React.Component {
             {strings.list_title.replace('{0}', workshopSet.name)}
             {this._getFilterString()}
           </Subheader>
+          <Divider style={{backgroundColor: '#eee'}} />
           {workshops.length
             ?
             workshops.map(workshop => (

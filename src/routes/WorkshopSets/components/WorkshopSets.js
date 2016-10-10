@@ -19,7 +19,7 @@ export default class WorkshopSets extends React.Component {
     return (
       <div className={classes.container}>
         <List>
-          <Divider />
+          <Divider style={{backgroundColor: '#eee'}} />
           {workshopSets.map(workshopSet => (
             <WorkshopSetListItem
               key={workshopSet.id}

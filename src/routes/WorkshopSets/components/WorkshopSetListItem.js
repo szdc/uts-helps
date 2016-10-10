@@ -38,7 +38,7 @@ export default class WorkshopSetListItem extends React.Component {
           onTouchTap={this._onClick}
           primaryText={workshopSet.name}
         />
-        <Divider />
+        <Divider style={{backgroundColor: '#eee'}} />
       </div>
     )
   }
