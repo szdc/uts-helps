@@ -5,6 +5,9 @@ import { Link } from 'react-router'
 import {
   IconDate,
   IconLogout,
+  IconProfile,
+  IconProgram,
+  IconSession,
   IconWorkshop
 } from 'components/Icons'
 
@@ -62,10 +65,35 @@ export default class NavigationDrawer extends React.Component {
               </NavigationLink>
             </li>
             <li>
+              <NavigationLink onClick={this.close} to='/profile'>
+                <IconProfile />
+                <span onClick={this.close} className={classes.text}>
+                  {strings.label_profile}
+                </span>
+              </NavigationLink>
+            </li>
+            <hr className={classes.divider} />
+            <li>
               <NavigationLink onClick={this.close} to='/workshop-sets'>
                 <IconWorkshop />
                 <span onClick={this.close} className={classes.text}>
                   {strings.label_workshops}
+                </span>
+              </NavigationLink>
+            </li>
+            <li>
+              <NavigationLink onClick={this.close} to='/sessions'>
+                <IconSession />
+                <span onClick={this.close} className={classes.text}>
+                  {strings.label_sessions}
+                </span>
+              </NavigationLink>
+            </li>
+            <li>
+              <NavigationLink onClick={this.close} to='/programs'>
+                <IconProgram />
+                <span onClick={this.close} className={classes.text}>
+                  {strings.label_programs}
                 </span>
               </NavigationLink>
             </li>

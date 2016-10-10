@@ -113,12 +113,21 @@ export const IconPlace = props =>
 export const IconPlaceholder = props =>
   createIcon({...props, disabled: true}, '')
 
+export const IconProfile = props =>
+  createIcon(props, 'person')
+
+export const IconProgram = props =>
+  createIcon(props, 'library_books')
+
 export const IconSearch = props =>
   createIcon(props, 'search')
+
+export const IconSession = props =>
+  createIcon(props, 'assignment')
 
 export const IconSettings = props =>
   createIcon(props, 'settings')
 
 export const IconWorkshop = props =>
-  createIcon(props, 'people')
+  createIcon(props, 'question_answer')
 
