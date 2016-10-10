@@ -166,7 +166,6 @@ export default (submitAction, redirectTo) => {
             />
             <DatePicker
               floatingLabelText={strings.labelDob}
-              hintText='Date Picker'
               onChange={this._onDateChange}
               textFieldStyle={inputStyle}
               style={inputStyle}

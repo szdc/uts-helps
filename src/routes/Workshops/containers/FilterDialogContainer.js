@@ -42,6 +42,7 @@ class FilterDialogContainer extends React.Component {
         }}
         onRequestClose={onCloseFilter}
         open={open}
+        repositionOnUpdate={false}
         title={strings.title}
       >
         {(campuses.loading || !campuses.campuses)

@@ -77,12 +77,12 @@ export default class FilterDialog extends React.Component {
     return (
       <div>
         <DatePicker
-          hintText={strings.hint_start_date}
+          floatingLabelText={strings.hint_start_date}
           textFieldStyle={inputStyle}
           style={inputStyle}
         />
         <DatePicker
-          hintText={strings.hint_end_date}
+          floatingLabelText={strings.hint_end_date}
           textFieldStyle={inputStyle}
           style={inputStyle}
         />
