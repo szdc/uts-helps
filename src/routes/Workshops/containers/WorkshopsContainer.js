@@ -130,7 +130,7 @@ class WorkshopsContainer extends React.Component {
     }
 
     return (
-      <div>
+      <div style={{height: '100%'}}>
         <Workshops
           filter={this.state.filter}
           onWorkshopClick={this._onWorkshopClick}

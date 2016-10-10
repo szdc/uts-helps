@@ -53,13 +53,13 @@ export default class Workshops extends React.Component {
 
     return (
       <div className={classes.container}>
-        <List>
+        <List style={{height: '100%'}}>
           <Subheader style={subheaderStyle}>
             {strings.list_title.replace('{0}', workshopSet.name)}
             {this._getFilterString()}
           </Subheader>
           <Divider style={{backgroundColor: '#eee'}} />
-          {workshops.length
+          {workshops.length === 0
             ?
             workshops.map(workshop => (
               <WorkshopListItem
@@ -69,9 +69,11 @@ export default class Workshops extends React.Component {
               />
             ))
             :
-            <CenterLayout>
-              <p>{strings.text_no_results}</p>
-            </CenterLayout>
+            <div className={classes.noResultsContainer}>
+              <CenterLayout>
+                <p className={classes.noResultsMessage}>{strings.text_no_results}</p>
+              </CenterLayout>
+            </div>
           }
         </List>
       </div>
