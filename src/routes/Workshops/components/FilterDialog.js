@@ -158,7 +158,6 @@ export default class FilterDialog extends React.Component {
         <TextField
           floatingLabelText={strings.label_topic}
           floatingLabelFixed
-          hintText={strings.hint_topic}
           name='topic'
           onChange={this._onFieldChange}
           style={{width: '100%'}}
