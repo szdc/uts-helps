@@ -3,6 +3,7 @@ import React from 'react'
 import Attendance from '../containers/AttendanceContainer'
 import CancelBooking from '../containers/CancelBookingContainer'
 import GenericListItem from 'components/GenericListItem'
+import Reminders from 'components/ReminderDialog'
 import { IconCheck } from 'components/Icons'
 
 import classes from './BookingListItem.scss'
@@ -50,6 +51,15 @@ export default class BookingListItem extends React.Component {
             {booking.isUpcoming && !booking.isInProgress && booking.attended === null &&
               <CancelBooking
                 booking={booking}
+              />
+            }
+            {booking.isUpcoming && booking.reminders.length > 0 &&
+              <Reminders
+                campus={booking.campus}
+                reminders={booking.reminders}
+                startDate={booking.starting}
+                topic={booking.topic}
+                workshopId={booking.workshopID}
               />
             }
           </div>

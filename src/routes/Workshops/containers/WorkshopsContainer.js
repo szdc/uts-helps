@@ -8,6 +8,7 @@ import { IconSearch } from 'components/Icons'
 import FilterDialog from './FilterDialogContainer'
 import Loading from 'components/Loading'
 import Workshops from '../components/Workshops'
+import { fetchReminders } from 'store/reminders/actions/fetch'
 import { fetchWorkshopSets } from 'store/workshopSets/actions'
 import { searchWorkshops } from 'store/workshops/actions'
 
@@ -37,14 +38,26 @@ class WorkshopsContainer extends React.Component {
    * Fetches the workshops.
    */
   componentDidMount() {
-    const { fetchWorkshopSets, layout, params, searchWorkshops, workshopSets } = this.props
+    const {
+      fetchReminders,
+      fetchWorkshopSets,
+      layout,
+      params,
+      reminders,
+      searchWorkshops,
+      workshopSets
+    } = this.props
+
     searchWorkshops({
       startingDtBegin: moment().format('YYYY-MM-DD'),
       startingDtEnd: moment().add(1, 'years').format('YYYY-MM-DD'),
       workshopSetId: params.id
     })
-    if (workshopSets.loading || !workshopSets.workshopSets) {
+    if (!workshopSets.loading && !workshopSets.workshopSets) {
       fetchWorkshopSets()
+    }
+    if (!reminders.loading && !reminders.reminders) {
+      fetchReminders()
     }
     layout
       .setHeader({
@@ -152,16 +165,19 @@ class WorkshopsContainer extends React.Component {
   }
 }
 WorkshopsContainer.propTypes = {
+  fetchReminders: React.PropTypes.func.isRequired,
   fetchWorkshopSets: React.PropTypes.func.isRequired,
   layout: React.PropTypes.object.isRequired,
   params: React.PropTypes.object.isRequired,
   push: React.PropTypes.func.isRequired,
+  reminders: React.PropTypes.object.isRequired,
   searchWorkshops: React.PropTypes.func.isRequired,
   workshops: React.PropTypes.object.isRequired,
   workshopSets: React.PropTypes.object.isRequired
 }
 
 const mapStateToProps = state => ({
+  reminders: state.reminders,
   workshops: workshopSelector(state),
   workshopSets: state.workshopSets
 })
@@ -177,8 +193,9 @@ const mapStateToProps = state => ({
  */
 const workshopSelector = createSelector(
   state => state.workshops,
-  workshops => {
-    if (workshops.loading || !workshops.workshops) {
+  state => state.reminders,
+  (workshops, reminders) => {
+    if (workshops.loading || !workshops.workshops || reminders.loading || !reminders.reminders) {
       return workshops
     }
 
@@ -191,6 +208,7 @@ const workshopSelector = createSelector(
       workshop.isBookable = workshop.bookingId === null && workshop.remaining > 0
         && !workshop.isWaitlistable && !workshop.isWaitlisted
       workshop.duration = moment.duration(moment(workshop.EndDate).diff(workshop.StartDate)).asHours()
+      workshop.reminders = reminders.reminders.filter(reminder => reminder.workshopId === workshop.WorkshopId)
 
       if (workshop.cutoff) {
         workshop.waitlistSize = Math.max(
@@ -220,6 +238,7 @@ const compareWorkshopsByDate = (workshopA, workshopB) => {
 }
 
 const mapDispatchToProps = {
+  fetchReminders,
   fetchWorkshopSets,
   searchWorkshops,
   push

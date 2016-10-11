@@ -7,6 +7,7 @@ import { push } from 'react-router-redux'
 import Bookings from '../components/Bookings'
 import Loading from 'components/Loading'
 import { fetchBookings } from 'store/bookings/actions'
+import { fetchReminders } from 'store/reminders/actions/fetch'
 import { IconAdd } from 'components/Icons'
 
 import strings from './BookingsContainer.strings.js'
@@ -27,8 +28,11 @@ class BookingsContainer extends React.Component {
    * Fetches the user's profile.
    */
   componentDidMount() {
-    const { fetchBookings, layout } = this.props
+    const { fetchBookings, fetchReminders, layout, reminders } = this.props
     fetchBookings()
+    if (!reminders.loading && !reminders.reminders) {
+      fetchReminders()
+    }
     layout
       .setHeader({
         contextualOptions: [
@@ -81,16 +85,19 @@ class BookingsContainer extends React.Component {
 BookingsContainer.propTypes = {
   bookings: React.PropTypes.object.isRequired,
   fetchBookings: React.PropTypes.func.isRequired,
+  fetchReminders: React.PropTypes.func.isRequired,
+  futureBookings: React.PropTypes.array,
   layout: React.PropTypes.object.isRequired,
   pastBookings: React.PropTypes.array,
   push: React.PropTypes.func.isRequired,
-  futureBookings: React.PropTypes.array
+  reminders: React.PropTypes.object.isRequired
 }
 
 const mapStateToProps = state => ({
   bookings: state.bookings,
   pastBookings: pastBookingsSelector(state),
-  futureBookings: futureBookingsSelector(state)
+  futureBookings: futureBookingsSelector(state),
+  reminders: state.reminders
 })
 
 /**
@@ -98,8 +105,9 @@ const mapStateToProps = state => ({
  */
 const futureBookingsSelector = createSelector(
   state => state.bookings,
-  bookings => {
-    if (bookings.loading || !bookings.bookings) {
+  state => state.reminders,
+  (bookings, reminders) => {
+    if (bookings.loading || !bookings.bookings || reminders.loading || !reminders.reminders) {
       return []
     }
     const now = moment()
@@ -110,6 +118,8 @@ const futureBookingsSelector = createSelector(
       booking.duration = moment.duration(moment(booking.ending).diff(booking.starting)).asHours()
       booking.isInProgress = moment(booking.starting).isBefore(now) && moment(booking.ending).isAfter(now)
       booking.isUpcoming = true
+      booking.reminders = reminders.reminders.filter(reminder => reminder.workshopId === booking.workshopID)
+
       return booking
     })
 
@@ -156,6 +166,7 @@ const compareBookingsByDate = (bookingA, bookingB) => {
 
 const mapDispatchToProps = {
   fetchBookings,
+  fetchReminders,
   push
 }
 

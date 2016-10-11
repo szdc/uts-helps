@@ -103,7 +103,10 @@ class WorkshopListItemContainer extends React.Component {
           <div>
             <label>Reminders:</label>
             <Reminders
-              workshop={workshop}
+              campus={workshop.campus}
+              startDate={workshop.StartDate}
+              topic={workshop.topic}
+              workshopId={workshop.WorkshopId}
             />
           </div>
         </div>

@@ -2,6 +2,8 @@ import React from 'react'
 import moment from 'moment'
 import { connect } from 'react-redux'
 
+import { createReminder } from 'store/reminders/actions/create'
+import { deleteReminder } from 'store/reminders/actions/delete'
 import Reminders from 'components/Reminders'
 
 import strings from './RemindersContainer.strings'
@@ -18,7 +20,7 @@ class RemindersContainer extends React.Component {
 
     this.state = {
       error: null,
-      reminders: []
+      reminders: props.reminders
     }
     this._addReminder = ::this._addReminder
     this._deleteReminder = ::this._deleteReminder
@@ -31,8 +33,13 @@ class RemindersContainer extends React.Component {
    * @param quantifier
    */
   _addReminder(figure, quantifier) {
-    const { workshop } = this.props
-    const timestamp = moment(workshop.StartDate).subtract(figure, quantifier).unix()
+    const {
+      campus,
+      startDate,
+      topic,
+      workshopId
+    } = this.props
+    const timestamp = moment(startDate).subtract(figure, quantifier).unix()
 
     if (this.state.reminders.some(reminder => reminder.timestamp === timestamp)) {
       return this.setState({
@@ -40,15 +47,22 @@ class RemindersContainer extends React.Component {
       })
     }
 
-    this.setState({
-      error: null,
-      reminders: [
-        ...this.state.reminders,
-        {
-          id: Math.random(),
-          timestamp
-        }
-      ]
+    this.props.createReminder({
+      workshopId,
+      timestamp: timestamp,
+      topic,
+      date: startDate,
+      location: campus,
+      email: 'jack.lives-here@hotmail.com'
+    }, (err, res) => {
+      if (err) {
+        return this.setState({
+          error: strings.error_reminder_failed
+        })
+      }
+      this.setState({
+        error: null
+      })
     })
   }
 
@@ -58,9 +72,7 @@ class RemindersContainer extends React.Component {
    * @param reminder
    */
   _deleteReminder(reminder) {
-    this.setState({
-      reminders: this.state.reminders.filter(r => r.id !== reminder.id)
-    })
+    this.props.deleteReminder(reminder._id)
   }
 
   /**
@@ -81,7 +93,21 @@ class RemindersContainer extends React.Component {
   }
 }
 RemindersContainer.propTypes = {
-  workshop: React.PropTypes.object
+  campus: React.PropTypes.string,
+  createReminder: React.PropTypes.func,
+  deleteReminder: React.PropTypes.func,
+  reminders: React.PropTypes.arrayOf(React.PropTypes.object),
+  startDate: React.PropTypes.string,
+  topic: React.PropTypes.string,
+  workshopId: React.PropTypes.any
+}
+RemindersContainer.defaultProps = {
+  reminders: []
 }
 
-export default connect()(RemindersContainer)
+const mapDispatchToProps = {
+  createReminder,
+  deleteReminder
+}
+
+export default connect(null, mapDispatchToProps)(RemindersContainer)

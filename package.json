@@ -125,6 +125,7 @@
     "rimraf": "^2.5.1",
     "sass-loader": "^4.0.0",
     "style-loader": "^0.13.0",
+    "superagent": "^2.3.0",
     "url-loader": "^0.5.6",
     "uts-helps-api-js": "git+ssh://git@github.com/szdc/uts-helps-api-js.git#build",
     "webpack": "^1.12.14",
