@@ -17,7 +17,7 @@ export default class GenericListItem extends React.Component {
       case 'single':
         return 'Workshop'
       case 'multiple':
-        return 'Program'
+        return 'Programme'
       default:
         return type
     }
