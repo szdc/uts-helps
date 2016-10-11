@@ -42,13 +42,13 @@ export default class BookingListItem extends React.Component {
       <GenericListItem
         actions={
           <div>
-            {!booking.isUpcoming &&
-              <CancelBooking
+            {booking.attended === null &&
+              <Attendance
                 booking={booking}
               />
             }
-            {booking.attended === null &&
-              <Attendance
+            {booking.isUpcoming &&
+              <CancelBooking
                 booking={booking}
               />
             }
