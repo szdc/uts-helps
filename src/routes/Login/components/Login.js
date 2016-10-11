@@ -121,7 +121,7 @@ export default (submitAction, redirectTo) => {
               >
                 <img
                   className={classes.logo}
-                  src='images/logo2.png'
+                  src='/images/logo2.png'
                 />
                 <TextField
                   className={classes.input}

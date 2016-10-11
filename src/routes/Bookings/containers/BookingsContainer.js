@@ -103,12 +103,16 @@ const futureBookingsSelector = createSelector(
       return []
     }
     const now = moment()
-    return bookings.bookings.filter(booking =>
+    const futureBookings = bookings.bookings.filter(booking =>
       moment(booking.ending).isAfter(now)
     ).map(booking => {
       booking.isUpcoming = true
       return booking
     })
+
+    futureBookings.sort(compareBookingsByDate)
+
+    return futureBookings
   }
 )
 
@@ -122,14 +126,28 @@ const pastBookingsSelector = createSelector(
       return []
     }
     const now = moment()
-    return bookings.bookings.filter(booking =>
+    const pastBookings = bookings.bookings.filter(booking =>
       moment(booking.ending).isBefore(now)
     ).map(booking => {
       booking.isUpcoming = false
       return booking
     })
+
+    pastBookings.sort(compareBookingsByDate)
+
+    return pastBookings
   }
 )
+
+/**
+ * Compares bookings by start date.
+ *
+ * @param bookingA
+ * @param bookingB
+ */
+const compareBookingsByDate = (bookingA, bookingB) => {
+  return moment(bookingA.starting).unix() - moment(bookingB.starting).unix()
+}
 
 const mapDispatchToProps = {
   fetchBookings,

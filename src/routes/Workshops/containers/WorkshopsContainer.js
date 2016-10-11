@@ -195,9 +195,22 @@ const workshopSelector = createSelector(
       }
       return workshop
     })
+
+    workshops.workshops.sort(compareWorkshopsByDate)
+
     return workshops
   }
 )
+
+/**
+ * Compares workshops by start date.
+ *
+ * @param workshopA
+ * @param workshopB
+ */
+const compareWorkshopsByDate = (workshopA, workshopB) => {
+  return moment(workshopA.StartDate).unix() - moment(workshopB.StartDate).unix()
+}
 
 const mapDispatchToProps = {
   fetchWorkshopSets,

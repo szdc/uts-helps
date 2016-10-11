@@ -55,7 +55,7 @@ export default class NavigationDrawer extends React.Component {
           <div className={classes.sectionLogo}>
             <img
               className={classes.logo}
-              src='images/logo.png'
+              src='/images/logo.png'
             />
           </div>
           <div className={classes.userInfo}>
