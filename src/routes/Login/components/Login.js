@@ -130,6 +130,7 @@ export default (submitAction, redirectTo) => {
                   hintText={props.hintId}
                   name='id'
                   pattern='[0-9]*'
+                  type='number'
                   value={form.id}
                 />
                 <TextField
