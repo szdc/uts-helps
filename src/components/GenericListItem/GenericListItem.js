@@ -50,6 +50,12 @@ export default class GenericListItem extends React.Component {
                   {actions}
                 </div>
                 <div className={classes.moreInfoContent}>
+                  {typeof duration !== 'undefined' ?
+                    <div className={classes.infoLine}>
+                      <span className={classes.heading}>{strings.label_duration}</span>
+                      <span className={classes.content}>{duration} {duration === 1 ? 'hour' : 'hours'}</span>
+                    </div> : null
+                  }
                   {(isWaitlistable || isWaitlisted) ?
                     <div className={classes.infoLine}>
                       <span className={classes.heading}>{strings.label_waitlist}</span>
@@ -96,9 +102,6 @@ export default class GenericListItem extends React.Component {
               <br />
               <div>
                 {getTimeString(startDate, endDate)}
-                {typeof duration !== 'undefined' &&
-                  ` (${duration} ${duration === 1 ? 'hour' : 'hours'})`
-                }
                 {additionalText}
               </div>
             </div>
