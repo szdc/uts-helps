@@ -63,6 +63,7 @@ export default class BookingListItem extends React.Component {
         }
         campus={booking.campus}
         description={booking.description}
+        duration={booking.duration}
         endDate={booking.ending}
         startDate={booking.starting}
         targetGroup={booking.targetingGroup}

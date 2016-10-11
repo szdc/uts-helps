@@ -189,6 +189,7 @@ const workshopSelector = createSelector(
         && !workshop.isWaitlisted
       workshop.isBookable = workshop.bookingId === null && workshop.remaining > 0
         && !workshop.isWaitlistable && !workshop.isWaitlisted
+      workshop.duration = moment.duration(moment(workshop.EndDate).diff(workshop.StartDate)).asHours()
 
       if (workshop.cutoff) {
         workshop.waitlistSize = Math.max(

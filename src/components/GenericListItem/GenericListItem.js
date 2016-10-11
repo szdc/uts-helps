@@ -18,6 +18,7 @@ export default class GenericListItem extends React.Component {
       additionalText,
       campus,
       description,
+      duration,
       endDate,
       isWaitlistable,
       isWaitlisted,
@@ -95,6 +96,9 @@ export default class GenericListItem extends React.Component {
               <br />
               <div>
                 {getTimeString(startDate, endDate)}
+                {typeof duration !== 'undefined' &&
+                  ` (${duration} ${duration === 1 ? 'hour' : 'hours'})`
+                }
                 {additionalText}
               </div>
             </div>
@@ -112,6 +116,7 @@ GenericListItem.propTypes = {
   campus: React.PropTypes.string,
   cutoffReached: React.PropTypes.bool,
   description: React.PropTypes.string,
+  duration: React.PropTypes.string,
   isWaitlistable: React.PropTypes.bool,
   isWaitlisted: React.PropTypes.bool,
   endDate: React.PropTypes.string,
