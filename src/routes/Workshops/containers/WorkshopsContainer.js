@@ -100,7 +100,9 @@ class WorkshopsContainer extends React.Component {
       filter,
       showFilterDialog: false
     })
-    const searchParams = {}
+    const searchParams = {
+      workshopSetId: this.props.params.id
+    }
     if (filter.startDate) {
       searchParams.startingDtBegin = moment(filter.startDate).format('YYYY-MM-DD')
       searchParams.startingDtEnd = moment(filter.startDate).add(1, 'years').format('YYYY-MM-DD')
