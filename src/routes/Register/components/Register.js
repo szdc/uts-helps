@@ -29,10 +29,11 @@ export default (submitAction, redirectTo) => {
       this.state = {
         form: {
           altContact: props.altContact,
-          id: props.id,
           countryOrigin: props.countryOrigin,
           degree: props.degree,
+          dateOfBirth: null,
           firstLanguage: props.firstLanguage,
+          id: props.id,
           status: props.status
         },
         formErrors: {}
@@ -116,7 +117,32 @@ export default (submitAction, redirectTo) => {
      * @private
      */
     _validate() {
+      const { form } = this.state
       let formErrors = {}
+
+      if (!form.altContact || !form.altContact.length) {
+        formErrors.altContact = strings.errorAltContact
+      }
+
+      if (!form.countryOrigin || !form.countryOrigin.length) {
+        formErrors.countryOrigin = strings.errorCountryOrigin
+      }
+
+      if (!form.degree || !form.degree.length) {
+        formErrors.degree = strings.errorDegree
+      }
+
+      if (!form.dateOfBirth) {
+        formErrors.dateOfBirth = strings.errorDateOfBirth
+      }
+
+      if (!form.firstLanguage || !form.firstLanguage.length) {
+        formErrors.firstLanguage = strings.errorFirstLanguage
+      }
+
+      if (!form.status || !form.status.length) {
+        formErrors.status = strings.errorStatus
+      }
 
       return formErrors
     }
@@ -166,12 +192,15 @@ export default (submitAction, redirectTo) => {
               value={form.id}
             />
             <DatePicker
+              errorText={formErrors.dateOfBirth}
               floatingLabelText={strings.labelDob}
+              formatDate={props.dateFormat}
               onChange={this._onDateChange}
               textFieldStyle={inputStyle}
               style={inputStyle}
             />
             <SelectField
+              errorText={formErrors.degree}
               floatingLabelText={strings.labelDegree}
               name='degree'
               onChange={this._onSelectDegreeChange}
@@ -182,6 +211,7 @@ export default (submitAction, redirectTo) => {
               <MenuItem value='PG' primaryText='Postgraduate' />
             </SelectField>
             <SelectField
+              errorText={formErrors.status}
               floatingLabelText={strings.labelStatus}
               name='status'
               onChange={this._onSelectStatusChange}
