@@ -86,11 +86,15 @@ export default class Reminders extends React.Component {
    * @returns {XML}
    */
   render() {
-    const { onDeleteReminder, reminders, workshop } = this.props
+    const { error, onDeleteReminder, reminders, workshop } = this.props
     const { form } = this.state
 
     return (
       <div>
+        {error !== null &&
+          <p className={classes.error}>{error}</p>
+        }
+
         <Table selectable={false}>
           <TableBody displayRowCheckbox={false}>
             <TableRow displayBorder={false}>
@@ -157,6 +161,7 @@ export default class Reminders extends React.Component {
   }
 }
 Reminders.propTypes = {
+  error: React.PropTypes.string,
   onAddReminder: React.PropTypes.func,
   onDeleteReminder: React.PropTypes.func,
   reminders: React.PropTypes.arrayOf(React.PropTypes.object),

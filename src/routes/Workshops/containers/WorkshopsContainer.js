@@ -39,6 +39,8 @@ class WorkshopsContainer extends React.Component {
   componentDidMount() {
     const { fetchWorkshopSets, layout, params, searchWorkshops, workshopSets } = this.props
     searchWorkshops({
+      startingDtBegin: moment().format('YYYY-MM-DD'),
+      startingDtEnd: moment().add(1, 'years').format('YYYY-MM-DD'),
       workshopSetId: params.id
     })
     if (workshopSets.loading || !workshopSets.workshopSets) {
@@ -100,7 +102,9 @@ class WorkshopsContainer extends React.Component {
       filter,
       showFilterDialog: false
     })
-    const searchParams = {}
+    const searchParams = {
+      workshopSetId: this.props.params.id
+    }
     if (filter.startDate) {
       searchParams.startingDtBegin = moment(filter.startDate).format('YYYY-MM-DD')
       searchParams.startingDtEnd = moment(filter.startDate).add(1, 'years').format('YYYY-MM-DD')
@@ -177,6 +181,7 @@ const workshopSelector = createSelector(
     if (workshops.loading || !workshops.workshops) {
       return workshops
     }
+
     workshops.workshops = workshops.workshops.map(workshop => {
       workshop.cutoffReached = workshop.cutoff !== null ? workshop.BookingCount >= workshop.cutoff : false
       workshop.isBooked = workshop.bookingId !== null
@@ -185,6 +190,7 @@ const workshopSelector = createSelector(
         && !workshop.isWaitlisted
       workshop.isBookable = workshop.bookingId === null && workshop.remaining > 0
         && !workshop.isWaitlistable && !workshop.isWaitlisted
+      workshop.duration = moment.duration(moment(workshop.EndDate).diff(workshop.StartDate)).asHours()
 
       if (workshop.cutoff) {
         workshop.waitlistSize = Math.max(
@@ -193,11 +199,25 @@ const workshopSelector = createSelector(
       } else {
         workshop.waitlistSize = Math.max(workshop.BookingCount - workshop.maximum, 0)
       }
+
       return workshop
     })
+
+    workshops.workshops.sort(compareWorkshopsByDate)
+
     return workshops
   }
 )
+
+/**
+ * Compares workshops by start date.
+ *
+ * @param workshopA
+ * @param workshopB
+ */
+const compareWorkshopsByDate = (workshopA, workshopB) => {
+  return moment(workshopA.StartDate).unix() - moment(workshopB.StartDate).unix()
+}
 
 const mapDispatchToProps = {
   fetchWorkshopSets,

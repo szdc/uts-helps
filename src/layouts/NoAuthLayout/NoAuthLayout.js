@@ -57,5 +57,3 @@ export default class NoAuthLayout extends React.Component {
 NoAuthLayout.propTypes = {
   children: React.PropTypes.element.isRequired
 }
-
-export default NoAuthLayout

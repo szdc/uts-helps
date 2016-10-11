@@ -1,4 +1,11 @@
 export default {
+  errorAltContact: 'Alt contact is required.',
+  errorCountryOrigin: 'Country of origin required.',
+  errorDegree: 'Degree is required.',
+  errorDateOfBirth: 'Date of birth is required.',
+  errorFirstLanguage: 'First language is required.',
+  errorGender: 'Gender is required.',
+  errorStatus: '',
   labelId: 'Student ID',
   labelAltContact: 'Mobile Number',
   labelCountryOrigin: 'Country of Origin',

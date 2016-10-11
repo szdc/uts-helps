@@ -4,6 +4,8 @@ import { connect } from 'react-redux'
 
 import Reminders from 'components/Reminders'
 
+import strings from './RemindersContainer.strings'
+
 class RemindersContainer extends React.Component {
 
   /**
@@ -15,6 +17,7 @@ class RemindersContainer extends React.Component {
     super(props)
 
     this.state = {
+      error: null,
       reminders: []
     }
     this._addReminder = ::this._addReminder
@@ -31,7 +34,14 @@ class RemindersContainer extends React.Component {
     const { workshop } = this.props
     const timestamp = moment(workshop.StartDate).subtract(figure, quantifier).unix()
 
+    if (this.state.reminders.some(reminder => reminder.timestamp === timestamp)) {
+      return this.setState({
+        error: strings.error_reminder_exists
+      })
+    }
+
     this.setState({
+      error: null,
       reminders: [
         ...this.state.reminders,
         {
@@ -61,6 +71,7 @@ class RemindersContainer extends React.Component {
   render() {
     return (
       <Reminders
+        error={this.state.error}
         onAddReminder={this._addReminder}
         onDeleteReminder={this._deleteReminder}
         reminders={this.state.reminders}

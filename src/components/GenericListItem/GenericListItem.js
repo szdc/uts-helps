@@ -10,6 +10,20 @@ import strings from './GenericListItem.strings'
 export default class GenericListItem extends React.Component {
 
   /**
+   * Returns a string representing the item type.
+   */
+  _getType(type) {
+    switch (type) {
+      case 'single':
+        return 'Workshop'
+      case 'multiple':
+        return 'Programme'
+      default:
+        return type
+    }
+  }
+
+  /**
    * Renders the list item.
    */
   render() {
@@ -18,6 +32,7 @@ export default class GenericListItem extends React.Component {
       additionalText,
       campus,
       description,
+      duration,
       endDate,
       isWaitlistable,
       isWaitlisted,
@@ -25,6 +40,7 @@ export default class GenericListItem extends React.Component {
       startDate,
       targetGroup,
       topic,
+      type,
       waitlistSize
     } = this.props
 
@@ -60,6 +76,18 @@ export default class GenericListItem extends React.Component {
                       <span className={classes.heading}>{strings.label_available}</span>
                       <span className={classes.content}>{remaining}</span>
                     </div>
+                  }
+                  {typeof type !== 'undefined' ?
+                    <div className={classes.infoLine}>
+                      <span className={classes.heading}>{strings.label_type}</span>
+                      <span className={classes.content}>{this._getType(type)}</span>
+                    </div> : null
+                  }
+                  {typeof duration !== 'undefined' ?
+                    <div className={classes.infoLine}>
+                      <span className={classes.heading}>{strings.label_duration}</span>
+                      <span className={classes.content}>{duration} {duration === 1 ? 'hour' : 'hours'}</span>
+                    </div> : null
                   }
                   {campus ?
                     <div className={classes.infoLine}>
@@ -112,6 +140,7 @@ GenericListItem.propTypes = {
   campus: React.PropTypes.string,
   cutoffReached: React.PropTypes.bool,
   description: React.PropTypes.string,
+  duration: React.PropTypes.number,
   isWaitlistable: React.PropTypes.bool,
   isWaitlisted: React.PropTypes.bool,
   endDate: React.PropTypes.string,
@@ -119,5 +148,6 @@ GenericListItem.propTypes = {
   startDate: React.PropTypes.string,
   targetGroup: React.PropTypes.string,
   topic: React.PropTypes.string,
+  type: React.PropTypes.string,
   waitlistSize: React.PropTypes.number
 }
