@@ -106,6 +106,7 @@ const futureBookingsSelector = createSelector(
     const futureBookings = bookings.bookings.filter(booking =>
       moment(booking.ending).isAfter(now)
     ).map(booking => {
+      booking.isInProgress = moment(booking.starting).isBefore(now) && moment(booking.ending).isAfter(now)
       booking.isUpcoming = true
       return booking
     })
