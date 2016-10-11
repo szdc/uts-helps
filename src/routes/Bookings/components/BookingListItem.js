@@ -68,6 +68,7 @@ export default class BookingListItem extends React.Component {
         startDate={booking.starting}
         targetGroup={booking.targetingGroup}
         topic={booking.topic}
+        type={booking.type}
       />
     )
   }

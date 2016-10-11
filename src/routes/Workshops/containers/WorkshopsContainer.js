@@ -181,6 +181,7 @@ const workshopSelector = createSelector(
     if (workshops.loading || !workshops.workshops) {
       return workshops
     }
+
     workshops.workshops = workshops.workshops.map(workshop => {
       workshop.cutoffReached = workshop.cutoff !== null ? workshop.BookingCount >= workshop.cutoff : false
       workshop.isBooked = workshop.bookingId !== null
@@ -198,6 +199,7 @@ const workshopSelector = createSelector(
       } else {
         workshop.waitlistSize = Math.max(workshop.BookingCount - workshop.maximum, 0)
       }
+
       return workshop
     })
 

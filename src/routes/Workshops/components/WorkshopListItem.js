@@ -117,6 +117,7 @@ export default class WorkshopListItem extends React.Component {
         startDate={workshop.StartDate}
         targetGroup={workshop.targetingGroup}
         topic={workshop.topic}
+        type={workshop.type}
         waitlistSize={workshop.waitlistSize}
       />
     )
