@@ -130,6 +130,7 @@ const pastBookingsSelector = createSelector(
     const pastBookings = bookings.bookings.filter(booking =>
       moment(booking.ending).isBefore(now)
     ).map(booking => {
+      booking.isInProgress = false
       booking.isUpcoming = false
       return booking
     })
