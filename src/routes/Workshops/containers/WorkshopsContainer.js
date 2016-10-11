@@ -39,6 +39,8 @@ class WorkshopsContainer extends React.Component {
   componentDidMount() {
     const { fetchWorkshopSets, layout, params, searchWorkshops, workshopSets } = this.props
     searchWorkshops({
+      startingDtBegin: moment().format('YYYY-MM-DD'),
+      startingDtEnd: moment().add(1, 'years').format('YYYY-MM-DD'),
       workshopSetId: params.id
     })
     if (workshopSets.loading || !workshopSets.workshopSets) {
