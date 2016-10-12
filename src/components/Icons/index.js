@@ -128,6 +128,9 @@ export const IconSession = props =>
 export const IconSettings = props =>
   createIcon(props, 'settings')
 
+export const IconSms = props =>
+  createIcon(props, 'phone_iphone')
+
 export const IconWorkshop = props =>
   createIcon(props, 'question_answer')
 

@@ -1,7 +1,11 @@
+.type i {
+  left: 3px;
+  position: relative;
+  top: 7px;
+}
 .cell {
   font-size: 16px !important;
   height: auto !important;
-  padding: 0 !important;
   vertical-align: middle;
 }
 .cellIcon {
@@ -16,4 +20,7 @@
 .reminderSubtext {
   font-size: 14px;
   margin-bottom: 5px;
+}
+.delete {
+  color: var(--primary-color);
 }

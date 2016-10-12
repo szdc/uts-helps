@@ -4,7 +4,9 @@ import { TableRow } from 'material-ui/Table'
 
 import TableCell from './TableCell'
 import TableCellIcon from './TableCellIcon'
-import { IconDelete } from 'components/Icons'
+import { IconDelete, IconEmail, IconSms } from 'components/Icons'
+
+import classes from './Reminders.scss'
 
 export default class TableRowReminder extends React.Component {
   /**
@@ -37,13 +39,19 @@ export default class TableRowReminder extends React.Component {
    * Renders the component.
    */
   render() {
+    const { reminder } = this.props
+
     return (
       <TableRow displayBorder={false}>
         <TableCell>
           {this._getTimeString()}
         </TableCell>
         <TableCellIcon>
+          {reminder.email ? <IconEmail displayAsButton /> : <IconSms displayAsButton />}
+        </TableCellIcon>
+        <TableCellIcon>
           <IconDelete
+            className={classes.delete}
             displayAsButton
             onTouchTap={this._onDeleteClick}
           />

@@ -31,8 +31,9 @@ class RemindersContainer extends React.Component {
    *
    * @param figure
    * @param quantifier
+   * @param type
    */
-  _addReminder(figure, quantifier) {
+  _addReminder(figure, quantifier, type) {
     const { props } = this
     const reminder = {
       location: props.campus,
@@ -48,7 +49,7 @@ class RemindersContainer extends React.Component {
       })
     }
 
-    this.props.createReminder(reminder, (err, newReminder) => {
+    this.props.createReminder(reminder, type, (err, newReminder) => {
       if (err) {
         return this.setState({
           error: strings.error_create_failed
@@ -89,12 +90,15 @@ class RemindersContainer extends React.Component {
    * @returns {XML}
    */
   render() {
+    const reminders = [...this.state.reminders]
+    reminders.sort((reminderA, reminderB) => reminderB.timestamp - reminderA.timestamp)
+
     return (
       <Reminders
         error={this.state.error}
         onAddReminder={this._addReminder}
         onDeleteReminder={this._deleteReminder}
-        reminders={this.state.reminders}
+        reminders={reminders}
         startDate={this.props.startDate}
       />
     )

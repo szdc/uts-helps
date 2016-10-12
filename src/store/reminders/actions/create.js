@@ -42,16 +42,26 @@ export function receiveAddReminderSuccess(workshopId) {
 }
 
 /**
- * Marks a booking as attended.
+ * Creates a reminder
  *
  * @param params
+ * @param type
  * @param callback
  * @returns {function(*, *, *)}
  */
-export function createReminder(params, callback) {
+export function createReminder(params, type, callback) {
   return (dispatch, getState, UtsHelps) => {
     const { user } = getState()
     params.studentId = user.id
+
+    switch (type) {
+      case 'sms':
+        params.mobile = '+61426810913'
+        break
+      case 'email':
+      default:
+        params.email = `${user.id}@uts.edu.au`
+    }
 
     dispatch(requestAddReminder())
 

@@ -11,7 +11,7 @@ import TextField from 'material-ui/TextField'
 import TableCell from './TableCell'
 import TableCellIcon from './TableCellIcon'
 import TableRowReminder from './TableRowReminder'
-import { IconAdd } from 'components/Icons'
+import { IconAdd, IconEmail, IconSms } from 'components/Icons'
 
 import classes from './Reminders.scss'
 import strings from './Reminders.strings'
@@ -27,11 +27,13 @@ export default class Reminders extends React.Component {
     this.state = {
       form: {
         figure: '',
-        quantifier: 'days'
+        quantifier: 'days',
+        type: 'sms'
       }
     }
     this._onAddReminderClick = ::this._onAddReminderClick
     this._onSelectFieldChange = ::this._onSelectFieldChange
+    this._onSelectTypeChange = ::this._onSelectTypeChange
     this._onTextFieldChange = ::this._onTextFieldChange
   }
 
@@ -41,7 +43,7 @@ export default class Reminders extends React.Component {
   _onAddReminderClick() {
     const { form } = this.state
     if (form.figure.length) {
-      this.props.onAddReminder(form.figure, form.quantifier)
+      this.props.onAddReminder(form.figure, form.quantifier, form.type)
       this.setState({
         form: {
           ...this.state.form,
@@ -82,6 +84,22 @@ export default class Reminders extends React.Component {
   }
 
   /**
+   * Stores a change to the quantifier select field.
+   *
+   * @param e
+   * @param i
+   * @param value
+   */
+  _onSelectTypeChange(e, i, value) {
+    this.setState({
+      form: {
+        ...this.state.form,
+        type: value
+      }
+    })
+  }
+
+  /**
    * Renders the component.
    *
    * @returns {XML}
@@ -90,10 +108,8 @@ export default class Reminders extends React.Component {
     const { error, onDeleteReminder, reminders, startDate } = this.props
     const { form } = this.state
 
-    console.log(this.props.reminders)
-
     return (
-      <div>
+      <div className={classes.container}>
         {error !== null &&
           <p className={classes.error}>{error}</p>
         }
@@ -101,28 +117,42 @@ export default class Reminders extends React.Component {
         <Table selectable={false}>
           <TableBody displayRowCheckbox={false}>
             <TableRow displayBorder={false}>
-              <TableCell>
+              <TableCell style={{padding: '0 10px 0 0', width: '48px'}}>
                 <TextField
+                  inputStyle={{textAlign: 'center'}}
                   name='figure'
                   onChange={this._onTextFieldChange}
                   ref='figure'
                   pattern='[0-9]*'
-                  style={{width: 'auto', marginRight: '15px'}}
+                  style={{width: '100%'}}
                   type='number'
                   value={form.figure}
                 />
               </TableCell>
-              <TableCell>
+              <TableCell style={{padding: '0 10px 0 0', width: '100px'}}>
                 <SelectField
                   autoWidth
                   name='quantifier'
                   onChange={this._onSelectFieldChange}
-                  style={{width: '100%'}}
+                  style={{width: '100%', marginRight: '10px'}}
                   value={form.quantifier}
                 >
                   <MenuItem value='minutes' primaryText='minutes' />
                   <MenuItem value='hours' primaryText='hours' />
                   <MenuItem value='days' primaryText='days' />
+                </SelectField>
+              </TableCell>
+              <TableCell style={{padding: '0 10px 0 0', width: '55px'}}>
+                <SelectField
+                  autoWidth
+                  className={classes.type}
+                  name='type'
+                  onChange={this._onSelectTypeChange}
+                  style={{padding: '0', width: '100%'}}
+                  value={form.type}
+                >
+                  <MenuItem value='email' primaryText={<IconEmail />} />
+                  <MenuItem value='sms' primaryText={<IconSms />} />
                 </SelectField>
               </TableCell>
               <TableCellIcon>
