@@ -156,6 +156,7 @@ export default class Attendance extends React.Component {
           bodyStyle={{lineHeight: '1.4', paddingBottom: '0'}}
           onRequestClose={this._closeDialog}
           open={Object.keys(dialog).length > 0}
+          repositionOnUpdate={false}
           {...dialog.props}
         >
           {confirming &&
