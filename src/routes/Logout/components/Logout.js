@@ -1,11 +1,19 @@
 import React from 'react'
 
 export default class Logout extends React.Component {
+
+  /**
+   * Logs the user out.
+   */
   componentWillMount() {
-    const { logout, navigateTo } = this.props
-    logout()
+    this.props.logout()
   }
 
+  /**
+   * Disables rendering of this component.
+   *
+   * @returns {null}
+   */
   render() {
     return null
   }
