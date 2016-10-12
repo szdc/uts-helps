@@ -33,35 +33,33 @@ class RemindersContainer extends React.Component {
    * @param quantifier
    */
   _addReminder(figure, quantifier) {
-    const {
-      campus,
-      startDate,
-      topic,
-      workshopId
-    } = this.props
-    const timestamp = moment(startDate).subtract(figure, quantifier).unix()
+    const { props } = this
+    const reminder = {
+      location: props.campus,
+      date: props.startDate,
+      topic: props.topic,
+      workshopId: props.workshopId,
+      timestamp: moment(props.startDate).subtract(figure, quantifier).unix()
+    }
 
-    if (this.state.reminders.some(reminder => reminder.timestamp === timestamp)) {
+    if (this.state.reminders.some(r => r.timestamp === reminder.timestamp)) {
       return this.setState({
-        error: strings.error_reminder_exists
+        error: strings.error_exists
       })
     }
 
-    this.props.createReminder({
-      workshopId,
-      timestamp: timestamp,
-      topic,
-      date: startDate,
-      location: campus,
-      email: 'jack.lives-here@hotmail.com'
-    }, (err, res) => {
+    this.props.createReminder(reminder, (err, newReminder) => {
       if (err) {
         return this.setState({
-          error: strings.error_reminder_failed
+          error: strings.error_create_failed
         })
       }
       this.setState({
-        error: null
+        error: null,
+        reminders: [
+          ...this.state.reminders,
+          newReminder
+        ]
       })
     })
   }
@@ -72,7 +70,17 @@ class RemindersContainer extends React.Component {
    * @param reminder
    */
   _deleteReminder(reminder) {
-    this.props.deleteReminder(reminder._id)
+    this.props.deleteReminder(reminder._id, (err, deletedReminder) => {
+      if (err) {
+        return this.setState({
+          error: strings.error_delete_failed
+        })
+      }
+      this.setState({
+        error: null,
+        reminders: this.state.reminders.filter(r => r._id !== deletedReminder._id)
+      })
+    })
   }
 
   /**
@@ -87,7 +95,7 @@ class RemindersContainer extends React.Component {
         onAddReminder={this._addReminder}
         onDeleteReminder={this._deleteReminder}
         reminders={this.state.reminders}
-        {...this.props}
+        startDate={this.props.startDate}
       />
     )
   }

@@ -22,6 +22,16 @@ export default class BookingListItem extends React.Component {
   }
 
   /**
+   * Does not update if the reminders have changed.
+   *
+   * @param nextProps
+   * @returns {boolean}
+   */
+  shouldComponentUpdate(nextProps) {
+    return nextProps.booking.reminders.length !== this.props.booking.reminders.length
+  }
+
+  /**
    * Handles a click on the cancel button.
    *
    * @private
@@ -53,7 +63,7 @@ export default class BookingListItem extends React.Component {
                 booking={booking}
               />
             }
-            {booking.isUpcoming && booking.reminders.length > 0 &&
+            {booking.isUpcoming && !booking.isInProgress &&
               <Reminders
                 campus={booking.campus}
                 reminders={booking.reminders}

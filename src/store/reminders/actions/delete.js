@@ -45,6 +45,7 @@ export function receiveDeleteReminderSuccess(reminderId) {
  * Deletes a reminder
  *
  * @param reminderId
+ * @param callback
  * @returns {function(*, *, *)}
  */
 export function deleteReminder(reminderId, callback) {
@@ -55,8 +56,10 @@ export function deleteReminder(reminderId, callback) {
       .end((err, res) => {
         if (err) {
           dispatch(receiveDeleteReminderError(err))
+          callback(err)
         } else {
           dispatch(receiveDeleteReminderSuccess(res.body._id))
+          callback(null, res.body)
         }
       })
   }

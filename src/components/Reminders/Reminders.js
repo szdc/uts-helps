@@ -23,15 +23,16 @@ export default class Reminders extends React.Component {
    */
   constructor(props) {
     super(props)
-    this._onAddReminderClick = ::this._onAddReminderClick
-    this._onSelectFieldChange = ::this._onSelectFieldChange
-    this._onTextFieldChange = ::this._onTextFieldChange
+
     this.state = {
       form: {
         figure: '',
         quantifier: 'days'
       }
     }
+    this._onAddReminderClick = ::this._onAddReminderClick
+    this._onSelectFieldChange = ::this._onSelectFieldChange
+    this._onTextFieldChange = ::this._onTextFieldChange
   }
 
   /**
@@ -88,6 +89,8 @@ export default class Reminders extends React.Component {
   render() {
     const { error, onDeleteReminder, reminders, startDate } = this.props
     const { form } = this.state
+
+    console.log(this.props.reminders)
 
     return (
       <div>
