@@ -1,20 +1,43 @@
 sudo: false
+
+addons:
+  ssh_known_hosts: utshelps.ddns.net
+
 language: node_js
+
 node_js:
 - '5'
+
 cache:
   directories:
   - node_modules
+
 install:
 - npm install
+
 script:
 - npm run lint
 - npm run test
 - NODE_ENV=development npm run deploy
 - NODE_ENV=staging npm run deploy
 - NODE_ENV=production npm run deploy
+
 after_success:
 - npm run codecov
+
 before_install:
 - openssl aes-256-cbc -K $encrypted_ed73560d77d2_key -iv $encrypted_ed73560d77d2_iv
   -in deploy_rsa.enc -out deploy_rsa -d
+
+before_deploy:
+- openssl aes-256-cbc aes-256-cbc -K $encrypted_<...>_key -iv $encrypted_<...>_iv -in deploy_rsa.enc -out /tmp/deploy_rsa -d
+- eval "$(ssh-agent -s)"
+- chmod 600 /tmp/deploy_rsa
+- ssh-add /tmp/deploy_rsa
+
+deploy:
+  provider: script
+  skip_cleanup: true
+  script: rsync -r --delete-after --quiet $TRAVIS_BUILD_DIR/dist szdc@utshelps.ddns.net:~/
+  on:
+    branch: master
