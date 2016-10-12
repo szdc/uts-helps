@@ -129,7 +129,7 @@ export default (submitAction, redirectTo) => {
                 />
                 <TextField
                   className={classes.input}
-                  errorText={props.errorIdInvalid}
+                  errorText={formErrors.id}
                   floatingLabelText={props.labelId}
                   hintText={props.hintId}
                   name='id'
