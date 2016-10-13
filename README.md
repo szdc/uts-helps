@@ -1,5 +1,7 @@
 # UTS:HELPS Responsive Front-End
 
+![Build status](https://travis-ci.com/szdc/uts-helps.svg?token=LB1mp8sixssmpy5vr58J&branch=master)
+
 ## Guides
 * [Coding style guide](CODINGSTYLE.md)
 
