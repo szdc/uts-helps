@@ -2,7 +2,6 @@ import { argv } from 'yargs'
 import config from '../config'
 import webpackConfig from './webpack.config'
 import _debug from 'debug'
-import intlShim from 'karma-intl-shim'
 
 const debug = _debug('app:karma')
 debug('Create configuration.')
@@ -33,7 +32,7 @@ const karmaConfig = {
         sinon: 'sinon/pkg/sinon.js'
       }
     },
-    plugins: [...webpackConfig.plugins, intlShim],
+    plugins: webpackConfig.plugins,
     module: {
       noParse: [
         /\/sinon\.js/

@@ -7,6 +7,7 @@ import chai from 'chai'
 import sinonChai from 'sinon-chai'
 import chaiAsPromised from 'chai-as-promised'
 import chaiEnzyme from 'chai-enzyme'
+require('intl/locale-data/jsonp/en.js')
 
 chai.use(sinonChai)
 chai.use(chaiAsPromised)
