@@ -141,16 +141,16 @@ export default class Attendance extends React.Component {
           actions={
             confirming ?
               [
-                <FlatButton
+                (<FlatButton
                   label={strings.label_cancel}
                   onTouchTap={this._closeDialog}
-                />,
-                <FlatButton
+                />),
+                (<FlatButton
                   disabled={form.code.length === 0}
                   label={strings.label_attend}
                   onTouchTap={this._onSubmit}
                   primary
-                />
+                />)
               ] : null
           }
           bodyStyle={{lineHeight: '1.4', paddingBottom: '0'}}

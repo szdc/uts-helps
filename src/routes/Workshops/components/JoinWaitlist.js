@@ -106,15 +106,15 @@ export default class JoinWaitlist extends React.Component {
           actions={
             confirming ?
               [
-                <FlatButton
+                (<FlatButton
                   label={strings.label_cancel}
                   onTouchTap={this._closeDialog}
-                />,
-                <FlatButton
+                />),
+                (<FlatButton
                   label={strings.label_confirm}
                   onTouchTap={this._onSubmit}
                   primary
-                />
+                />)
               ] : null
           }
           bodyStyle={{

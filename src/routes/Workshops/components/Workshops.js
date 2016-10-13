@@ -73,19 +73,19 @@ export default class Workshops extends React.Component {
           <Divider style={{backgroundColor: '#eee'}} />
           {workshops.length
             ?
-            workshops.map(workshop => (
-              <WorkshopListItem
-                key={workshop.WorkshopId}
-                onClick={onWorkshopClick}
-                workshop={workshop}
-              />
-            ))
+              workshops.map(workshop => (
+                <WorkshopListItem
+                  key={workshop.WorkshopId}
+                  onClick={onWorkshopClick}
+                  workshop={workshop}
+                />
+              ))
             :
-            <div className={classes.noResultsContainer}>
-              <CenterLayout>
-                <p className={classes.noResultsMessage}>{strings.text_no_results}</p>
-              </CenterLayout>
-            </div>
+              <div className={classes.noResultsContainer}>
+                <CenterLayout>
+                  <p className={classes.noResultsMessage}>{strings.text_no_results}</p>
+                </CenterLayout>
+              </div>
           }
         </List>
       </div>
