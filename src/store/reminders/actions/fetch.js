@@ -50,7 +50,7 @@ export function fetchReminders() {
   return (dispatch, getState, UtsHelps) => {
     dispatch(requestReminders())
     request
-      .get('http://utshelps.ddns.net:3000/api/reminders')
+      .get('http://utshelpsbackend.ddns.net/api/reminders')
       .end((err, res) => {
         if (err) {
           dispatch(receiveRemindersError(err))
