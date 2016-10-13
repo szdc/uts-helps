@@ -66,7 +66,7 @@ export function createReminder(params, type, callback) {
     dispatch(requestAddReminder())
 
     request
-      .post('http://localhost:8000/api/reminders')
+      .post('http://utshelps.ddns.net:3000/api/reminders')
       .send(params)
       .end((err, res) => {
         if (err) {

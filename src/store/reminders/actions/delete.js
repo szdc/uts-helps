@@ -52,7 +52,7 @@ export function deleteReminder(reminderId, callback) {
   return (dispatch, getState) => {
     dispatch(requestDeleteReminder())
     request
-      .delete(`http://localhost:8000/api/reminders/${reminderId}`)
+      .delete(`http://utshelps.ddns.net:3000/api/reminders/${reminderId}`)
       .end((err, res) => {
         if (err) {
           dispatch(receiveDeleteReminderError(err))
