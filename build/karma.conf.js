@@ -2,6 +2,7 @@ import { argv } from 'yargs'
 import config from '../config'
 import webpackConfig from './webpack.config'
 import _debug from 'debug'
+import intlShim from 'karma-intl-shim'
 
 const debug = _debug('app:karma')
 debug('Create configuration.')
@@ -17,7 +18,7 @@ const karmaConfig = {
     }
   ],
   singleRun: !argv.watch,
-  frameworks: ['mocha'],
+  frameworks: ['mocha', 'intl-shim'],
   reporters: ['mocha'],
   preprocessors: {
     [`${config.dir_test}/test-bundler.js`]: ['webpack']
@@ -32,7 +33,7 @@ const karmaConfig = {
         sinon: 'sinon/pkg/sinon.js'
       }
     },
-    plugins: webpackConfig.plugins,
+    plugins: [...webpackConfig.plugins, intlShim],
     module: {
       noParse: [
         /\/sinon\.js/
