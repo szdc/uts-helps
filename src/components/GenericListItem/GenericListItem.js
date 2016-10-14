@@ -15,9 +15,8 @@ export default class GenericListItem extends React.Component {
   _getType(type) {
     switch (type) {
       case 'single':
-        return 'Workshop'
       case 'multiple':
-        return 'Programme'
+        return 'Workshop'
       default:
         return type
     }
