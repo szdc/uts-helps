@@ -3,6 +3,12 @@ sudo: false
 addons:
   ssh_known_hosts: utshelps.ddns.net
 
+notifications:
+  slack:
+    rooms:
+      - group13hq:TEt70tKWgQNth361ZMJVHJ2G#dev
+    on_pull_requests: false
+
 language: node_js
 
 node_js:
