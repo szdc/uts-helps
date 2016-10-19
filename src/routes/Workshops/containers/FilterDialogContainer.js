@@ -68,6 +68,17 @@ class FilterDialogContainer extends React.Component {
       open
     } = this.props
 
+    const sortedCampuses = campuses.campuses || []
+    sortedCampuses.sort((a, b) => {
+      if (a.campus < b.campus) {
+        return -1
+      } else if (a.campus > b.campus) {
+        return 1
+      } else {
+        return 0
+      }
+    })
+
     return (
       <Dialog
         actions={[
@@ -91,7 +102,7 @@ class FilterDialogContainer extends React.Component {
         title={strings.title}
       >
         <FilterDialog
-          campuses={campuses.campuses || []}
+          campuses={sortedCampuses}
           onFilterChange={this._onFilterChange}
         />
       </Dialog>
