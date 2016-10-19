@@ -33,6 +33,7 @@ export default class ReminderDialog extends React.Component {
     this.setState({
       open: false
     })
+    this.props.onDialogChanged(false)
   }
 
   /**
@@ -44,6 +45,7 @@ export default class ReminderDialog extends React.Component {
     this.setState({
       open: true
     })
+    this.props.onDialogChanged(true)
   }
 
   /**
@@ -88,7 +90,11 @@ export default class ReminderDialog extends React.Component {
 }
 ReminderDialog.propTypes = {
   campus: React.PropTypes.string,
+  onDialogChanged: React.PropTypes.func,
   startDate: React.PropTypes.string,
   topic: React.PropTypes.string,
   workshopId: React.PropTypes.any
+}
+ReminderDialog.defaultProps = {
+  onDialogChanged: () => {}
 }

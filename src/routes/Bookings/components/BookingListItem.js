@@ -18,6 +18,11 @@ export default class BookingListItem extends React.Component {
    */
   constructor(props) {
     super(props)
+
+    this.state = {
+      reminderDialogOpen: true
+    }
+    this._onReminderDialogChanged = ::this._onReminderDialogChanged
     this._onCancelClick = ::this._onCancelClick
   }
 
@@ -25,10 +30,11 @@ export default class BookingListItem extends React.Component {
    * Does not update if the reminders have changed.
    *
    * @param nextProps
+   * @param nextState
    * @returns {boolean}
    */
-  shouldComponentUpdate(nextProps) {
-    return nextProps.booking.reminders.length === this.props.booking.reminders.length
+  shouldComponentUpdate(nextProps, nextState) {
+    return !(this.state.reminderDialogOpen === true && nextState.reminderDialogOpen === true)
   }
 
   /**
@@ -39,6 +45,12 @@ export default class BookingListItem extends React.Component {
   _onCancelClick() {
     const { onCancelClick, booking } = this.props
     onCancelClick(booking)
+  }
+
+  _onReminderDialogChanged(open) {
+    this.setState({
+      reminderDialogOpen: open
+    })
   }
 
   /**
@@ -56,6 +68,7 @@ export default class BookingListItem extends React.Component {
             {booking.attended === null && (booking.isInProgress || booking.isUpcoming) &&
               <Attendance
                 booking={booking}
+                onDialogOpen={this._onAttendanceDialogOpened}
               />
             }
             {booking.isUpcoming && !booking.isInProgress && booking.attended === null &&
@@ -66,6 +79,7 @@ export default class BookingListItem extends React.Component {
             {booking.isUpcoming && !booking.isInProgress &&
               <Reminders
                 campus={booking.campus}
+                onDialogChanged={this._onReminderDialogChanged}
                 reminders={booking.reminders}
                 startDate={booking.starting}
                 topic={booking.topic}
