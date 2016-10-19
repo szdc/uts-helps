@@ -56,8 +56,9 @@ export default class Attendance extends React.Component {
    */
   _closeDialog() {
     this.setState({
-      dialog: {},
       confirming: false,
+      dialog: {},
+      formErrors: {},
       submitting: false
     })
   }

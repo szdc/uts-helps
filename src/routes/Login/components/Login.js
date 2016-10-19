@@ -22,7 +22,7 @@ export default (submitAction, redirectTo) => {
     constructor(props) {
       super(props)
 
-      this.rxId = /^\d+$/gi
+      this.rxId = /^[0-9]+$/gi
       this.state = {
         form: {
           id: '',
@@ -52,7 +52,7 @@ export default (submitAction, redirectTo) => {
      * @private
      */
     _onFieldChange(e) {
-      if (e.target.name === 'id' && e.target.value.search(this.rxId) === -1) {
+      if (e.target.name === 'id' && e.target.value.search(this.rxId) === -1 && e.target.value.length > 0) {
         return
       }
 

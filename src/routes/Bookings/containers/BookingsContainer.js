@@ -145,6 +145,7 @@ const pastBookingsSelector = createSelector(
       booking.duration = moment.duration(moment(booking.ending).diff(booking.starting)).asHours()
       booking.isInProgress = false
       booking.isUpcoming = false
+      booking.reminders = []
       return booking
     })
 

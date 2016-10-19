@@ -26,7 +26,7 @@ export default (submitAction, redirectTo) => {
     constructor(props) {
       super(props)
 
-      this.rxId = /^\d+$/gi
+      this.rxNumber = /^[0-9]+$/gi
       this.state = {
         form: {
           altContact: props.altContact,
@@ -53,6 +53,10 @@ export default (submitAction, redirectTo) => {
      * @private
      */
     _onFieldChange(e) {
+      if (e.target.name === 'altContact' && e.target.value.search(this.rxNumber) === -1 && e.target.value.length > 0) {
+        return
+      }
+
       this.setState({
         form: {
           ...this.state.form,
@@ -243,9 +247,83 @@ export default (submitAction, redirectTo) => {
                   className={classes.input}
                   errorText={formErrors.altContact}
                   floatingLabelText={strings.labelAltContact}
-                  floatingLabelFixed
                   name='altContact'
+                  pattern='[0-9]*'
+                  type='number'
                   value={form.altContact}
+                />
+                <TextField
+                  className={classes.input}
+                  errorText={formErrors.preferredName}
+                  floatingLabelText={strings.labelPreferredName}
+                  name='preferredName'
+                  type='text'
+                  value={form.preferredName}
+                />
+                <TextField
+                  className={classes.input}
+                  errorText={formErrors.hscMark}
+                  floatingLabelText={strings.labelHscMark}
+                  name='hscMark'
+                  pattern='[0-9]*'
+                  type='text'
+                  value={form.hscMark}
+                />
+                <TextField
+                  className={classes.input}
+                  errorText={formErrors.ieltsMark}
+                  floatingLabelText={strings.labelIeltsMark}
+                  name='ieltsMark'
+                  type='text'
+                  value={form.ieltsMark}
+                />
+                <TextField
+                  className={classes.input}
+                  errorText={formErrors.toeflMark}
+                  floatingLabelText={strings.labelToeflMark}
+                  name='toeflMark'
+                  type='text'
+                  value={form.toeflMark}
+                />
+                <TextField
+                  className={classes.input}
+                  errorText={formErrors.tafeMark}
+                  floatingLabelText={strings.labelTafeMark}
+                  name='tafeMark'
+                  type='text'
+                  value={form.tafeMark}
+                />
+                <TextField
+                  className={classes.input}
+                  errorText={formErrors.cultMark}
+                  floatingLabelText={strings.labelCultMark}
+                  name='cultMark'
+                  type='text'
+                  value={form.cultMark}
+                />
+                <TextField
+                  className={classes.input}
+                  errorText={formErrors.insearchDeepMark}
+                  floatingLabelText={strings.labelInsearchDeepMark}
+                  name='insearchDeepMark'
+                  type='text'
+                  value={form.insearchDeepMark}
+                />
+                <TextField
+                  className={classes.input}
+                  errorText={formErrors.insearchDiplomaMark}
+                  floatingLabelText={strings.labelInsearchDiplomaMark}
+                  name='insearchDiplomaMark'
+                  type='text'
+                  value={form.insearchDiplomaMark}
+                />
+                <TextField
+                  className={classes.input}
+                  errorText={formErrors.foundationCourseMark}
+                  floatingLabelText={strings.labelFoundationCourseMark}
+                  name='foundationCourseMark'
+                  type='text'
+                  value={form.foundationCourseMark}
                 />
                 <br />
                 <br />
