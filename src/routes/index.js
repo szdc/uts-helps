@@ -15,6 +15,12 @@ import BookingsRoute from './Bookings'
 import WorkshopSetsRoute from './WorkshopSets'
 import WorkshopsRoute from './Workshops'
 
+// Programmes
+import ProgrammesRoute from './Programmes'
+
+// Sessions
+import SessionsRoute from './Sessions'
+
 // Authentication
 import { requireAuth, requireNoAuth, requireRegistering } from 'utils/auth'
 
@@ -44,6 +50,8 @@ export const createRoutes = (store, api) => ({
       childRoutes: [
         BookingsRoute(store),
         LogoutRoute(store),
+        ProgrammesRoute(store),
+        SessionsRoute(store),
         WorkshopsRoute(store),
         WorkshopSetsRoute(store),
         NotFoundRoute(store)

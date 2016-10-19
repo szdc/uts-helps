@@ -59,6 +59,9 @@ export const IconAdd = props =>
 export const IconBack = props =>
   createIcon(props, 'arrow_back')
 
+export const IconCall = props =>
+  createIcon(props, 'phone')
+
 export const IconCancel = props =>
   createIcon(props, 'not_interested')
 
@@ -97,6 +100,9 @@ export const IconErrorOutline = props =>
 
 export const IconFilter = props =>
   createIcon(props, 'filter_list')
+
+export const IconLocation = props =>
+  createIcon(props, 'location_on')
 
 export const IconLogout = props =>
   createIcon(props, 'exit_to_app')

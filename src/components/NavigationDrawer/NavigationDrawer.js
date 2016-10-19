@@ -98,10 +98,10 @@ export default class NavigationDrawer extends React.Component {
               </NavigationLink>
             </li>
             <li>
-              <NavigationLink onClick={this.close} to='/programs'>
+              <NavigationLink onClick={this.close} to='/programmes'>
                 <IconProgram />
                 <span onClick={this.close} className={classes.text}>
-                  {strings.label_programs}
+                  {strings.label_programmes}
                 </span>
               </NavigationLink>
             </li>
