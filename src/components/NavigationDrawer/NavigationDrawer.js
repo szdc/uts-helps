@@ -5,7 +5,6 @@ import { Link } from 'react-router'
 import {
   IconDate,
   IconLogout,
-  IconProfile,
   IconProgram,
   IconSession,
   IconWorkshop
@@ -69,14 +68,6 @@ export default class NavigationDrawer extends React.Component {
                 <IconDate />
                 <span onClick={this.close} className={classes.text}>
                   {strings.label_bookings}
-                </span>
-              </NavigationLink>
-            </li>
-            <li>
-              <NavigationLink onClick={this.close} to='/profile'>
-                <IconProfile />
-                <span onClick={this.close} className={classes.text}>
-                  {strings.label_profile}
                 </span>
               </NavigationLink>
             </li>
