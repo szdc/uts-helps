@@ -9,11 +9,20 @@ export default {
   labelId: 'Student ID',
   labelAltContact: 'Mobile Number',
   labelCountryOrigin: 'Country of Origin',
+  labelCultMark: 'CULT Mark',
   labelDegree: 'Degree',
   labelDob: 'Date of Birth',
   labelFirstLanguage: 'First Language',
+  labelFoundationCourseMark: 'Foundation Course Mark',
   labelGender: 'Gender',
+  labelHscMark: 'HSC Mark',
+  labelIeltsMark: 'IELTS Mark',
+  labelInsearchDeepMark: 'Insearch DEEP Mark',
+  labelInsearchDiplomaMark: 'Insearch Diploma Mark',
   labelLogin: 'Back to login',
+  labelPreferredName: 'Preferred Name',
   labelStatus: 'Status',
-  labelSubmit: 'Register'
+  labelSubmit: 'Register',
+  labelTafeMark: 'TAFE Mark',
+  labelToeflMark: 'TOEFL Mark'
 }
