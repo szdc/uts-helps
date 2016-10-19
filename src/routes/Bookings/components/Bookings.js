@@ -38,7 +38,7 @@ export default class Bookings extends React.Component {
    * Renders the booking component.
    */
   render() {
-    const { future, onFindWorkshopClick, past } = this.props
+    const { bookings, future, onFindWorkshopClick, past } = this.props
     const tabStyle = {
       backgroundColor: this.context.muiTheme.palette.accent2Color,
       color: this.context.muiTheme.palette.primary1Color
@@ -82,6 +82,7 @@ export default class Bookings extends React.Component {
         </SwipeableViews>
         {this.props.showHelp &&
           <HelpOverlay
+            hasBookings={bookings.length > 0}
             onClose={this.props.onHelpClose}
           />
         }

@@ -9,6 +9,8 @@ export default class HelpOverlay extends React.Component {
    * Renders the help overlay.
    */
   render() {
+    const { hasBookings } = this.props
+
     return (
       <div className={classes.container}>
         <img
@@ -23,10 +25,12 @@ export default class HelpOverlay extends React.Component {
           className={classes.step2}
           src='/images/helps2.png'
         />
-        <img
-          className={classes.step3}
-          src='/images/helps3a.png'
-        />
+        {!hasBookings &&
+          <img
+            className={classes.step3}
+            src='/images/helps3a.png'
+          />
+        }
         <RaisedButton
           className={classes.button}
           label='Got it!'
@@ -38,5 +42,9 @@ export default class HelpOverlay extends React.Component {
   }
 }
 HelpOverlay.propTypes = {
+  hasBookings: React.PropTypes.bool,
   onClose: React.PropTypes.func.isRequired
+}
+HelpOverlay.defaultProps = {
+  hasBookings: false
 }
