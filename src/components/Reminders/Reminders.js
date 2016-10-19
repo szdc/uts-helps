@@ -28,7 +28,7 @@ export default class Reminders extends React.Component {
       form: {
         figure: '',
         quantifier: 'days',
-        type: 'sms'
+        type: 'email'
       }
     }
     this._onAddReminderClick = ::this._onAddReminderClick
