@@ -28,7 +28,7 @@ export default class BookingListItem extends React.Component {
    * @returns {boolean}
    */
   shouldComponentUpdate(nextProps) {
-    return nextProps.booking.reminders.length !== this.props.booking.reminders.length
+    return nextProps.booking.reminders.length === this.props.booking.reminders.length
   }
 
   /**
