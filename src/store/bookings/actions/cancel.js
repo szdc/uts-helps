@@ -1,3 +1,5 @@
+import { deleteAllReminders } from 'store/reminders/actions/delete'
+
 export const REQUEST_CANCEL_BOOKING = 'REQUEST_CANCEL_BOOKING'
 export const RECEIVE_CANCEL_BOOKING_ERROR = 'RECEIVE_CANCEL_BOOKING_ERROR'
 export const RECEIVE_CANCEL_BOOKING_SUCCESS = 'RECEIVE_CANCEL_BOOKING_SUCCESS'
@@ -57,6 +59,7 @@ export function cancelBooking(workshopId, callback) {
         callback(err)
       } else {
         dispatch(receiveCancelBookingSuccess(workshopId))
+        dispatch(deleteAllReminders(workshopId))
         callback(null, workshopId)
       }
     })

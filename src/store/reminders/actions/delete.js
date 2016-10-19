@@ -42,7 +42,7 @@ export function receiveDeleteReminderSuccess(reminderId) {
 }
 
 /**
- * Deletes a reminder
+ * Deletes a reminder.
  *
  * @param reminderId
  * @param callback
@@ -60,6 +60,29 @@ export function deleteReminder(reminderId, callback) {
         } else {
           dispatch(receiveDeleteReminderSuccess(res.body._id))
           callback(null, res.body)
+        }
+      })
+  }
+}
+
+/**
+ * Deletes all reminders associated with a workshop.
+ *
+ * @param workshopId
+ * @param callback
+ * @returns {function(*, *, *)}
+ */
+export function deleteAllReminders(workshopId, callback) {
+  return (dispatch, getState) => {
+    dispatch(requestDeleteReminder())
+    const { user } = getState()
+
+    request
+      .delete('http://utshelpsbackend.ddns.net/api/reminders/all')
+      .query({ workshopId, studentId: user.id })
+      .end((err, res) => {
+        if (err) {
+          console.log(err)
         }
       })
   }
