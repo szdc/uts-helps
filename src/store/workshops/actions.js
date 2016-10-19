@@ -1,3 +1,5 @@
+import moment from 'moment'
+
 export const REQUEST_WORKSHOPS = 'REQUEST_WORKSHOPS'
 export const RECEIVE_WORKSHOPS_ERROR = 'RECEIVE_WORKSHOPS_ERROR'
 export const RECEIVE_WORKSHOPS_SUCCESS = 'RECEIVE_WORKSHOPS_SUCCESS'
@@ -56,7 +58,10 @@ export function searchWorkshops(params) {
       if (err) {
         dispatch(receiveWorkshopsError(err))
       } else {
-        dispatch(receiveWorkshopsSuccess(res.Results))
+        const now = moment()
+        const workshops = res.Results.filter(workshop => moment(workshop.StartDate).diff(now) > 0)
+
+        dispatch(receiveWorkshopsSuccess(workshops))
       }
     })
   }
