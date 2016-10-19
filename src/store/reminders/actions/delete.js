@@ -3,6 +3,7 @@ import request from 'superagent'
 export const REQUEST_DELETE_REMINDER = 'REQUEST_DELETE_REMINDER'
 export const RECEIVE_DELETE_REMINDER_ERROR = 'RECEIVE_DELETE_REMINDER_ERROR'
 export const RECEIVE_DELETE_REMINDER_SUCCESS = 'RECEIVE_DELETE_REMINDER_SUCCESS'
+export const RECEIVE_DELETE_ALL_REMINDER_SUCCESS = 'RECEIVE_DELETE_ALL_REMINDER_SUCCESS'
 
 /**
  * Creates an action to request a reminder be deleted from a booking.
@@ -38,6 +39,19 @@ export function receiveDeleteReminderSuccess(reminderId) {
   return {
     type: RECEIVE_DELETE_REMINDER_SUCCESS,
     payload: reminderId
+  }
+}
+
+/**
+ * Creates a success action to receive a delete all reminders success response.
+ *
+ * @param workshopId
+ * @returns {{type: string, payload: *}}
+ */
+export function receiveDeleteAllReminderSuccess(workshopId) {
+  return {
+    type: RECEIVE_DELETE_REMINDER_SUCCESS,
+    payload: workshopId
   }
 }
 
@@ -83,6 +97,8 @@ export function deleteAllReminders(workshopId, callback) {
       .end((err, res) => {
         if (err) {
           console.log(err)
+        } else {
+          dispatch(receiveDeleteAllReminderSuccess(workshopId))
         }
       })
   }

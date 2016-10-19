@@ -4,7 +4,10 @@ import {
   RECEIVE_REMINDERS_SUCCESS
 } from './actions/fetch'
 import { RECEIVE_ADD_REMINDER_SUCCESS } from './actions/create'
-import { RECEIVE_DELETE_REMINDER_SUCCESS } from './actions/delete'
+import {
+  RECEIVE_DELETE_REMINDER_SUCCESS,
+  RECEIVE_DELETE_ALL_REMINDER_SUCCESS
+} from './actions/delete'
 
 const initialState = {
   reminders: null,
@@ -47,6 +50,13 @@ export default function remindersReducer(state = initialState, action) {
         ...state,
         reminders: state.reminders ? state.reminders.filter(reminder =>
           reminder._id !== action.payload
+        ) : []
+      }
+    case RECEIVE_DELETE_ALL_REMINDER_SUCCESS:
+      return {
+        ...state,
+        reminders: state.reminders ? state.reminders.filter(reminder =>
+          reminder.workshopId !== action.payload
         ) : []
       }
     default:
