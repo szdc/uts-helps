@@ -26,7 +26,7 @@ export default (submitAction, redirectTo) => {
     constructor(props) {
       super(props)
 
-      this.rxId = /^\d+$/gi
+      this.rxNumber = /^[0-9]+$/gi
       this.state = {
         form: {
           altContact: props.altContact,
@@ -53,6 +53,10 @@ export default (submitAction, redirectTo) => {
      * @private
      */
     _onFieldChange(e) {
+      if (e.target.name === 'altContact' && e.target.value.search(this.rxNumber) === -1 && e.target.value.length > 0) {
+        return
+      }
+
       this.setState({
         form: {
           ...this.state.form,
@@ -245,6 +249,8 @@ export default (submitAction, redirectTo) => {
                   floatingLabelText={strings.labelAltContact}
                   floatingLabelFixed
                   name='altContact'
+                  pattern='[0-9]*'
+                  type='number'
                   value={form.altContact}
                 />
                 <br />

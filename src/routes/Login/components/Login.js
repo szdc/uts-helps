@@ -22,7 +22,7 @@ export default (submitAction, redirectTo) => {
     constructor(props) {
       super(props)
 
-      this.rxId = /^\d+$/gi
+      this.rxId = /^[0-9]+$/gi
       this.state = {
         form: {
           id: '',
