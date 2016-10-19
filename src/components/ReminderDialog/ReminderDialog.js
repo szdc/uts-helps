@@ -72,6 +72,7 @@ export default class ReminderDialog extends React.Component {
             />
           }
           bodyStyle={{lineHeight: '1.4', paddingBottom: '0'}}
+          contentStyle={{width: '85%'}}
           onRequestClose={this._closeDialog}
           open={open}
           repositionOnUpdate={false}

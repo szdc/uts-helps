@@ -256,6 +256,7 @@ class WorkshopListItemContainer extends React.Component {
             paddingBottom: '0'
           }}
           className={classes.dialog}
+          contentStyle={{width: '85%'}}
           onRequestClose={this._onBookingDialogCancel}
           open={Object.keys(dialog).length > 0}
           {...dialog.props}
