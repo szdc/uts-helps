@@ -3,6 +3,7 @@ import SwipeableViews from 'react-swipeable-views'
 import { Tabs, Tab } from 'material-ui/Tabs'
 
 import BookingsTab from './BookingsTab'
+import HelpOverlay from './HelpOverlay'
 
 import classes from './Bookings.scss'
 import strings from './Bookings.strings'
@@ -79,6 +80,11 @@ export default class Bookings extends React.Component {
             onFindWorkshopClick={onFindWorkshopClick}
           />
         </SwipeableViews>
+        {this.props.showHelp &&
+          <HelpOverlay
+            onClose={this.props.onHelpClose}
+          />
+        }
       </div>
     )
   }
@@ -90,8 +96,11 @@ Bookings.propTypes = {
   bookings: React.PropTypes.array.isRequired,
   future: React.PropTypes.array.isRequired,
   onFindWorkshopClick: React.PropTypes.func,
-  past: React.PropTypes.array.isRequired
+  onHelpClose: React.PropTypes.func,
+  past: React.PropTypes.array.isRequired,
+  showHelp: React.PropTypes.bool
 }
 Bookings.defaultProps = {
-  onFindWorkshopClick: () => {}
+  onFindWorkshopClick: () => {},
+  showHelp: false
 }

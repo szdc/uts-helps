@@ -1,0 +1,61 @@
+.container {
+  background-color: rgba(0, 0, 0, 0.75);
+  height: 100%;
+  left: 0;
+  position: absolute;
+  top: 0;
+  width: 100%;
+  z-index: 1000;
+}
+.title,
+.step1,
+.step2,
+.step3 {
+  position: absolute;
+  z-index: 2000;
+}
+.title {
+  left: 0;
+  margin: 0 auto;
+  max-width: 350px;
+  right: 0;
+  top: 125px;
+  width: 75%;
+}
+.step1 {
+  left: 0;
+  max-width: 210px;
+  top: -30px;
+  width: 40%;
+}
+.step2 {
+  max-width: 200px;
+  right: -12px;
+  top: -27px;
+  width: 40%;
+}
+.step3 {
+  bottom: 0;
+  left: 0;
+  margin: auto;
+  max-width: none;
+  padding-top: 148px;
+  right: 0;
+  top: 0;
+  width: 228px;
+}
+.button {
+  background: none !important;
+  border: 0 !important;
+  box-shadow: none !important;
+  bottom: 50px;
+  height: 36px !important;
+  margin: auto !important;
+  max-width: none;
+  padding-top: 0;
+  position: absolute !important;
+  right: 50px;
+}
+.button button span {
+  font-weight: bold !important;
+}

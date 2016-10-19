@@ -4,6 +4,7 @@ import { Link } from 'react-router'
 
 import {
   IconDate,
+  IconHelp,
   IconLogout,
   IconProgram,
   IconSession,
@@ -93,6 +94,17 @@ export default class NavigationDrawer extends React.Component {
                 <IconProgram />
                 <span onClick={this.close} className={classes.text}>
                   {strings.label_programmes}
+                </span>
+              </NavigationLink>
+            </li>
+            <li>
+              <hr className={classes.divider} />
+            </li>
+            <li>
+              <NavigationLink onClick={this.close} to='/bookings?help=true'>
+                <IconHelp />
+                <span onClick={this.close} className={classes.text}>
+                  {strings.label_help}
                 </span>
               </NavigationLink>
             </li>

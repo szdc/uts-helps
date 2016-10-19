@@ -22,17 +22,39 @@ class BookingsContainer extends React.Component {
   constructor(props) {
     super(props)
     this._findWorkshops = ::this._findWorkshops
+    this._onHideHelp = ::this._onHideHelp
   }
 
   /**
    * Fetches the user's profile.
    */
   componentDidMount() {
-    const { fetchBookings, fetchReminders, layout, reminders } = this.props
+    const { fetchBookings, fetchReminders, reminders } = this.props
     fetchBookings()
     if (!reminders.loading && !reminders.reminders) {
       fetchReminders()
     }
+    this._setLayout()
+  }
+
+  /**
+   * Only updates the layout if the route changes.
+   *
+   * @param nextProps
+   */
+  componentWillReceiveProps(nextProps) {
+    if (nextProps.location.query.help !== this.props.location.query.help) {
+      this._setLayout()
+    }
+  }
+
+  /**
+   * Sets up the layout.
+   *
+   * @private
+   */
+  _setLayout() {
+    const { layout } = this.props
     layout
       .setHeader({
         contextualOptions: [
@@ -55,6 +77,15 @@ class BookingsContainer extends React.Component {
   }
 
   /**
+   * Hides the help overlay.
+   *
+   * @private
+   */
+  _onHideHelp() {
+    this.props.push('/bookings')
+  }
+
+  /**
    * Renders the booking list.
    *
    * @returns {XML}
@@ -63,6 +94,7 @@ class BookingsContainer extends React.Component {
     const {
       bookings,
       futureBookings,
+      location,
       pastBookings
     } = this.props
 
@@ -77,7 +109,9 @@ class BookingsContainer extends React.Component {
         bookings={bookings.bookings}
         future={futureBookings}
         onFindWorkshopClick={this._findWorkshops}
+        onHelpClose={this._onHideHelp}
         past={pastBookings}
+        showHelp={typeof location.query.help !== 'undefined'}
       />
     )
   }
@@ -88,6 +122,7 @@ BookingsContainer.propTypes = {
   fetchReminders: React.PropTypes.func.isRequired,
   futureBookings: React.PropTypes.array,
   layout: React.PropTypes.object.isRequired,
+  location: React.PropTypes.object.isRequired,
   pastBookings: React.PropTypes.array,
   push: React.PropTypes.func.isRequired,
   reminders: React.PropTypes.object.isRequired

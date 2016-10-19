@@ -101,6 +101,9 @@ export const IconErrorOutline = props =>
 export const IconFilter = props =>
   createIcon(props, 'filter_list')
 
+export const IconHelp = props =>
+  createIcon(props, 'help_outline')
+
 export const IconLocation = props =>
   createIcon(props, 'location_on')
 
