@@ -18,7 +18,7 @@ class RegisterContainer extends React.Component {
     super(props)
 
     this._returnToLogin = ::this._returnToLogin
-    this.RegisterForm = RegisterForm(register, '/bookings')
+    this.RegisterForm = RegisterForm(register, '/bookings?help=true')
   }
 
   /**
