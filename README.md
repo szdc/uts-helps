@@ -76,40 +76,40 @@ The current workflow is configured to use TravisCI, but any Continuous Integrati
 
 The process for updating the system is as follows:
 
-1. Ensure you have the latest changes
+* Ensure you have the latest changes
 ```bash
-# Make sure you are in the directory of the repository
+// Make sure you are in the directory of the repository
 cd uts-helps
 
-# Make sure you are going to branch off master
+// Make sure you are going to branch off master
 git checkout master
 
-# Ensure you have the latest changes
+// Ensure you have the latest changes
 git pull origin master
 ```
 
-2. Checkout a new branch to ensure your changes are isolated
+* Checkout a new branch to ensure your changes are isolated
 ```bash
 git checkout -b new-change
 ```
 
-3. Develop your new feature/bug fix using your IDE
+* Develop your new feature/bug fix using your IDE
 
-4. Commit your changes to your newly created branch
+* Commit your changes to your newly created branch
 ```bash
 git add -A
 git commit -m "feat: Added new feature."
 ```
 
-5. A git hook will run to ensure your changes meet the [coding style guide](CODINGSTYLE.md).
+* A git hook will run to ensure your changes meet the [coding style guide](CODINGSTYLE.md).
 If the commit fails, the errors will be reported in the terminal and you will need to resolve them.
 
-6. Once your commit passes, push your changes to your new branch.
+* Once your commit passes, push your changes to your new branch.
 
-7. TravisCI will ensure your changes meet the coding standards and pass all tests.
+* TravisCI will ensure your changes meet the coding standards and pass all tests.
 If TravisCI reports passes your changes, create a merge request to add your changes to the live branch.
 
-8. TravisCI will deploy your changes live.
+* TravisCI will deploy your changes live.
 
 
 ## Application Structure
