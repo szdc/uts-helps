@@ -78,13 +78,8 @@ The process for updating the system is as follows:
 
 * Ensure you have the latest changes
 ```bash
-// Make sure you are in the directory of the repository
 cd uts-helps
-
-// Make sure you are going to branch off master
 git checkout master
-
-// Ensure you have the latest changes
 git pull origin master
 ```
 
