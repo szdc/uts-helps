@@ -27,17 +27,6 @@ export default class BookingListItem extends React.Component {
   }
 
   /**
-   * Does not update if the reminders have changed.
-   *
-   * @param nextProps
-   * @param nextState
-   * @returns {boolean}
-   */
-  shouldComponentUpdate(nextProps, nextState) {
-    return !(this.state.reminderDialogOpen === true && nextState.reminderDialogOpen === true)
-  }
-
-  /**
    * Handles a click on the cancel button.
    *
    * @private
